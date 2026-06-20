@@ -1,0 +1,22 @@
+# Build artifacts
+*.o
+*.exe
+*.out
+*.obj
+
+# LaTeX auxiliary files (in paper/ only)
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.synctex.gz
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
