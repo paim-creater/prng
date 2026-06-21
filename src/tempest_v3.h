@@ -1,14 +1,9 @@
-/* tempest_v4.h — 5-cmul Tempest v3 (final optimized)
+/* tempest_v3.h — 4-cmul Tempest v3 (final optimized)
  * 4-cmul Fibonacci-weave + ADD pre-diffusion + AND-mix output
- * 2^128 CSPRNG, 10.6 Gbit/s, passes NIST 15/15 + TestU01 337/337 + PractRand
- *
- * Architecture:
- *   Round: ADD pre-diff → 4-cmul Fibonacci-weave → Post-ARX → Boomerang/2r
- *   Output: fold4 → rotl → ADD-square → AND-mix → low-bit whitener
- *   Key schedule: 16r absorption + 6r warmup
+ * 2^128 CSPRNG, 11.1 Gbit/s, passes NIST 15/15 + TestU01 337/337 + PractRand
  */
-#ifndef TEMPEST_V4_H
-#define TEMPEST_V4_H
+#ifndef TEMPEST_V3_H
+#define TEMPEST_V3_H
 #include <stdint.h>
 #include <stddef.h>
 #ifdef __cplusplus

@@ -19,7 +19,7 @@
  *   - ChaCha20: 1.83× speedup
  *   - Tempest v2 (5-cmul): 1.26× speedup
  */
-#include "tempest_v4.h"
+#include "tempest_v3.h"
 #include <string.h>
 
 static inline uint64_t rotl(uint64_t x,int r){return (x<<r)|(x>>(64-r));}

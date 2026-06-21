@@ -1,8 +1,6 @@
-// bolt_v3.h — Bolt v3 experimental variants:
-//   ADC-Bolt:  ADD+ADC carry-chain nonlinearity replaces MULX
-//   Flash Bolt: pure ARX, no multiplication (carry-chain-only nonlinearity)
-#ifndef BOLT_V3_H
-#define BOLT_V3_H
+// adcbolt.h — ADC-Bolt: carry-chain nonlinearity replaces MULX
+#ifndef ADCBOLT_H
+#define ADCBOLT_H
 #include <stdint.h>
 #include <stddef.h>
 #ifdef __cplusplus

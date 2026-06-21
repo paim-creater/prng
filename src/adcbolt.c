@@ -1,5 +1,5 @@
 /* bolt_v3.c — Bolt v3 experimental variants */
-#include "bolt_v3.h"
+#include "adcbolt.h"
 #include <string.h>
 
 static inline uint64_t rotl(uint64_t x,int r){return (x<<r)|(x>>(64-r));}
