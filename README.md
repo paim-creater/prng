@@ -125,6 +125,80 @@ int main() {
     └── practrand_v3_1tb.log     ← Tempest v3 PractRand 1 TiB (354/354)
 ```
 
+## Benchmark Guide
+
+Reproduce the throughput measurements on your own hardware.
+
+### Prerequisites
+
+- **GCC** (MinGW-w64 on Windows, or native on Linux/macOS)
+- **Make** (optional; you can compile manually)
+
+### Step 1: Clone and Build
+
+```bash
+git clone https://github.com/paim-creater/prng.git
+cd prng
+make          # runs self-tests for both algorithms
+```
+
+If `make` is not available, compile manually:
+
+```bash
+# Linux / macOS / MSYS2
+gcc -O3 -march=native -o test_bolt test_bolt.c src/adcbolt.c -I.
+gcc -O3 -march=native -o test_tempest test_tempest.c src/tempest_v3.c -I.
+./test_bolt && ./test_tempest
+```
+
+### Step 2: Run Benchmark
+
+```bash
+make benchmark
+```
+
+Or manually:
+
+```bash
+gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
+./benchmark
+```
+
+### Step 3: Read the Output
+
+```
+============================================
+  Bolt & Tempest — Throughput Benchmark
+============================================
+
+  ADC-Bolt:             70261 Mbit/s  ( 70.3 Gbit/s)   182 ms
+  4-cmul Tempest v3:    11056 Mbit/s  ( 11.1 Gbit/s)   289 ms
+
+============================================
+  Reference (same platform):
+    ADC-Bolt:             70,261 Mbit/s  (70.3 Gbit/s)
+    4-cmul Tempest v3:    11,056 Mbit/s  (11.1 Gbit/s)
+    Platform: AMD Ryzen 9 8940HX, MinGW-w64 GCC -O3
+============================================
+```
+
+### Important Notes
+
+| Factor | Impact |
+|--------|--------|
+| **`-O3 -march=native`** | **Critical.** Without these flags, throughput drops 3–5×. |
+| CPU frequency scaling | Close other apps, plug in AC power for stable results. |
+| Thermal throttling | Let the laptop cool down between runs. |
+| Compiler version | GCC 13+ recommended. MSVC produces ~10–15% lower throughput. |
+| Different CPU | Results vary by microarchitecture. Zen 4 > Zen 3 > Intel 12th-gen. |
+
+### Expected Ranges
+
+| Algorithm | Low-end (laptop) | Mid-range (desktop) | High-end (Zen 4) |
+|-----------|-----------------|--------------------|--------------------|
+| ADC-Bolt | 25–40 Gbit/s | 50–60 Gbit/s | **65–75 Gbit/s** |
+| Tempest v3 | 4–7 Gbit/s | 8–10 Gbit/s | **10–12 Gbit/s** |
+
 ## Design Methodology
 
 Traditional PRNG design follows: choose structure → test → add rounds. We reverse this:
