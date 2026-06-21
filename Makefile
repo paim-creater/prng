@@ -19,5 +19,9 @@ test_bolt: test_bolt.c src/adcbolt.c src/adcbolt.h
 test_tempest: test_tempest.c src/tempest_v3.c src/tempest_v3.h
 	$(CC) $(CFLAGS) -o test_tempest test_tempest.c src/tempest_v3.c
 
+benchmark: benchmark.c src/adcbolt.c src/tempest_v3.c src/adcbolt.h src/tempest_v3.h
+	$(CC) $(CFLAGS) -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c
+	./benchmark
+
 clean:
-	rm -f test_bolt test_tempest test_bolt.exe test_tempest.exe
+	rm -f test_bolt test_tempest benchmark test_bolt.exe test_tempest.exe benchmark.exe

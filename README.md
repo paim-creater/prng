@@ -54,6 +54,7 @@ Three architectural innovations after 11 generations of iteration:
 git clone https://github.com/paim-creater/prng.git
 cd prng
 make          # compiles and runs self-tests for both algorithms
+make benchmark # runs throughput benchmark (requires gcc -O3)
 ```
 
 ### Minimal Example
