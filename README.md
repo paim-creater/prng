@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Language: C](https://img.shields.io/badge/Language-C-blue.svg)](src/)
+[![Benchmark](https://github.com/paim-creater/prng/actions/workflows/benchmark.yml/badge.svg)](https://github.com/paim-creater/prng/actions/workflows/benchmark.yml)
 
 Two high-performance pseudorandom number generators designed through an algebraic degree-driven methodology.
 

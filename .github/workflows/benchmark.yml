@@ -1,0 +1,25 @@
+name: Benchmark
+
+on: [push, workflow_dispatch]
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
+
+      - name: Run Benchmark
+        run: ./benchmark
+
+      - name: Self-test ADC-Bolt
+        run: |
+          gcc -O3 -march=native -o test_bolt test_bolt.c src/adcbolt.c -I.
+          ./test_bolt
+
+      - name: Self-test Tempest v3
+        run: |
+          gcc -O3 -march=native -o test_tempest test_tempest.c src/tempest_v3.c -I.
+          ./test_tempest
