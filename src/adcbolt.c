@@ -1,4 +1,4 @@
-/* bolt_v3.c — Bolt v3 experimental variants */
+/* adcbolt.c — ADC-Bolt: carry-chain PRNG (70.3 Gbit/s) */
 #include "adcbolt.h"
 #include <string.h>
 

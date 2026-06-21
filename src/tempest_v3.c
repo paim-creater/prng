@@ -1,5 +1,5 @@
-/* tempest_v4.c — 5-cmul Tempest v3 (final optimized)
- * 4-cmul Fibonacci-weave + ADD pre-diffusion + AND-mix output
+/* tempest_v3.c — 4-cmul Tempest v3: CSPRNG (11.1 Gbit/s, 2^128)
+ * ADD pre-diffusion + 4-cmul Fibonacci-weave + AND-mix output
  *
  * Key innovations vs v2:
  *   1. ADD-based pre-diffusion: breaks XOR chain dependency, +14% ILP
