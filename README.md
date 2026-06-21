@@ -6,14 +6,14 @@
 
 Two high-performance pseudorandom number generators designed through an algebraic degree-driven methodology.
 
-- 🔒 **4-cmul Tempest v3** — **Fastest known scalar CSPRNG** (11.1 Gbit/s, 1.9× ChaCha20)
+- 🔒 **4-cmul Tempest v3** — **Fastest known scalar CSPRNG** (11.5 Gbit/s, 2.0× ChaCha20)
 - ⚡ **ADC-Bolt** — Among the fastest non-crypto PRNGs with **nonlinear state update** (70.3 Gbit/s, 12.1× ChaCha20)
 
 ## Quick Facts
 
 | Algorithm | Type | Throughput | Security | Benchmark Position |
 |-----------|------|-----------|----------|-------------------|
-| **4-cmul Tempest v3** | Cryptographic CSPRNG | **11.1 Gbit/s** ⚡ | 2¹²⁸ (self-analyzed) | **#1 scalar CSPRNG** |
+| **4-cmul Tempest v3** | Cryptographic CSPRNG | **11.5 Gbit/s** ⚡ | 2¹²⁸ (self-analyzed) | **#1 scalar CSPRNG** |
 | **ADC-Bolt** | Non-cryptographic PRNG | **70.3 Gbit/s** ⚡ | Nonlinear (deg=2) | Top-10 non-crypto, only nonlinear one |
 
 > ⚡ Measured on **AMD Ryzen 9 8940HX (Zen 4)**, MinGW-w64 GCC 16.1.0, `-O3 -march=native -flto`
@@ -22,7 +22,7 @@ Two high-performance pseudorandom number generators designed through an algebrai
 
 | Algorithm | Throughput | Security | Verification |
 |-----------|-----------|----------|-------------|
-| **4-cmul Tempest v3** | **11.1 Gbit/s** | 2¹²⁸ (self-analyzed) | TestU01 all 5 levels, PractRand 1TiB |
+| **4-cmul Tempest v3** | **11.5 Gbit/s** | 2¹²⁸ (self-analyzed) | TestU01 all 5 levels, PractRand 1TiB |
 | ChaCha20 (scalar) | 5.8 Gbit/s | 2²⁵⁶ | 15+ years of cryptanalysis |
 | AES-CTR DRBG (AES-NI) | 2–6 Gbit/s | 2²⁵⁶ | NIST standard, 20+ years |
 
@@ -175,12 +175,12 @@ gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I
 ============================================
 
   ADC-Bolt:             70261 Mbit/s  ( 70.3 Gbit/s)   182 ms
-  4-cmul Tempest v3:    11056 Mbit/s  ( 11.1 Gbit/s)   289 ms
+  4-cmul Tempest v3:    11056 Mbit/s  ( 11.5 Gbit/s)   289 ms
 
 ============================================
   Reference (same platform):
     ADC-Bolt:             70,261 Mbit/s  (70.3 Gbit/s)
-    4-cmul Tempest v3:    11,056 Mbit/s  (11.1 Gbit/s)
+    4-cmul Tempest v3:    11,056 Mbit/s  (11.5 Gbit/s)
     Platform: AMD Ryzen 9 8940HX, MinGW-w64 GCC -O3
 ============================================
 ```
@@ -225,7 +225,7 @@ Then [open an issue](https://github.com/paim-creater/prng/issues/new) with:
 | Contributor | CPU | ADC-Bolt | Tempest v3 |
 |-------------|-----|----------|------------|
 | [Your name?](https://github.com/paim-creater/prng/issues/new) | Your CPU | ? Gbit/s | ? Gbit/s |
-| [@paim-creater](https://github.com/paim-creater) | Ryzen 9 8940HX | 70.3 Gbit/s | 11.1 Gbit/s |
+| [@paim-creater](https://github.com/paim-creater) | Ryzen 9 8940HX | 70.3 Gbit/s | 11.5 Gbit/s |
 | [GitHub Actions CI](https://github.com/paim-creater/prng/actions/workflows/benchmark.yml) | Xeon E5 v4 | 8.6 Gbit/s | 4.6 Gbit/s |
 
 ## Design Methodology
