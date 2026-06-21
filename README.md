@@ -207,6 +207,21 @@ gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I
 | ADC-Bolt | 25–40 Gbit/s | 50–60 Gbit/s | **65–75 Gbit/s** |
 | Tempest v3 | 4–7 Gbit/s | 8–10 Gbit/s | **10–12 Gbit/s** |
 
+### Predicted Performance by CPU Architecture
+
+| CPU | ADC-Bolt | Tempest v3 | Why |
+|-----|----------|------------|-----|
+| **Apple M4 Pro/Max** 🥇 | 85–95 Gbit/s | **16–18 Gbit/s** | 10-wide frontend, UMULL=1c (=ADD latency!) |
+| Apple M3 | 78–88 Gbit/s | 14–17 Gbit/s | Same ARM advantage, slightly narrower |
+| AMD Zen 5 (Ryzen 9000) | 75–82 Gbit/s | 13–15 Gbit/s | IPC +15% over Zen 4, same MULX=3c |
+| AMD Zen 4 (Ryzen 7000) | **70.3** ✅ | **11.5** ✅ | Reference platform |
+| Intel Arrow Lake | 75–85 Gbit/s | 12–14 Gbit/s | Higher clock (5.7 GHz), wider decode |
+| Intel Raptor Lake | 60–70 Gbit/s | 10–12 Gbit/s | P-core 5.2 GHz, older architecture |
+| ARM Cortex-X4 | 55–65 Gbit/s | 10–13 Gbit/s | Mobile thermal limits, UMULL=3c |
+| RISC-V (SG2044) | 30–40 Gbit/s | 6–8 Gbit/s | Early silicon, lower clock |
+
+> 🥇 **ARM64 is the ideal platform.** On Apple M-series, multiply latency (UMULL=1c) equals ADD latency (1c), perfectly matching Tempest's cmul→ADD rhythm. x86-64's MULX=3c creates a bottleneck that ARM eliminates.
+
 ### Community Benchmarks
 
 Run on your own hardware and submit your results to help build a public performance database.
