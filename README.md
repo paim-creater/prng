@@ -175,12 +175,12 @@ gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I
 ============================================
 
   ADC-Bolt:             70261 Mbit/s  ( 70.3 Gbit/s)   182 ms
-  4-cmul Tempest v3:    11056 Mbit/s  ( 11.5 Gbit/s)   289 ms
+  4-cmul Tempest v3:    11503 Mbit/s  ( 11.5 Gbit/s)   278 ms
 
 ============================================
   Reference (same platform):
     ADC-Bolt:             70,261 Mbit/s  (70.3 Gbit/s)
-    4-cmul Tempest v3:    11,056 Mbit/s  (11.5 Gbit/s)
+    4-cmul Tempest v3:    11,503 Mbit/s  (11.5 Gbit/s)
     Platform: AMD Ryzen 9 8940HX, MinGW-w64 GCC -O3
 ============================================
 ```
@@ -225,7 +225,7 @@ Then [open an issue](https://github.com/paim-creater/prng/issues/new) with:
 | Contributor | CPU | ADC-Bolt | Tempest v3 |
 |-------------|-----|----------|------------|
 | [Your name?](https://github.com/paim-creater/prng/issues/new) | Your CPU | ? Gbit/s | ? Gbit/s |
-| [@paim-creater](https://github.com/paim-creater) | Ryzen 9 8940HX | 70.3 Gbit/s | 11.5 Gbit/s |
+| [@paim-creater](https://github.com/paim-creater) | Ryzen 9 8940HX (Zen 4) | 70.3 Gbit/s | 11.5 Gbit/s |
 | [GitHub Actions CI](https://github.com/paim-creater/prng/actions/workflows/benchmark.yml) | Xeon E5 v4 | 8.6 Gbit/s | 4.6 Gbit/s |
 
 ## Design Methodology
