@@ -77,7 +77,10 @@ int main() {
 ```
 .
 ├── README.md              ← You are here
+├── Makefile               ← One-click build + test
 ├── LICENSE                ← MIT License
+├── test_bolt.c            ← ADC-Bolt self-test
+├── test_tempest.c         ← Tempest v3 self-test
 ├── src/
 │   ├── tempest_v3.h       ← 4-cmul Tempest v3 API
 │   ├── tempest_v3.c       ← 4-cmul Tempest v3 implementation
