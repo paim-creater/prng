@@ -102,6 +102,7 @@ int main() {
 ├── LICENSE                ← MIT License
 ├── test_bolt.c            ← ADC-Bolt self-test
 ├── test_tempest.c         ← Tempest v3 self-test
+├── benchmark.c            ← Throughput benchmark
 ├── src/
 │   ├── tempest_v3.h       ← 4-cmul Tempest v3 API
 │   ├── tempest_v3.c       ← 4-cmul Tempest v3 implementation
