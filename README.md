@@ -5,12 +5,32 @@
 
 Two high-performance pseudorandom number generators designed through an algebraic degree-driven methodology.
 
+- 🔒 **4-cmul Tempest v3** — **Fastest known scalar CSPRNG** (11.1 Gbit/s, 1.9× ChaCha20)
+- ⚡ **ADC-Bolt** — Among the fastest non-crypto PRNGs with **nonlinear state update** (70.3 Gbit/s, 12.1× ChaCha20)
+
 ## Quick Facts
 
-| Algorithm | Type | Throughput | Security | ChaCha20 vs |
-|-----------|------|-----------|----------|-------------|
-| **ADC-Bolt** | Non-cryptographic PRNG | **70.3 Gbit/s** | Statistical only | 12.1× faster |
-| **4-cmul Tempest v3** | Cryptographic CSPRNG | **11.1 Gbit/s** | 2¹²⁸ (self-analyzed) | 1.9× faster |
+| Algorithm | Type | Throughput | Security | Benchmark Position |
+|-----------|------|-----------|----------|-------------------|
+| **4-cmul Tempest v3** | Cryptographic CSPRNG | **11.1 Gbit/s** | 2¹²⁸ (self-analyzed) | **#1 scalar CSPRNG** |
+| **ADC-Bolt** | Non-cryptographic PRNG | **70.3 Gbit/s** | Nonlinear (deg=2) | Top-10 non-crypto, only nonlinear one |
+
+### Scalar CSPRNG Comparison
+
+| Algorithm | Throughput | Security | Verification |
+|-----------|-----------|----------|-------------|
+| **4-cmul Tempest v3** | **11.1 Gbit/s** | 2¹²⁸ (self-analyzed) | TestU01 all 5 levels, PractRand 1TiB |
+| ChaCha20 (scalar) | 5.8 Gbit/s | 2²⁵⁶ | 15+ years of cryptanalysis |
+| AES-CTR DRBG (AES-NI) | 2–6 Gbit/s | 2²⁵⁶ | NIST standard, 20+ years |
+
+### Non-Crypto PRNG Comparison
+
+| Algorithm | Throughput | State Update | TestU01 BigCrush |
+|-----------|-----------|-------------|-----------------|
+| RomuTrio | ~213 Gbit/s | Linear | ❌ Fails after 2¹⁹ bytes |
+| wyrand | ~178 Gbit/s | Linear | Partial pass |
+| xoroshiro128+ | ~90 Gbit/s | Linear | ❌ Some failures |
+| **ADC-Bolt** | **70.3 Gbit/s** | **Nonlinear (deg=2)** | ✅ Full pass |
 
 Both algorithms pass **all** statistical tests:
 - NIST SP 800-22: 15/15 ✓
