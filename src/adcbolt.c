@@ -1,9 +1,7 @@
 /* adcbolt.c — ADC-Bolt: carry-chain PRNG (70.3 Gbit/s) */
 #include "adcbolt.h"
+#include "platform.h"
 #include <string.h>
-
-static inline uint64_t rotl(uint64_t x,int r){return (x<<r)|(x>>(64-r));}
-static inline uint64_t cmul_hl(uint64_t a,uint64_t b){return (uint32_t)(a>>32)*(uint32_t)b;}
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * ADC-Bolt: ADD+ADC replaces MULX (critical path 3c→2c, est. +33% throughput)

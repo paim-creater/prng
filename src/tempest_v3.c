@@ -20,11 +20,8 @@
  *   - Tempest v2 (5-cmul): 1.26× speedup
  */
 #include "tempest_v3.h"
+#include "platform.h"
 #include <string.h>
-
-static inline uint64_t rotl(uint64_t x,int r){return (x<<r)|(x>>(64-r));}
-static inline uint64_t cmul_hl(uint64_t a,uint64_t b){return (uint32_t)(a>>32)*(uint32_t)b;}
-static inline uint64_t cmul_lh(uint64_t a,uint64_t b){return (uint32_t)a*(uint32_t)(b>>32);}
 static uint64_t fold4(uint64_t u,uint64_t v,uint64_t w,uint64_t z){return u^rotl(v,32)^w^rotl(z,16);}
 static const uint64_t RC[8]={0x6A09E667F3BCC908ULL,0xBB67AE8584CAA73BULL,0x3C6EF372FE94F82BULL,0xA54FF53A5F1D36F1ULL,0x510E527FADE682D1ULL,0x9B05688C2B3E6C1FULL,0x1F83D9ABFB41BD6BULL,0x5BE0CD19137E2179ULL};
 
@@ -82,8 +79,7 @@ static uint64_t tx5_output(tx4_state*s){
     uint64_t t=fold4(s->u,s->v,s->w,s->z);
     t^=rotl(t,27);
     /* Stage 3: ADD-based square — carry chain propagates entropy */
-    __uint128_t sq=(__uint128_t)t*(__uint128_t)t;
-    t+=(uint64_t)(sq>>32);
+    t += square_mid64(t);
     /* Stage 4: AND-mix — quadratic nonlinearity at ALU speed */
     t^=rotl(t,31)&rotl(t,53);
     /* Stage 5: Low-bit whitener */

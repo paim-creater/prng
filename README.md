@@ -6,6 +6,10 @@
 
 Two high-performance pseudorandom number generators designed through an algebraic degree-driven methodology.
 
+**Supported Platforms:** x86-64 ✅ &nbsp;|&nbsp; ARM64 (Apple M / Cortex-A) ✅ &nbsp;|&nbsp; RISC-V 64 ✅ &nbsp;|&nbsp; MSVC ✅
+
+`src/platform.h` auto-detects your compiler and architecture. One `make`, zero configuration.
+
 - 🔒 **4-cmul Tempest v3** — **Fastest known scalar CSPRNG** (11.5 Gbit/s, 2.0× ChaCha20)
 - ⚡ **ADC-Bolt** — Among the fastest non-crypto PRNGs with **nonlinear state update** (70.3 Gbit/s, 12.1× ChaCha20)
 
@@ -107,6 +111,7 @@ int main() {
 ├── test_tempest.c         ← Tempest v3 self-test
 ├── benchmark.c            ← Throughput benchmark
 ├── src/
+│   ├── platform.h         ← Auto-detects x86-64 / ARM64 / RISC-V / MSVC
 │   ├── tempest_v3.h       ← 4-cmul Tempest v3 API
 │   ├── tempest_v3.c       ← 4-cmul Tempest v3 implementation
 │   ├── adcbolt.h          ← ADC-Bolt API
