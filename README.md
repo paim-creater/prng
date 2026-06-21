@@ -13,8 +13,10 @@ Two high-performance pseudorandom number generators designed through an algebrai
 
 | Algorithm | Type | Throughput | Security | Benchmark Position |
 |-----------|------|-----------|----------|-------------------|
-| **4-cmul Tempest v3** | Cryptographic CSPRNG | **11.1 Gbit/s** | 2¹²⁸ (self-analyzed) | **#1 scalar CSPRNG** |
-| **ADC-Bolt** | Non-cryptographic PRNG | **70.3 Gbit/s** | Nonlinear (deg=2) | Top-10 non-crypto, only nonlinear one |
+| **4-cmul Tempest v3** | Cryptographic CSPRNG | **11.1 Gbit/s** ⚡ | 2¹²⁸ (self-analyzed) | **#1 scalar CSPRNG** |
+| **ADC-Bolt** | Non-cryptographic PRNG | **70.3 Gbit/s** ⚡ | Nonlinear (deg=2) | Top-10 non-crypto, only nonlinear one |
+
+> ⚡ Measured on **AMD Ryzen 9 8940HX (Zen 4)**, MinGW-w64 GCC 16.1.0, `-O3 -march=native -flto`
 
 ### Scalar CSPRNG Comparison
 
@@ -199,6 +201,32 @@ gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I
 |-----------|-----------------|--------------------|--------------------|
 | ADC-Bolt | 25–40 Gbit/s | 50–60 Gbit/s | **65–75 Gbit/s** |
 | Tempest v3 | 4–7 Gbit/s | 8–10 Gbit/s | **10–12 Gbit/s** |
+
+### Community Benchmarks
+
+Run on your own hardware and submit your results to help build a public performance database.
+
+```bash
+git clone https://github.com/paim-creater/prng.git && cd prng
+gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
+./benchmark
+```
+
+Then [open an issue](https://github.com/paim-creater/prng/issues/new) with:
+
+```markdown
+**CPU:** [your CPU model]
+**OS:** [Windows/Linux/macOS]
+**Compiler:** [gcc version]
+**ADC-Bolt:** [your result] Gbit/s
+**Tempest v3:** [your result] Gbit/s
+```
+
+| Contributor | CPU | ADC-Bolt | Tempest v3 |
+|-------------|-----|----------|------------|
+| [Your name?](https://github.com/paim-creater/prng/issues/new) | Your CPU | ? Gbit/s | ? Gbit/s |
+| [@paim-creater](https://github.com/paim-creater) | Ryzen 9 8940HX | 70.3 Gbit/s | 11.1 Gbit/s |
+| [GitHub Actions CI](https://github.com/paim-creater/prng/actions/workflows/benchmark.yml) | Xeon E5 v4 | 8.6 Gbit/s | 4.6 Gbit/s |
 
 ## Design Methodology
 
