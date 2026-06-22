@@ -55,7 +55,35 @@ Three architectural innovations after 11 generations of iteration:
 2. **4-cmul Fibonacci-weave** — optimal multiplication scheduling with active-cmul lower bound a₁ ≥ 3 (DP ≤ 2⁻¹⁸⁶)
 3. **AND-mix output** — replaces a 3-cycle MULX square with a ~1-cycle bitwise AND-of-rotations operation over GF(2)
 
-## Quick Start
+## Quick Use (Drop-In)
+
+### C / C++ — One file
+
+```c
+#include "prng_single_header.h"  // copy this one file into your project
+
+// Game: roll a dice
+adcbolt_state rng; adcbolt_seed(&rng, time(NULL));
+int dice = adcbolt_range(&rng, 1, 6);
+
+// Security: generate a token
+tempest_state csprng;
+tempest_init(&csprng, key, nonce);
+uint64_t token = tempest_u64(&csprng);
+```
+
+### Python — One import
+
+```python
+import prng
+rng = prng.ADC_Bolt(seed=42)
+print(rng.randint(1, 6))  # roll dice
+
+csprng = prng.Tempest(key=bytes(32), nonce=bytes(16))
+print(csprng.hex(16))     # random hex token
+```
+
+## Quick Start (Developers)
 
 ```bash
 git clone https://github.com/paim-creater/prng.git
