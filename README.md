@@ -55,6 +55,22 @@ Three architectural innovations after 11 generations of iteration:
 2. **4-cmul Fibonacci-weave** — optimal multiplication scheduling with active-cmul lower bound a₁ ≥ 3 (DP ≤ 2⁻¹⁸⁶)
 3. **AND-mix output** — replaces a 3-cycle MULX square with a ~1-cycle bitwise AND-of-rotations operation over GF(2)
 
+## Try It Now
+
+```bash
+git clone https://github.com/paim-creater/prng.git && cd prng
+make && make benchmark
+```
+
+```
+============================================
+  Bolt & Tempest — Throughput Benchmark
+============================================
+  ADC-Bolt:            70261 Mbit/s  (70.3 Gbit/s)   182 ms
+  4-cmul Tempest v3:   11503 Mbit/s  (11.5 Gbit/s)   278 ms
+============================================
+```
+
 ## Quick Use (Drop-In)
 
 ### C / C++ — One file
