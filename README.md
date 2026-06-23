@@ -83,6 +83,29 @@ csprng = prng.Tempest(key=bytes(32), nonce=bytes(16))
 print(csprng.hex(16))     # random hex token
 ```
 
+### Build from Source
+
+```bash
+git clone https://github.com/paim-creater/prng.git && cd prng
+
+# Any platform (CMake): MSVC / Xcode / Make / Ninja
+mkdir build && cd build && cmake .. && cmake --build .
+
+# Linux / macOS / MSYS2 (Make):
+make && make benchmark
+
+# Single-header (no build system needed):
+gcc -O3 -o my_app my_app.c    # just #include "prng_single_header.h"
+```
+
+### Real-World Examples
+
+```bash
+gcc -O3 -o dice examples/dice_roll.c && ./dice          # game dice roller
+gcc -O3 -o token examples/generate_token.c && ./token    # secure API token
+gcc -O3 -o pi examples/monte_carlo.c && ./pi             # π via Monte Carlo
+```
+
 ## Quick Start (Developers)
 
 ```bash
