@@ -131,40 +131,27 @@ make          # compiles and runs self-tests for both algorithms
 make benchmark # runs throughput benchmark (requires gcc -O3)
 ```
 
-### Minimal Example
+### Minimal Example (C)
 
 ```c
-#include "src/tempest_v3.h"
+#include "prng_single_header.h"  // one file, no build system needed
 
-int main() {
-    tx4_state state;
-    uint64_t key[4] = {0x1234..., 0x5678..., 0x9ABC..., 0xDEF0...};
-    uint64_t nonce[2] = {0xAAAA..., 0xBBBB...};
-    
-    tx5cmul_init(&state, key, nonce);
-    
-    // Generate random numbers
-    for (int i = 0; i < 10; i++)
-        printf("%016llx\n", tx5cmul_next(&state));
-    
-    return 0;
-}
+// Game dice
+adcbolt_state rng; adcbolt_seed(&rng, 42);
+int dice = adcbolt_range(&rng, 1, 6);
+
+// Secure token
+tempest_state csprng;
+tempest_init(&csprng, key, nonce);
+uint8_t token[32]; tempest_bytes(&csprng, token, 32);
 ```
 
-### ADC-Bolt Example
+### Minimal Example (Python)
 
-```c
-#include "src/adcbolt.h"
-
-int main() {
-    bolt3_state state;
-    adcbolt_seed(&state, 42);
-    
-    for (int i = 0; i < 10; i++)
-        printf("%016llx\n", adcbolt_next(&state));
-    
-    return 0;
-}
+```python
+import prng
+rng = prng.ADC_Bolt(seed=42)
+print(rng.randint(1, 6))
 ```
 
 ## Repository Structure
@@ -172,11 +159,19 @@ int main() {
 ```
 .
 ├── README.md              ← You are here
+├── CONTRIBUTING.md        ← How to contribute
+├── CMakeLists.txt          ← CMake build (MSVC / Xcode / Make)
 ├── Makefile               ← One-click build + test
 ├── LICENSE                ← MIT License
+├── prng_single_header.h   ← Drop-in header (1 file, all platforms)
+├── prng.py                ← Python bindings (import prng)
 ├── test_bolt.c            ← ADC-Bolt self-test
 ├── test_tempest.c         ← Tempest v3 self-test
 ├── benchmark.c            ← Throughput benchmark
+├── examples/
+│   ├── dice_roll.c        ← Game dice roller
+│   ├── generate_token.c   ← Secure token generator
+│   └── monte_carlo.c      ← π via Monte Carlo
 ├── src/
 │   ├── platform.h         ← Auto-detects x86-64 / ARM64 / RISC-V / MSVC
 │   ├── tempest_v3.h       ← 4-cmul Tempest v3 API
@@ -217,13 +212,18 @@ cd prng
 make          # runs self-tests for both algorithms
 ```
 
-If `make` is not available, compile manually:
+If `make` is not available, use the single-header (no build system needed):
 
 ```bash
-# Linux / macOS / MSYS2
-gcc -O3 -march=native -o test_bolt test_bolt.c src/adcbolt.c -I.
-gcc -O3 -march=native -o test_tempest test_tempest.c src/tempest_v3.c -I.
-./test_bolt && ./test_tempest
+gcc -O3 -o my_test my_test.c   # just #include "prng_single_header.h"
+./my_test
+```
+
+Or compile the full test suite manually:
+
+```bash
+gcc -O3 -march=native -o test_bolt test_bolt.c src/adcbolt.c -I. && ./test_bolt
+gcc -O3 -march=native -o test_tempest test_tempest.c src/tempest_v3.c -I. && ./test_tempest
 ```
 
 ### Step 2: Run Benchmark
