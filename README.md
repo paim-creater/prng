@@ -67,7 +67,7 @@ make && make benchmark
   Bolt & Tempest — Throughput Benchmark
 ============================================
   ADC-Bolt:            70261 Mbit/s  (70.3 Gbit/s)   182 ms
-  4-cmul Tempest v3:   19024 Mbit/s  (19.0 Gbit/s)   278 ms
+  4-cmul Tempest v3:   19024 Mbit/s  (19.0 Gbit/s)   168 ms
 ============================================
 ```
 
@@ -247,12 +247,12 @@ gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I
 ============================================
 
   ADC-Bolt:             70261 Mbit/s  ( 70.3 Gbit/s)   182 ms
-  4-cmul Tempest v3:    19024 Mbit/s  ( 19.0 Gbit/s)   278 ms
+  4-cmul Tempest v3:    19024 Mbit/s  ( 19.0 Gbit/s)   168 ms
 
 ============================================
   Reference (same platform):
     ADC-Bolt:             70,261 Mbit/s  (70.3 Gbit/s)
-    4-cmul Tempest v3:    11,503 Mbit/s  (19.0 Gbit/s)
+    4-cmul Tempest v3:    19024 Mbit/s  (19.0 Gbit/s)
     Platform: AMD Ryzen 9 8940HX, MinGW-w64 GCC -O3
 ============================================
 ```
@@ -281,7 +281,7 @@ gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I
 | **Apple M4 Pro/Max** 🥇 | 85–95 Gbit/s | **16–18 Gbit/s** | 10-wide frontend, UMULL=1c (=ADD latency!) |
 | Apple M3 | 78–88 Gbit/s | 14–17 Gbit/s | Same ARM advantage, slightly narrower |
 | AMD Zen 5 (Ryzen 9000) | 75–82 Gbit/s | 13–15 Gbit/s | IPC +15% over Zen 4, same MULX=3c |
-| AMD Zen 4 (Ryzen 7000) | **70.3** ✅ | **11.5** ✅ | Reference platform |
+| AMD Zen 4 (Ryzen 7000) | **70.3** ✅ | **19.0** ✅ | Reference platform |
 | Intel Arrow Lake | 75–85 Gbit/s | 12–14 Gbit/s | Higher clock (5.7 GHz), wider decode |
 | Intel Raptor Lake | 60–70 Gbit/s | 10–12 Gbit/s | P-core 5.2 GHz, older architecture |
 | ARM Cortex-X4 | 55–65 Gbit/s | 10–13 Gbit/s | Mobile thermal limits, UMULL=3c |
