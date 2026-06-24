@@ -186,13 +186,11 @@ print(rng.randint(1, 6))
     ├── bigcrush_adcbolt.log     ← ADC-Bolt BigCrush 160/160
     ├── crush_adcbolt.log        ← ADC-Bolt Crush 144/144
     ├── practrand_adcbolt.log    ← ADC-Bolt PractRand 1 TiB
-    ├── tempest_v3_nist_report.txt ← Tempest v3 NIST 15/15
-    ├── smallcrush_v3.log        ← Tempest v3 SmallCrush 15/15
-    ├── rabbit_v3.log            ← Tempest v3 Rabbit 40/40
-    ├── alphabit_v3.log          ← Tempest v3 Alphabit 17/17
-    ├── bigcrush_v3.log          ← Tempest v3 BigCrush 160/160
-    ├── crush_v3.log             ← Tempest v3 Crush 144/144
-    └── practrand_v3_1tb.log     ← Tempest v3 PractRand 1 TiB (354/354)
+    ├── nist_v7_report.txt       ← Tempest v7 NIST 15/15
+    ├── smallcrush_v7.log        ← Tempest v7 SmallCrush 15/15
+    ├── rabbit_v7.log            ← Tempest v7 Rabbit 40/40
+    ├── alphabit_v7.log          ← Tempest v7 Alphabit 17/17
+    └── bigcrush_dual_v7.log     ← Tempest v7 BigCrush 160/160 (1h43m)
 ```
 
 ## Benchmark Guide

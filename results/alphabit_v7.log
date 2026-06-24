@@ -1,4 +1,3 @@
-=== TestU01 Alphabit ===
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
           Starting Alphabit:   nb = 100000000
           Version: TestU01 1.2.3
@@ -8,7 +7,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 smultin_MultinomialBitsOver test:
@@ -29,22 +28,22 @@ smultin_MultinomialBitsOver test:
 Test Results for Delta =   1.0000
 
 Number of degrees of freedom          :    2
-Value of the statistic                :    3.61
-p-value of test                       :    0.16
+Value of the statistic                :    0.79
+p-value of test                       :    0.67
 
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.10
+CPU time used                    :  00:00:00.09
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 smultin_MultinomialBitsOver test:
@@ -65,22 +64,22 @@ smultin_MultinomialBitsOver test:
 Test Results for Delta =   1.0000
 
 Number of degrees of freedom          :    8
-Value of the statistic                :    7.21
-p-value of test                       :    0.51
+Value of the statistic                :   11.98
+p-value of test                       :    0.15
 
 
 -----------------------------------------------
 CPU time used                    :  00:00:00.06
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 smultin_MultinomialBitsOver test:
@@ -101,22 +100,22 @@ smultin_MultinomialBitsOver test:
 Test Results for Delta =   1.0000
 
 Number of degrees of freedom          :  128
-Value of the statistic                :  130.39
-p-value of test                       :    0.42
+Value of the statistic                :  119.24
+p-value of test                       :    0.70
 
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.09
+CPU time used                    :  00:00:00.06
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 smultin_MultinomialBitsOver test:
@@ -137,22 +136,22 @@ smultin_MultinomialBitsOver test:
 Test Results for Delta =   1.0000
 
 Number of degrees of freedom          : 32768
-Value of the statistic                :32522.99
-p-value of test                       :    0.83
+Value of the statistic                :32812.04
+p-value of test                       :    0.43
 
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.12
+CPU time used                    :  00:00:00.10
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 sstring_HammingIndep test:
@@ -164,21 +163,21 @@ sstring_HammingIndep test:
 Counters with expected numbers >= 10
 -----------------------------------------------
 Number of degrees of freedom          :  205
-Chi-square statistic                  :  207.99
-p-value of test                       :    0.43
+Chi-square statistic                  :  227.97
+p-value of test                       :    0.13
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.07
+CPU time used                    :  00:00:00.09
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 sstring_HammingIndep test:
@@ -190,21 +189,21 @@ sstring_HammingIndep test:
 Counters with expected numbers >= 10
 -----------------------------------------------
 Number of degrees of freedom          :  377
-Chi-square statistic                  :  400.99
-p-value of test                       :    0.19
+Chi-square statistic                  :  407.62
+p-value of test                       :    0.13
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.07
+CPU time used                    :  00:00:00.06
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 sstring_HammingCorr test:
@@ -214,21 +213,21 @@ sstring_HammingCorr test:
 
 
 -----------------------------------------------
-Normal statistic                      :   -1.64
-p-value of test                       :    0.95
+Normal statistic                      :    0.37
+p-value of test                       :    0.36
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.07
+CPU time used                    :  00:00:00.04
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 swalk_RandomWalk1 test:
@@ -241,54 +240,54 @@ swalk_RandomWalk1 test:
 Test on the values of the Statistic H
 
 Number of degrees of freedom          :   34
-ChiSquare statistic                   :   39.62
-p-value of test                       :    0.23
+ChiSquare statistic                   :   32.60
+p-value of test                       :    0.54
 
 
 -----------------------------------------------
 Test on the values of the Statistic M
 
 Number of degrees of freedom          :   35
-ChiSquare statistic                   :   41.83
-p-value of test                       :    0.20
+ChiSquare statistic                   :   32.03
+p-value of test                       :    0.61
 
 
 -----------------------------------------------
 Test on the values of the Statistic J
 
 Number of degrees of freedom          :   32
-ChiSquare statistic                   :   43.03
-p-value of test                       :    0.09
+ChiSquare statistic                   :   25.18
+p-value of test                       :    0.80
 
 
 -----------------------------------------------
 Test on the values of the Statistic R
 
 Number of degrees of freedom          :   26
-ChiSquare statistic                   :   21.00
-p-value of test                       :    0.74
+ChiSquare statistic                   :   19.92
+p-value of test                       :    0.80
 
 
 -----------------------------------------------
 Test on the values of the Statistic C
 
 Number of degrees of freedom          :   17
-ChiSquare statistic                   :   14.82
-p-value of test                       :    0.61
+ChiSquare statistic                   :   11.50
+p-value of test                       :    0.83
 
 
 -----------------------------------------------
 CPU time used                    :  00:00:00.28
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 swalk_RandomWalk1 test:
@@ -301,47 +300,47 @@ swalk_RandomWalk1 test:
 Test on the values of the Statistic H
 
 Number of degrees of freedom          :   70
-ChiSquare statistic                   :   78.12
-p-value of test                       :    0.24
+ChiSquare statistic                   :   65.94
+p-value of test                       :    0.62
 
 
 -----------------------------------------------
 Test on the values of the Statistic M
 
 Number of degrees of freedom          :   70
-ChiSquare statistic                   :   76.46
-p-value of test                       :    0.28
+ChiSquare statistic                   :   80.55
+p-value of test                       :    0.18
 
 
 -----------------------------------------------
 Test on the values of the Statistic J
 
 Number of degrees of freedom          :  160
-ChiSquare statistic                   :  165.04
-p-value of test                       :    0.38
+ChiSquare statistic                   :  162.44
+p-value of test                       :    0.43
 
 
 -----------------------------------------------
 Test on the values of the Statistic R
 
 Number of degrees of freedom          :   63
-ChiSquare statistic                   :   61.70
-p-value of test                       :    0.52
+ChiSquare statistic                   :   71.17
+p-value of test                       :    0.22
 
 
 -----------------------------------------------
 Test on the values of the Statistic C
 
 Number of degrees of freedom          :   35
-ChiSquare statistic                   :   33.08
-p-value of test                       :    0.56
+ChiSquare statistic                   :   37.10
+p-value of test                       :    0.37
 
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.21
+CPU time used                    :  00:00:00.23
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
@@ -349,10 +348,10 @@ Generator state:
 ========= Summary results of Alphabit =========
 
  Version:          TestU01 1.2.3
- Generator:        4-cmul Tempest v3
+ Generator:        Dual-Tempest
  Number of bits:   100000000
  Number of statistics:  17
- Total CPU time:   00:00:01.12
+ Total CPU time:   00:00:01.04
 
  All tests were passed
 

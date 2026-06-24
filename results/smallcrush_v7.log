@@ -1,4 +1,3 @@
-=== TestU01 SmallCrush ===
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                  Starting SmallCrush
                  Version: TestU01 1.2.3
@@ -8,7 +7,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 smarsa_BirthdaySpacings test:
@@ -22,15 +21,15 @@ smarsa_BirthdaySpacings test:
 
 ----------------------------------------------------
 Total expected number = N*Lambda      :      27.11
-Total observed number                 :      23
-p-value of test                       :    0.75
+Total observed number                 :      31
+p-value of test                       :    0.25
 
 
 -----------------------------------------------
 CPU time used                    :  00:00:00.62
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
@@ -40,7 +39,7 @@ Test sknuth_Collision calling smultin_Multinomial
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 smultin_Multinomial test:
@@ -60,31 +59,31 @@ smultin_Multinomial test:
 Test Results for Collisions
 
 Expected number of collisions = Mu    :     2909.25
-Observed number of collisions         :     2810
-p-value of test                       :    0.97
+Observed number of collisions         :     2832
+p-value of test                       :    0.92
 
 -----------------------------
 Total number of cells containing j balls
 
-  j =  0                              :       4289970106
-  j =  1                              :          4994381
-  j =  2                              :             2808
-  j =  3                              :                1
+  j =  0                              :       4289970128
+  j =  1                              :          4994336
+  j =  2                              :             2832
+  j =  3                              :                0
   j =  4                              :                0
   j =  5                              :                0
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.82
+CPU time used                    :  00:00:00.70
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 sknuth_Gap test:
@@ -94,21 +93,21 @@ sknuth_Gap test:
 
 -----------------------------------------------
 Number of degrees of freedom          : 1114
-Chi-square statistic                  : 1081.98
-p-value of test                       :    0.75
+Chi-square statistic                  : 1135.76
+p-value of test                       :    0.32
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.35
+CPU time used                    :  00:00:00.28
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 sknuth_SimpPoker test:
@@ -118,21 +117,21 @@ sknuth_SimpPoker test:
 
 -----------------------------------------------
 Number of degrees of freedom          :   19
-Chi-square statistic                  :   18.36
-p-value of test                       :    0.50
+Chi-square statistic                  :   16.72
+p-value of test                       :    0.61
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.35
+CPU time used                    :  00:00:00.29
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 sknuth_CouponCollector test:
@@ -142,21 +141,21 @@ sknuth_CouponCollector test:
 
 -----------------------------------------------
 Number of degrees of freedom          :   44
-Chi-square statistic                  :   45.42
-p-value of test                       :    0.41
+Chi-square statistic                  :   44.78
+p-value of test                       :    0.44
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.28
+CPU time used                    :  00:00:00.25
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 sknuth_MaxOft test:
@@ -169,27 +168,27 @@ sknuth_MaxOft test:
 
 -----------------------------------------------
 Number of degrees of freedom          : 99999
-Chi-square statistic                  : 1.00e+5
-p-value of test                       :    0.27
+Chi-square statistic                  :99966.70
+p-value of test                       :    0.53
 
 
 -----------------------------------------------
-Anderson-Darling statistic            :    0.63
-p-value of test                       :    0.37
+Anderson-Darling statistic            :    0.29
+p-value of test                       :    0.71
 
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.31
+CPU time used                    :  00:00:00.29
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 svaria_WeightDistrib test:
@@ -199,21 +198,21 @@ svaria_WeightDistrib test:
 
 -----------------------------------------------
 Number of degrees of freedom          :   41
-Chi-square statistic                  :   48.68
-p-value of test                       :    0.19
+Chi-square statistic                  :   41.47
+p-value of test                       :    0.45
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.35
+CPU time used                    :  00:00:00.26
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 smarsa_MatrixRank test:
@@ -223,21 +222,21 @@ smarsa_MatrixRank test:
 
 -----------------------------------------------
 Number of degrees of freedom          :    3
-Chi-square statistic                  :    9.67
-p-value of test                       :    0.02
+Chi-square statistic                  :    7.21
+p-value of test                       :    0.07
 
 -----------------------------------------------
 CPU time used                    :  00:00:00.23
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 sstring_HammingIndep test:
@@ -249,21 +248,21 @@ sstring_HammingIndep test:
 Counters with expected numbers >= 10
 -----------------------------------------------
 Number of degrees of freedom          : 2209
-Chi-square statistic                  : 2127.69
-p-value of test                       :    0.89
+Chi-square statistic                  : 2301.07
+p-value of test                       :    0.08
 
 -----------------------------------------------
-CPU time used                    :  00:00:00.48
+CPU time used                    :  00:00:00.40
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
 ***********************************************************
 HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
 
-4-cmul Tempest v3
+Dual-Tempest
 
 
 swalk_RandomWalk1 test:
@@ -276,47 +275,47 @@ swalk_RandomWalk1 test:
 Test on the values of the Statistic H
 
 Number of degrees of freedom          :   52
-ChiSquare statistic                   :   50.57
-p-value of test                       :    0.53
+ChiSquare statistic                   :   61.61
+p-value of test                       :    0.17
 
 
 -----------------------------------------------
 Test on the values of the Statistic M
 
 Number of degrees of freedom          :   52
-ChiSquare statistic                   :   62.50
-p-value of test                       :    0.15
+ChiSquare statistic                   :   70.13
+p-value of test                       :    0.05
 
 
 -----------------------------------------------
 Test on the values of the Statistic J
 
 Number of degrees of freedom          :   75
-ChiSquare statistic                   :   71.20
-p-value of test                       :    0.60
+ChiSquare statistic                   :   89.58
+p-value of test                       :    0.12
 
 
 -----------------------------------------------
 Test on the values of the Statistic R
 
 Number of degrees of freedom          :   44
-ChiSquare statistic                   :   48.27
-p-value of test                       :    0.30
+ChiSquare statistic                   :   43.62
+p-value of test                       :    0.49
 
 
 -----------------------------------------------
 Test on the values of the Statistic C
 
 Number of degrees of freedom          :   26
-ChiSquare statistic                   :   25.92
-p-value of test                       :    0.47
+ChiSquare statistic                   :   19.98
+p-value of test                       :    0.79
 
 
 -----------------------------------------------
 CPU time used                    :  00:00:00.39
 
 Generator state:
- 4-cmul Tempest v3\n
+ Dual-output Tempest v7\n
 
 
 
@@ -324,9 +323,9 @@ Generator state:
 ========= Summary results of SmallCrush =========
 
  Version:          TestU01 1.2.3
- Generator:        4-cmul Tempest v3
+ Generator:        Dual-Tempest
  Number of statistics:  15
- Total CPU time:   00:00:04.25
+ Total CPU time:   00:00:03.78
 
  All tests were passed
 
