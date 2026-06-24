@@ -2,7 +2,7 @@
  * ADD pre-diffusion + 4-cmul Fibonacci-weave + AND-mix output
  * Dual-output: 128 bits per round via make_output(u,v,w,z) + make_output(v,w,z,u)
  * 2^128 CSPRNG, passes all tests. ChaCha20: 3.3× speedup. */
-#include "tempest_v4.h"
+#include "tempest_v3.h"
 #include <string.h>
 
 static inline uint64_t rotl(uint64_t x,int r){return (x<<r)|(x>>(64-r));}

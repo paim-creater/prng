@@ -2,8 +2,8 @@
  * ADD pre-diffusion + 4-cmul Fibonacci-weave + AND-mix output
  * 2^128 CSPRNG, 19.0 Gbit/s (single-stream: 128 bits/round via dual-output)
  * Passes NIST 15/15 + TestU01 337/337 + PractRand 1TiB */
-#ifndef TEMPEST_V4_H
-#define TEMPEST_V4_H
+#ifndef TEMPEST_V3_H
+#define TEMPEST_V3_H
 #include <stdint.h>
 #include <stddef.h>
 #ifdef __cplusplus
