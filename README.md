@@ -191,8 +191,7 @@ print(rng.randint(1, 6))
     ├── rabbit_tempest_v3.log        ← Tempest v3 Rabbit 40/40 ✅
     ├── alphabit_tempest_v3.log      ← Tempest v3 Alphabit 17/17 ✅
     ├── bigcrush_tempest_v3.log      ← Tempest v3 BigCrush 160/160 (1h43m) ✅
-    ├── crush_v3_legacy.log          ← Crush 144/144 (v3单输出, 待重测)
-    └── practrand_v3_legacy.log      ← PractRand 1 TiB (v3单输出, 待重测)
+    └── crush_tempest_v3.log         ← Tempest v3 Crush 144/144 (16m13s) ✅
 ```
 
 ## Benchmark Guide
