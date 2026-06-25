@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -O3 -march=native -flto -Wall -I.
 
-.PHONY: all test clean
+.PHONY: all test clean bench
 
 all: test
 
@@ -21,6 +21,8 @@ test_tempest: test_tempest.c src/tempest_v3.c src/tempest_v3.h
 
 benchmark: benchmark.c src/adcbolt.c src/tempest_v3.c src/adcbolt.h src/tempest_v3.h
 	$(CC) $(CFLAGS) -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c
+
+bench: benchmark
 	./benchmark
 
 clean:

@@ -1,7 +1,8 @@
 /* tempest_v3.h — 4-cmul Tempest v3 (dual-output)
  * ADD pre-diffusion + 4-cmul Fibonacci-weave + AND-mix output
- * 2^128 CSPRNG, 19.0 Gbit/s (single-stream: 128 bits/round via dual-output)
- * Passes NIST 15/15 + TestU01 337/337 + PractRand 1TiB */
+ * 2^128 CSPRNG, 19.0 Gbit/s (dual-output: 128 bits/round)
+ * Passes NIST 15/15 + TestU01 all 5 levels + PractRand 1 TiB
+ * See results/ for full test logs */
 #ifndef TEMPEST_V3_H
 #define TEMPEST_V3_H
 #include <stdint.h>

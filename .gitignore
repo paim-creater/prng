@@ -3,13 +3,15 @@
 *.exe
 *.out
 *.obj
+*.lib
+*.dll
+*.dylib
+*.so
+*.a
 
-# LaTeX auxiliary files (in paper/ only)
-paper/*.aux
-paper/*.log
-paper/*.out
-paper/*.toc
-paper/*.synctex.gz
+# Build directories
+build/
+cmake-build-*/
 
 # IDE files
 .vscode/
@@ -20,3 +22,10 @@ paper/*.synctex.gz
 # OS files
 .DS_Store
 Thumbs.db
+
+# Paper build artifacts
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.synctex.gz

@@ -1,36 +1,273 @@
 # Bolt & Tempest: Algebraic Degree-Driven PRNG Design
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Language: C](https://img.shields.io/badge/Language-C-blue.svg)](src/)
+[![Language: C99](https://img.shields.io/badge/Language-C99-blue.svg)](src/)
 [![Benchmark](https://github.com/paim-creater/prng/actions/workflows/benchmark.yml/badge.svg)](https://github.com/paim-creater/prng/actions/workflows/benchmark.yml)
 
-Two high-performance pseudorandom number generators designed through an algebraic degree-driven methodology.
+Two high-performance pseudorandom number generators designed through an **algebraic degree-driven methodology** — target the algebraic degree (deg) over GF(2) first, then reverse-engineer the optimal primitive combination.
 
-**Supported Platforms:** x86-64 ✅ &nbsp;|&nbsp; ARM64 (Apple M / Cortex-A) ✅ &nbsp;|&nbsp; RISC-V 64 ✅ &nbsp;|&nbsp; MSVC ✅
+| Platform | Status |
+|----------|--------|
+| x86-64 (GCC/Clang/MSVC) | ✅ Full support |
+| ARM64 (Apple M / Cortex-A) | ✅ Full support |
+| RISC-V 64 | ✅ Full support |
+| MSVC | ✅ Supported via `src/platform.h` |
 
-`src/platform.h` auto-detects your compiler and architecture. One `make`, zero configuration.
+---
 
-- 🔒 **4-cmul Tempest v3** — **Fastest known scalar CSPRNG** (19.0 Gbit/s, 3.3× ChaCha20)
-- ⚡ **ADC-Bolt** — Among the fastest non-crypto PRNGs with **nonlinear state update** (70.3 Gbit/s, 12.1× ChaCha20)
+## At a Glance
 
-## Quick Facts
+| Algorithm | Type | Throughput | Security | Test Status |
+|-----------|------|-----------|----------|-------------|
+| **ADC-Bolt** | Non-crypto PRNG | **70.3 Gbit/s** (12.1× ChaCha20) | deg=2 (non-crypto) | NIST ✅ TestU01 ✅ PractRand ✅ |
+| **4-cmul Tempest v3** | CSPRNG | **19.0 Gbit/s** (3.3× ChaCha20) | 2¹²⁸ (self-analyzed) | NIST ✅ TestU01 ✅ PractRand 1 TiB ✅ |
 
-| Algorithm | Type | Throughput | Security | Benchmark Position |
-|-----------|------|-----------|----------|-------------------|
-| **4-cmul Tempest v3** | Cryptographic CSPRNG | **19.0 Gbit/s** ⚡ | 2¹²⁸ (self-analyzed) | **#1 scalar CSPRNG** |
-| **ADC-Bolt** | Non-cryptographic PRNG | **70.3 Gbit/s** ⚡ | Nonlinear (deg=2) | Top-10 non-crypto, only nonlinear one |
+> ⚡ Benchmarked on AMD Ryzen 9 8940HX (Zen 4), MinGW-w64 GCC 16.1.0, `-O3 -march=native -flto`. Single-core, scalar code (no SIMD).
 
-> ⚡ Measured on **AMD Ryzen 9 8940HX (Zen 4)**, MinGW-w64 GCC 16.1.0, `-O3 -march=native -flto`
+---
 
-### Scalar CSPRNG Comparison
+## Quick Start
+
+```bash
+git clone https://github.com/paim-creater/prng.git && cd prng
+make && make bench
+```
+
+Expected output:
+```
+============================================
+  Bolt & Tempest — Throughput Benchmark
+============================================
+  ADC-Bolt:            70261 Mbit/s  (70.3 Gbit/s)
+  4-cmul Tempest v3:   19024 Mbit/s  (19.0 Gbit/s)
+============================================
+```
+
+### Drop-In Usage (Single Header)
+
+Copy one file — no build system needed:
+
+```c
+#include "prng_single_header.h"
+
+// Non-crypto: games, Monte Carlo, ML
+adcbolt_state rng;
+adcbolt_seed(&rng, 42);
+double x = adcbolt_double(&rng);
+int dice = adcbolt_range(&rng, 1, 6);
+
+// Cryptographic: keys, tokens, authentication
+tempest_state csprng;
+tempest_init(&csprng, key, nonce);
+uint64_t token = tempest_u64(&csprng);
+```
+
+### Python
+
+```python
+import prng
+
+rng = prng.ADC_Bolt(seed=42)
+print(rng.randint(1, 6))
+
+csprng = prng.Tempest(key=bytes(32), nonce=bytes(16))
+print(csprng.hex(16))
+```
+
+---
+
+## Design Methodology
+
+Traditional PRNG design follows: *choose structure → test → add rounds*. We reverse this:
+
+**First determine the target algebraic degree (deg), then reverse-engineer the primitives.**
+
+The key metric is **deg-per-mul** — algebraic degree yield per hardware multiplication:
+
+$$\text{deg-per-mul} = \frac{\max\deg(\text{after one round})}{\text{multiplications per round}}$$
+
+This single number guides every design decision, transforming PRNG development from empirical tuning into goal-directed optimization.
+
+### ADC-Bolt (70.3 Gbit/s)
+
+Replace MULX multiplication (3-cycle latency) with **carry-chain dual-addition** (ADD+ADD, 2-cycle latency). Same algebraic degree (deg=2), shorter critical path, **52% throughput gain** over the MULX baseline.
+
+```c
+// Core nonlinearity: carry-chain provides deg=2 at 2c latency
+z = (z + u) + v;   // majority carry = quadratic over GF(2)
+```
+
+### 4-cmul Tempest v3 (19.0 Gbit/s, 2¹²⁸ security)
+
+Four architectural innovations after 11 generations of iteration:
+
+1. **ADD pre-diffusion** — breaks XOR serial dependency chain, doubles state-word deg from 1→2, ILP +33%
+2. **4-cmul Fibonacci-weave** — optimal multiplication scheduling with active-cmul lower bound a₁ ≥ 3 (DP ≤ 2⁻¹⁸⁶)
+3. **AND-mix output** — replaces 3-cycle MULX square with ~1-cycle bitwise AND-of-rotations (deg=2d over GF(2))
+4. **Dual-output** — generates 2×64-bit per round by permuting state combinations, 73% throughput gain
+
+---
+
+## Statistical Testing
+
+Both algorithms have passed **all** statistical tests applied:
+
+| Test Suite | Tests | ADC-Bolt | 4-cmul Tempest v3 |
+|------------|-------|----------|-------------------|
+| NIST SP 800-22 | 15 series | ✅ 15/15 | ✅ 15/15 |
+| TestU01 SmallCrush | 10 | ✅ Pass | ✅ Pass |
+| TestU01 Rabbit | 40 | ✅ Pass | ✅ Pass |
+| TestU01 Alphabit | 17 | ✅ Pass | ✅ Pass |
+| TestU01 BigCrush | 106 | ✅ Pass (1h39m) | ✅ Pass (1h43m) |
+| TestU01 Crush | 96 | ✅ Pass (12h46m) | ✅ Pass (16m13s) |
+| PractRand | — | ✅ 1 TiB, 354 sets | ✅ 1 TiB, 354 sets, 0 anomalies |
+
+Full test logs: [`results/`](results/)
+
+---
+
+## Performance
+
+### Reference Platform (AMD Zen 4)
+
+| Algorithm | Rounds | Time | Throughput |
+|-----------|--------|------|------------|
+| ADC-Bolt | 2×10⁸ | 182 ms | 70.3 Gbit/s |
+| 4-cmul Tempest v3 | 5×10⁷ | 168 ms | 19.0 Gbit/s |
+| ChaCha20 (scalar) | 2×10⁸ | — | 5.8 Gbit/s |
+
+### Predicted Performance by Architecture
+
+| CPU | ADC-Bolt | Tempest v3 | Key Factor |
+|-----|----------|------------|------------|
+| **Apple M4 Pro/Max** 🥇 | 85–95 Gbit/s | 16–18 Gbit/s | UMULL=1c (=ADD latency) |
+| AMD Zen 5 | 75–82 Gbit/s | 13–15 Gbit/s | IPC +15% over Zen 4 |
+| **AMD Zen 4** | **70.3** ✅ | **19.0** ✅ | Reference platform |
+| Intel Arrow Lake | 75–85 Gbit/s | 12–14 Gbit/s | Higher clock (5.7 GHz) |
+| Intel Raptor Lake | 60–70 Gbit/s | 10–12 Gbit/s | Previous gen |
+| ARM Cortex-X4 | 55–65 Gbit/s | 10–13 Gbit/s | Mobile thermal limits |
+
+> 🥇 ARM64 is the ideal platform — multiply latency (UMULL=1c) equals ADD latency (1c), eliminating the MULX bottleneck that limits x86-64.
+
+### Reproduce on Your Hardware
+
+```bash
+git clone https://github.com/paim-creater/prng.git && cd prng
+gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
+./benchmark
+```
+
+Then [submit your results](https://github.com/paim-creater/prng/issues/new?template=benchmark_result.md) to the community database!
+
+| Contributor | CPU | ADC-Bolt | Tempest v3 |
+|-------------|-----|----------|------------|
+| [Submit yours →](https://github.com/paim-creater/prng/issues/new?template=benchmark_result.md) | — | — | — |
+| [@paim-creater](https://github.com/paim-creater) | Ryzen 9 8940HX (Zen 4) | 70.3 Gbit/s | 19.0 Gbit/s |
+| [GitHub Actions CI](https://github.com/paim-creater/prng/actions) | Xeon E5 v4 | 8.6 Gbit/s | 4.6 Gbit/s |
+
+---
+
+## Repository Structure
+
+```
+.
+├── README.md
+├── LICENSE                    ← MIT
+├── CONTRIBUTING.md
+├── CMakeLists.txt             ← CMake build (MSVC / Xcode / Make / Ninja)
+├── Makefile                   ← One-click: make && make bench
+├── prng_single_header.h       ← Drop-in: copy one file, #include it
+├── prng.py                    ← Python bindings
+├── benchmark.c                ← Throughput benchmark
+├── test_bolt.c                ← ADC-Bolt self-test
+├── test_tempest.c             ← Tempest v3 self-test
+├── examples/
+│   ├── dice_roll.c            ← Game dice roller
+│   ├── generate_token.c       ← Secure API token
+│   └── monte_carlo.c          ← π via Monte Carlo
+├── src/
+│   ├── platform.h             ← Auto-detects x86-64 / ARM64 / RISC-V / MSVC
+│   ├── adcbolt.h              ← ADC-Bolt API
+│   ├── adcbolt.c              ← ADC-Bolt implementation
+│   ├── tempest_v3.h           ← Tempest v3 API
+│   └── tempest_v3.c           ← Tempest v3 implementation
+├── results/                   ← Full test logs
+│   ├── nist_tempest_v3_report.txt
+│   ├── smallcrush_tempest_v3.log
+│   ├── rabbit_tempest_v3.log
+│   ├── alphabit_tempest_v3.log
+│   ├── bigcrush_tempest_v3.log
+│   ├── crush_tempest_v3.log
+│   ├── practrand_tempest_v3_1tb.log
+│   └── (adcbolt counterparts)
+└── .github/
+    ├── workflows/benchmark.yml  ← CI benchmark
+    └── ISSUE_TEMPLATE/
+```
+
+---
+
+## Security Disclaimer
+
+The 2¹²⁸ security claim for 4-cmul Tempest v3 is **self-analyzed** and has **not been independently verified** by a third party. The security argument rests on:
+
+- **Wide-trail analysis**: active cmul lower bound a₁ ≥ 3, iterative DP ≤ 2⁻¹⁸⁶
+- **Algebraic degree**: deg ≥ 256 after 2 rounds (XL/Gröbner base ≥ 2¹²⁸)
+- **Empirical**: >2.2×10¹⁰ samples, zero differential collisions
+- **Two unproven hypotheses** (H1: cmul differential uniformity; H2: inter-round decorrelation)
+
+This follows the same methodological paradigm as AES and ChaCha20 — structural lower bounds + component analysis + empirical validation. See the [paper](https://github.com/paim-creater/prng) for full security analysis.
+
+---
+
+## Build Options
+
+### Make (Linux / macOS / MSYS2)
+
+```bash
+make            # compile + run self-tests
+make test       # build and run both test programs
+make benchmark  # build benchmark binary
+make bench      # build and run benchmark
+make clean      # remove binaries
+```
+
+### CMake (All platforms including MSVC)
+
+```bash
+mkdir build && cd build
+cmake ..
+cmake --build .
+ctest           # run test_all
+./benchmark     # run benchmark
+```
+
+### Manual Compilation
+
+```bash
+# ADC-Bolt
+gcc -O3 -march=native -o test_bolt test_bolt.c src/adcbolt.c -I.
+
+# Tempest v3
+gcc -O3 -march=native -o test_tempest test_tempest.c src/tempest_v3.c -I.
+
+# Benchmark
+gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
+```
+
+---
+
+## Comparison
+
+### Scalar CSPRNG
 
 | Algorithm | Throughput | Security | Verification |
 |-----------|-----------|----------|-------------|
-| **4-cmul Tempest v3** | **19.0 Gbit/s** | 2¹²⁸ (self-analyzed) | TestU01 all 5 levels, PractRand 1TiB |
-| ChaCha20 (scalar) | 5.8 Gbit/s | 2²⁵⁶ | 15+ years of cryptanalysis |
-| AES-CTR DRBG (AES-NI) | 2–6 Gbit/s | 2²⁵⁶ | NIST standard, 20+ years |
+| **4-cmul Tempest v3** | **19.0 Gbit/s** | 2¹²⁸ (self-analyzed) | TestU01 all 5 levels, PractRand 1 TiB |
+| ChaCha20 | 5.8 Gbit/s | 2²⁵⁶ | 15+ years of cryptanalysis |
+| AES-CTR DRBG (AES-NI) | 2–6 Gbit/s | 2²⁵⁶ | NIST standard |
 
-### Non-Crypto PRNG Comparison
+### Non-Crypto PRNG
 
 | Algorithm | Throughput | State Update | TestU01 BigCrush |
 |-----------|-----------|-------------|-----------------|
@@ -39,318 +276,20 @@ Two high-performance pseudorandom number generators designed through an algebrai
 | xoroshiro128+ | ~90 Gbit/s | Linear | ❌ Some failures |
 | **ADC-Bolt** | **70.3 Gbit/s** | **Nonlinear (deg=2)** | ✅ Full pass |
 
-Both algorithms pass **all** statistical tests:
-- NIST SP 800-22: 15/15 ✓
-- TestU01 (SmallCrush, Rabbit, Alphabit, BigCrush, Crush): 337/337 ✓
-- PractRand 1 TiB: 354/354 test sets, zero anomalies ✓
-
-## Key Innovations
-
-### ADC-Bolt
-Replace MULX multiplication (3-cycle latency) with **carry-chain dual-addition** (ADD+ADD, 2-cycle latency) — same algebraic degree (deg=2), shorter critical path, 52% throughput gain over the MULX baseline.
-
-### 4-cmul Tempest v3
-Three architectural innovations after 11 generations of iteration:
-1. **ADD pre-diffusion** — breaks a hidden XOR serial dependency chain, doubling state-word algebraic degree while improving ILP by 33%
-2. **4-cmul Fibonacci-weave** — optimal multiplication scheduling with active-cmul lower bound a₁ ≥ 3 (DP ≤ 2⁻¹⁸⁶)
-3. **AND-mix output** — replaces a 3-cycle MULX square with a ~1-cycle bitwise AND-of-rotations operation over GF(2)
-
-## Try It Now
-
-```bash
-git clone https://github.com/paim-creater/prng.git && cd prng
-make && make benchmark
-```
-
-```
-============================================
-  Bolt & Tempest — Throughput Benchmark
-============================================
-  ADC-Bolt:            70261 Mbit/s  (70.3 Gbit/s)   182 ms
-  4-cmul Tempest v3:   19024 Mbit/s  (19.0 Gbit/s)   168 ms
-============================================
-```
-
-## Quick Use (Drop-In)
-
-### C / C++ — One file
-
-```c
-#include "prng_single_header.h"  // copy this one file into your project
-
-// Game: roll a dice
-adcbolt_state rng; adcbolt_seed(&rng, time(NULL));
-int dice = adcbolt_range(&rng, 1, 6);
-
-// Security: generate a token
-tempest_state csprng;
-tempest_init(&csprng, key, nonce);
-uint64_t token = tempest_u64(&csprng);
-```
-
-### Python — One import
-
-```python
-import prng
-rng = prng.ADC_Bolt(seed=42)
-print(rng.randint(1, 6))  # roll dice
-
-csprng = prng.Tempest(key=bytes(32), nonce=bytes(16))
-print(csprng.hex(16))     # random hex token
-```
-
-### Build from Source
-
-```bash
-git clone https://github.com/paim-creater/prng.git && cd prng
-
-# Any platform (CMake): MSVC / Xcode / Make / Ninja
-mkdir build && cd build && cmake .. && cmake --build .
-
-# Linux / macOS / MSYS2 (Make):
-make && make benchmark
-
-# Single-header (no build system needed):
-gcc -O3 -o my_app my_app.c    # just #include "prng_single_header.h"
-```
-
-### Real-World Examples
-
-```bash
-gcc -O3 -o dice examples/dice_roll.c && ./dice          # game dice roller
-gcc -O3 -o token examples/generate_token.c && ./token    # secure API token
-gcc -O3 -o pi examples/monte_carlo.c && ./pi             # π via Monte Carlo
-```
-
-## Quick Start (Developers)
-
-```bash
-git clone https://github.com/paim-creater/prng.git
-cd prng
-make          # compiles and runs self-tests for both algorithms
-make benchmark # runs throughput benchmark (requires gcc -O3)
-```
-
-### Minimal Example (C)
-
-```c
-#include "prng_single_header.h"  // one file, no build system needed
-
-// Game dice
-adcbolt_state rng; adcbolt_seed(&rng, 42);
-int dice = adcbolt_range(&rng, 1, 6);
-
-// Secure token
-tempest_state csprng;
-tempest_init(&csprng, key, nonce);
-uint8_t token[32]; tempest_bytes(&csprng, token, 32);
-```
-
-### Minimal Example (Python)
-
-```python
-import prng
-rng = prng.ADC_Bolt(seed=42)
-print(rng.randint(1, 6))
-```
-
-## Repository Structure
-
-```
-.
-├── README.md              ← You are here
-├── CONTRIBUTING.md        ← How to contribute
-├── CMakeLists.txt          ← CMake build (MSVC / Xcode / Make)
-├── Makefile               ← One-click build + test
-├── LICENSE                ← MIT License
-├── prng_single_header.h   ← Drop-in header (1 file, all platforms)
-├── prng.py                ← Python bindings (import prng)
-├── test_bolt.c            ← ADC-Bolt self-test
-├── test_tempest.c         ← Tempest v3 self-test
-├── benchmark.c            ← Throughput benchmark
-├── examples/
-│   ├── dice_roll.c        ← Game dice roller
-│   ├── generate_token.c   ← Secure token generator
-│   └── monte_carlo.c      ← π via Monte Carlo
-├── src/
-│   ├── platform.h         ← Auto-detects x86-64 / ARM64 / RISC-V / MSVC
-│   ├── tempest_v3.h       ← 4-cmul Tempest v3 API
-│   ├── tempest_v3.c       ← 4-cmul Tempest v3 implementation
-│   ├── adcbolt.h          ← ADC-Bolt API
-│   └── adcbolt.c          ← ADC-Bolt implementation
-└── results/
-    ├── adcbolt_nist_report.txt  ← ADC-Bolt NIST 15/15
-    ├── smallcrush_adcbolt.log   ← ADC-Bolt SmallCrush 15/15
-    ├── rabbit_adcbolt.log       ← ADC-Bolt Rabbit 40/40
-    ├── alphabit_adcbolt.log     ← ADC-Bolt Alphabit 17/17
-    ├── bigcrush_adcbolt.log     ← ADC-Bolt BigCrush 160/160
-    ├── crush_adcbolt.log        ← ADC-Bolt Crush 144/144
-    ├── practrand_adcbolt.log    ← ADC-Bolt PractRand 1 TiB
-    ├── nist_tempest_v3_report.txt   ← Tempest v3 NIST 15/15 ✅
-    ├── smallcrush_tempest_v3.log    ← Tempest v3 SmallCrush 15/15 ✅
-    ├── rabbit_tempest_v3.log        ← Tempest v3 Rabbit 40/40 ✅
-    ├── alphabit_tempest_v3.log      ← Tempest v3 Alphabit 17/17 ✅
-    ├── bigcrush_tempest_v3.log      ← Tempest v3 BigCrush 160/160 (1h43m) ✅
-    └── crush_tempest_v3.log         ← Tempest v3 Crush 144/144 (16m13s) ✅
-```
-
-## Benchmark Guide
-
-Reproduce the throughput measurements on your own hardware.
-
-### Prerequisites
-
-- **GCC** (MinGW-w64 on Windows, or native on Linux/macOS)
-- **Make** (optional; you can compile manually)
-
-### Step 1: Clone and Build
-
-```bash
-git clone https://github.com/paim-creater/prng.git
-cd prng
-make          # runs self-tests for both algorithms
-```
-
-If `make` is not available, use the single-header (no build system needed):
-
-```bash
-gcc -O3 -o my_test my_test.c   # just #include "prng_single_header.h"
-./my_test
-```
-
-Or compile the full test suite manually:
-
-```bash
-gcc -O3 -march=native -o test_bolt test_bolt.c src/adcbolt.c -I. && ./test_bolt
-gcc -O3 -march=native -o test_tempest test_tempest.c src/tempest_v3.c -I. && ./test_tempest
-```
-
-### Step 2: Run Benchmark
-
-```bash
-make benchmark
-```
-
-Or manually:
-
-```bash
-gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
-./benchmark
-```
-
-### Step 3: Read the Output
-
-```
-============================================
-  Bolt & Tempest — Throughput Benchmark
-============================================
-
-  ADC-Bolt:             70261 Mbit/s  ( 70.3 Gbit/s)   182 ms
-  4-cmul Tempest v3:    19024 Mbit/s  ( 19.0 Gbit/s)   168 ms
-
-============================================
-  Reference (same platform):
-    ADC-Bolt:             70,261 Mbit/s  (70.3 Gbit/s)
-    4-cmul Tempest v3:    19024 Mbit/s  (19.0 Gbit/s)
-    Platform: AMD Ryzen 9 8940HX, MinGW-w64 GCC -O3
-============================================
-```
-
-### Important Notes
-
-| Factor | Impact |
-|--------|--------|
-| **`-O3 -march=native`** | **Critical.** Without these flags, throughput drops 3–5×. |
-| CPU frequency scaling | Close other apps, plug in AC power for stable results. |
-| Thermal throttling | Let the laptop cool down between runs. |
-| Compiler version | GCC 13+ recommended. MSVC produces ~10–15% lower throughput. |
-| Different CPU | Results vary by microarchitecture. Zen 4 > Zen 3 > Intel 12th-gen. |
-
-### Expected Ranges
-
-| Algorithm | Low-end (laptop) | Mid-range (desktop) | High-end (Zen 4) |
-|-----------|-----------------|--------------------|--------------------|
-| ADC-Bolt | 25–40 Gbit/s | 50–60 Gbit/s | **65–75 Gbit/s** |
-| Tempest v3 | 4–7 Gbit/s | 8–10 Gbit/s | **10–12 Gbit/s** |
-
-### Predicted Performance by CPU Architecture
-
-| CPU | ADC-Bolt | Tempest v3 | Why |
-|-----|----------|------------|-----|
-| **Apple M4 Pro/Max** 🥇 | 85–95 Gbit/s | **16–18 Gbit/s** | 10-wide frontend, UMULL=1c (=ADD latency!) |
-| Apple M3 | 78–88 Gbit/s | 14–17 Gbit/s | Same ARM advantage, slightly narrower |
-| AMD Zen 5 (Ryzen 9000) | 75–82 Gbit/s | 13–15 Gbit/s | IPC +15% over Zen 4, same MULX=3c |
-| AMD Zen 4 (Ryzen 7000) | **70.3** ✅ | **19.0** ✅ | Reference platform |
-| Intel Arrow Lake | 75–85 Gbit/s | 12–14 Gbit/s | Higher clock (5.7 GHz), wider decode |
-| Intel Raptor Lake | 60–70 Gbit/s | 10–12 Gbit/s | P-core 5.2 GHz, older architecture |
-| ARM Cortex-X4 | 55–65 Gbit/s | 10–13 Gbit/s | Mobile thermal limits, UMULL=3c |
-| RISC-V (SG2044) | 30–40 Gbit/s | 6–8 Gbit/s | Early silicon, lower clock |
-
-> 🥇 **ARM64 is the ideal platform.** On Apple M-series, multiply latency (UMULL=1c) equals ADD latency (1c), perfectly matching Tempest's cmul→ADD rhythm. x86-64's MULX=3c creates a bottleneck that ARM eliminates.
-
-### Community Benchmarks
-
-Run on your own hardware and submit your results to help build a public performance database.
-
-```bash
-git clone https://github.com/paim-creater/prng.git && cd prng
-gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
-./benchmark
-```
-
-Then [open an issue](https://github.com/paim-creater/prng/issues/new) with:
-
-```markdown
-**CPU:** [your CPU model]
-**OS:** [Windows/Linux/macOS]
-**Compiler:** [gcc version]
-**ADC-Bolt:** [your result] Gbit/s
-**Tempest v3:** [your result] Gbit/s
-```
-
-| Contributor | CPU | ADC-Bolt | Tempest v3 |
-|-------------|-----|----------|------------|
-| [Your name?](https://github.com/paim-creater/prng/issues/new) | Your CPU | ? Gbit/s | ? Gbit/s |
-| [@paim-creater](https://github.com/paim-creater) | Ryzen 9 8940HX (Zen 4) | 70.3 Gbit/s | 19.0 Gbit/s |
-| [GitHub Actions CI](https://github.com/paim-creater/prng/actions/workflows/benchmark.yml) | Xeon E5 v4 | 8.6 Gbit/s | 4.6 Gbit/s |
-
-## Design Methodology
-
-Traditional PRNG design follows: choose structure → test → add rounds. We reverse this:
-
-**First determine the target algebraic degree (deg), then reverse-engineer the primitives.**
-
-The key metric is **deg-per-mul** — algebraic degree yield per hardware multiplication:
-```
-deg-per-mul = max(deg after one round) / (multiplications per round)
-```
-
-This single number guides every design decision, transforming PRNG development from empirical tuning into goal-directed optimization.
-
-## Security Disclaimer
-
-The 2¹²⁸ security claim for 4-cmul Tempest v3 is **self-analyzed** and has **not been independently verified** by a third party. The security argument rests on two unproven hypotheses (H1: cmul differential uniformity; H2: inter-round independence), supported by theory, algebra, and >10¹⁰ empirical samples with zero collisions — following the same methodological paradigm as AES and ChaCha20.
-
-## Related Work
-
-- Odrzywołek (2026): EML operator — original inspiration
-- Daemen & Rijmen (2002): AES wide-trail strategy — security framework foundation
-- Bernstein (2008): ChaCha20 — ARX stream cipher benchmark
-- Blackman & Vigna (2018): xoroshiro — speed benchmark for non-crypto PRNGs
+---
 
 ## Citation
 
-If you use this code in your research, please cite:
-
-```
+```bibtex
 @misc{bolt_tempest_2026,
-  title = {4-cmul Tempest v3 \& ADC-Bolt: 
+  title = {4-cmul Tempest v3 \& ADC-Bolt:
            Algebraic Degree-Driven PRNG Design},
   author = {Tian Yuezhou},
   year = {2026},
+  url = {https://github.com/paim-creater/prng},
 }
 ```
 
 ## License
 
-MIT License — see [LICENSE](LICENSE) for details. Free for academic, commercial, and personal use.
+MIT — free for academic, commercial, and personal use. See [LICENSE](LICENSE).
