@@ -85,6 +85,36 @@ static inline void adcbolt_bytes(adcbolt_state *s, uint8_t *buf, size_t n) {
     if (n > 0) { uint64_t r = adcbolt_u64(s); memcpy(buf, &r, n); }
 }
 
+/* Convenience: random integer in [min, max] with unbiased rejection sampling.
+   Avoids the modulo bias of the simple adcbolt_range function. */
+static inline int adcbolt_range_unbiased(adcbolt_state *s, int min, int max) {
+    if (min > max) { int t = min; min = max; max = t; }
+    unsigned r = (unsigned)(max - min + 1);
+    if (r == 0) return (int)adcbolt_u64(s); /* full 32-bit range */
+    if ((r & (r - 1)) == 0) return min + (int)(adcbolt_u64(s) & (r - 1));
+    unsigned mask = (1U << (32 - __builtin_clz(r))) - 1;
+    unsigned x;
+    do { x = (unsigned)adcbolt_u64(s) & mask; } while (x >= r);
+    return min + (int)x;
+}
+
+/* Convenience: Fisher-Yates shuffle an array IN-PLACE.
+   arr is an array of elemsize-byte elements, count elements total.
+   Uses unbiased range for index selection. */
+static inline void adcbolt_shuffle(adcbolt_state *s, void *arr, size_t count, size_t elemsize) {
+    uint8_t *a = (uint8_t*)arr;
+    uint8_t tmp[256]; /* stack buffer for swapping — max 256-byte elements */
+    if (elemsize > 256) return; /* element too large, would need heap allocation */
+    for (size_t i = count - 1; i > 0; i--) {
+        size_t j = (size_t)adcbolt_range_unbiased(s, 0, (int)i);
+        if (i != j) {
+            memcpy(tmp, a + i * elemsize, elemsize);
+            memcpy(a + i * elemsize, a + j * elemsize, elemsize);
+            memcpy(a + j * elemsize, tmp, elemsize);
+        }
+    }
+}
+
 /* ═══════════════════════════════════════════════════════════════════
  * PART 2: 4-cmul Tempest v3 — Cryptographic CSPRNG (19.0 Gbit/s, dual-output)
  * Use for: key generation, authentication tokens, security
@@ -191,6 +221,69 @@ static inline void tempest_u64x2(tempest_state *s, uint64_t out[2]) {
     t2 ^= prng_rotl(t2, 31) & prng_rotl(t2, 53);
     t2 ^= t2 >> 32;
     out[0] = t1; out[1] = t2;
+}
+
+/* Convenience: random double in [0, 1) */
+static inline double tempest_double(tempest_state *s) {
+    return (tempest_u64(s) >> 11) * 0x1.0p-53;
+}
+
+/* Convenience: random integer in [min, max] with unbiased rejection */
+static inline int tempest_range(tempest_state *s, int min, int max) {
+    if (min > max) { int t = min; min = max; max = t; }
+    unsigned r = (unsigned)(max - min + 1);
+    if (r == 0) return (int)tempest_u64(s);
+    if ((r & (r - 1)) == 0) return min + (int)(tempest_u64(s) & (r - 1));
+    unsigned mask = (1U << (32 - __builtin_clz(r))) - 1;
+    unsigned x;
+    do { x = (unsigned)tempest_u64(s) & mask; } while (x >= r);
+    return min + (int)x;
+}
+
+/* Convenience: Fisher-Yates shuffle (cryptographically secure) */
+static inline void tempest_shuffle(tempest_state *s, void *arr, size_t count, size_t elemsize) {
+    uint8_t *a = (uint8_t*)arr;
+    uint8_t tmp[256];
+    if (elemsize > 256) return;
+    for (size_t i = count - 1; i > 0; i--) {
+        size_t j = (size_t)tempest_range(s, 0, (int)i);
+        if (i != j) {
+            memcpy(tmp, a + i * elemsize, elemsize);
+            memcpy(a + i * elemsize, a + j * elemsize, elemsize);
+            memcpy(a + j * elemsize, tmp, elemsize);
+        }
+    }
+}
+
+/* Convenience: generate hex string from random bytes.
+   out must be at least n_bytes*2+1 bytes (includes null terminator). */
+static inline void tempest_hex(tempest_state *s, char *out, size_t n_bytes) {
+    static const char hex[] = "0123456789abcdef";
+    uint8_t buf[64];
+    size_t remaining = n_bytes;
+    while (remaining > 0) {
+        size_t chunk = remaining < 64 ? remaining : 64;
+        tempest_bytes(s, buf, chunk);
+        for (size_t i = 0; i < chunk; i++) {
+            *out++ = hex[buf[i] >> 4];
+            *out++ = hex[buf[i] & 15];
+        }
+        remaining -= chunk;
+    }
+    *out = '\0';
+}
+
+/* Convenience: seed Tempest from a single 64-bit value (deterministic).
+   NOT cryptographically secure — use only for reproducible testing. */
+static inline void tempest_seed(tempest_state *s, uint64_t seed) {
+    uint64_t key[4], nonce[2];
+    key[0] = seed + 0x9E3779B97F4A7C15ULL;
+    key[1] = ((seed << 17) | (seed >> 47)) * 0x6A09E667F3BCC909ULL;
+    key[2] = seed ^ 0x3243F6A8885A308DULL;
+    key[3] = ((seed << 32) | (seed >> 32)) + 0xB7E151628AED2A6BULL;
+    nonce[0] = seed ^ 0x510E527FADE682D1ULL;
+    nonce[1] = seed ^ 0xBB67AE8584CAA73BULL;
+    tempest_init(s, key, nonce);
 }
 
 #ifdef __cplusplus

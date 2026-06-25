@@ -1,25 +1,61 @@
-name: Benchmark
+name: CI
 
-on: [push, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  benchmark:
-    runs-on: ubuntu-latest
+  test-and-benchmark:
+    name: ${{ matrix.os }} / ${{ matrix.cc }} ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Linux
+          - os: ubuntu-24.04
+            cc: gcc
+            target: x86_64
+          - os: ubuntu-24.04
+            cc: clang
+            target: x86_64
+          # macOS
+          - os: macos-14
+            cc: gcc
+            target: aarch64
+          - os: macos-14
+            cc: clang
+            target: aarch64
+          # Windows
+          - os: windows-2025
+            cc: gcc
+            target: x86_64
+          - os: windows-2025
+            cc: clang
+            target: x86_64
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build
-        run: gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
+      - name: Build ADC-Bolt test
+        run: ${{ matrix.cc }} -O3 -march=native -o test_bolt test_bolt.c src/adcbolt.c -I.
 
-      - name: Run Benchmark
+      - name: Run ADC-Bolt self-test
+        run: ./test_bolt
+
+      - name: Build Tempest v3 test
+        run: ${{ matrix.cc }} -O3 -march=native -o test_tempest test_tempest.c src/tempest_v3.c -I.
+
+      - name: Run Tempest v3 self-test
+        run: ./test_tempest
+
+      - name: Build benchmark
+        run: ${{ matrix.cc }} -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
+
+      - name: Run benchmark
         run: ./benchmark
 
-      - name: Self-test ADC-Bolt
+      - name: Compile examples
         run: |
-          gcc -O3 -march=native -o test_bolt test_bolt.c src/adcbolt.c -I.
-          ./test_bolt
-
-      - name: Self-test Tempest v3
-        run: |
-          gcc -O3 -march=native -o test_tempest test_tempest.c src/tempest_v3.c -I.
-          ./test_tempest
+          ${{ matrix.cc }} -O3 -o examples/dice examples/dice_roll.c src/adcbolt.c -I.
+          ${{ matrix.cc }} -O3 -o examples/token examples/generate_token.c src/tempest_v3.c -I.
+          ${{ matrix.cc }} -O3 -o examples/pi examples/monte_carlo.c src/adcbolt.c -I.
+        if: matrix.os != 'windows-2025'
