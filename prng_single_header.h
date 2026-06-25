@@ -35,6 +35,28 @@
 extern "C" {
 #endif
 
+/* Portable count-leading-zeros (fallback for MSVC / unknown compilers) */
+#if defined(_MSC_VER)
+#include <intrin.h>
+static inline int prng_clz32(unsigned x) {
+    unsigned long idx;
+    _BitScanReverse(&idx, x);
+    return 31 - (int)idx;
+}
+#elif defined(__GNUC__) || defined(__clang__)
+static inline int prng_clz32(unsigned x) { return x ? __builtin_clz(x) : 32; }
+#else
+static inline int prng_clz32(unsigned x) {
+    int n = 0;
+    if ((x & 0xFFFF0000U) == 0) { n += 16; x <<= 16; }
+    if ((x & 0xFF000000U) == 0) { n += 8;  x <<= 8;  }
+    if ((x & 0xF0000000U) == 0) { n += 4;  x <<= 4;  }
+    if ((x & 0xC0000000U) == 0) { n += 2;  x <<= 2;  }
+    if ((x & 0x80000000U) == 0) { n += 1; }
+    return n;
+}
+#endif
+
 /* ═══════════════════════════════════════════════════════════════════
  * PART 1: ADC-Bolt — Ultra-fast non-crypto PRNG (70.3 Gbit/s)
  * Use for: games, Monte Carlo, ML, simulations, shaders
@@ -92,7 +114,7 @@ static inline int adcbolt_range_unbiased(adcbolt_state *s, int min, int max) {
     unsigned r = (unsigned)(max - min + 1);
     if (r == 0) return (int)adcbolt_u64(s); /* full 32-bit range */
     if ((r & (r - 1)) == 0) return min + (int)(adcbolt_u64(s) & (r - 1));
-    unsigned mask = (1U << (32 - __builtin_clz(r))) - 1;
+    unsigned mask = (1U << (32 - prng_clz32(r))) - 1;
     unsigned x;
     do { x = (unsigned)adcbolt_u64(s) & mask; } while (x >= r);
     return min + (int)x;
@@ -234,7 +256,7 @@ static inline int tempest_range(tempest_state *s, int min, int max) {
     unsigned r = (unsigned)(max - min + 1);
     if (r == 0) return (int)tempest_u64(s);
     if ((r & (r - 1)) == 0) return min + (int)(tempest_u64(s) & (r - 1));
-    unsigned mask = (1U << (32 - __builtin_clz(r))) - 1;
+    unsigned mask = (1U << (32 - prng_clz32(r))) - 1;
     unsigned x;
     do { x = (unsigned)tempest_u64(s) & mask; } while (x >= r);
     return min + (int)x;
