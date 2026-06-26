@@ -38,8 +38,8 @@ Expected output:
 ============================================
   Bolt & Tempest — Throughput Benchmark
 ============================================
-  ADC-Bolt:            70261 Mbit/s  (70.3 Gbit/s)
-  4-cmul Tempest v3:   19024 Mbit/s  (19.0 Gbit/s)
+  ADC-Bolt:            62753 Mbit/s  (62.8 Gbit/s)
+  4-cmul Tempest v3:   19594 Mbit/s  (19.6 Gbit/s)  [dual-output]
 ============================================
 ```
 

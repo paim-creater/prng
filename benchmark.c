@@ -4,7 +4,7 @@
  *   gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
  *   ./benchmark
  *
- * Output: throughput in Mbit/s and Gbit/s, cycle estimate.
+ * Tempest v3 uses dual-output (tx5cmul_next2, 128 bits/round) for ~19 Gbit/s.
  * Platform note: uses QueryPerformanceCounter on Windows, clock_gettime on Linux.
  */
 #include "src/adcbolt.h"
@@ -47,20 +47,24 @@ static void bench_tempest() {
     uint64_t key[4] = {1, 2, 3, 4}, nonce[2] = {5, 6};
     tx5cmul_init(&s, key, nonce);
     volatile uint64_t sink = 0;
-    int64_t rounds = 50000000; /* 50M rounds = 400 MB of output */
+    /* Dual-output: 128 bits per round via tx5cmul_next2 */
+    int64_t rounds = 50000000;
     double t0 = now_ms();
-    for (int64_t i = 0; i < rounds; i++) sink ^= tx5cmul_next(&s);
+    for (int64_t i = 0; i < rounds; i++) {
+        uint64_t out[2];
+        tx5cmul_next2(&s, out);
+        sink ^= out[0] ^ out[1];
+    }
     double elapsed = now_ms() - t0;
-    double mbits = (rounds * 64.0 / 1e6) / (elapsed / 1000.0);
-    printf("  4-cmul Tempest v3:    %8.0f Mbit/s  (%5.1f Gbit/s)  %6.0f ms\n",
+    /* 128 bits per round for dual-output */
+    double mbits = (rounds * 128.0 / 1e6) / (elapsed / 1000.0);
+    printf("  4-cmul Tempest v3:    %8.0f Mbit/s  (%5.1f Gbit/s)  %6.0f ms  [dual-output]\n",
            mbits, mbits / 1000.0, elapsed);
 }
 
 int main() {
     printf("============================================\n");
     printf("  Bolt & Tempest — Throughput Benchmark\n");
-    printf("  Each test runs fixed rounds, measures wall-clock time.\n");
-    printf("  For reproducible results: close other apps, plug in AC power.\n");
     printf("============================================\n\n");
 
     printf("Warming up...\n");
@@ -69,7 +73,7 @@ int main() {
     tx4_state ts;
     uint64_t k[4] = {0}, n[2] = {0};
     tx5cmul_init(&ts, k, n);
-    for (int i = 0; i < 10000; i++) tx5cmul_next(&ts);
+    for (int i = 0; i < 10000; i++) { uint64_t o[2]; tx5cmul_next2(&ts, o); }
 
     printf("\nBenchmarking...\n\n");
     bench_adcbolt();
