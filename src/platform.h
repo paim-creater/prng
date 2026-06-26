@@ -97,11 +97,11 @@ static inline uint64_t cmul_lh(uint64_t a, uint64_t b) {
   }
 
 #elif defined(PLATFORM_MSVC) && defined(PLATFORM_X86_64)
-  /* MSVC x86-64: _umul128 intrinsic */
+  /* MSVC x86-64: _umul128 -> (t * t) >> 32 = (hi << 32) | (lo >> 32) */
   static inline uint64_t square_mid64(uint64_t t) {
-      uint64_t hi;
-      (void)_umul128(t, t, &hi);
-      return hi;
+      uint64_t hi, lo;
+      lo = _umul128(t, t, &hi);
+      return (hi << 32) | (lo >> 32);
   }
 
 #elif defined(PLATFORM_GCC)

@@ -6,11 +6,8 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Compiler flags
 if(NOT MSVC)
-    add_compile_options(-O3 -Wall -Wextra)
-    # Platform-specific tuning
-    if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
-        add_compile_options(-march=native)
-    elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|ARM64")
+    add_compile_options(-O3 -Wall -Wextra -Wpedantic)
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64|aarch64|ARM64|riscv64|RISCV_64")
         add_compile_options(-march=native)
     endif()
 endif()

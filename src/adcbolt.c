@@ -30,6 +30,12 @@ void adcbolt_next_bytes(bolt3_state *s,uint8_t *buf,size_t n){
     if(n>0){uint64_t r=adcbolt_next(s);memcpy(buf,&r,n);}
 }
 
+/* ═══════════════════════════════════════════════════════════════════════
+ * Python binding wrappers (alias functions with Python-friendly names)
+ * ═══════════════════════════════════════════════════════════════════════ */
+uint64_t adcbolt_u64(bolt3_state *s){ return adcbolt_next(s); }
+void adcbolt_bytes(bolt3_state *s, uint8_t *buf, size_t n){ adcbolt_next_bytes(s, buf, n); }
+
 /* ═══════════════════════════════════════════════════════════════════════════
  * Flash Bolt: zero multiplication, pure ARX, 4-ARX ring + self-XOR
  * ═══════════════════════════════════════════════════════════════════════════ */
