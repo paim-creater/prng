@@ -139,6 +139,7 @@ static inline void adcbolt_shuffle(adcbolt_state *s, void *arr, size_t count, si
 
 /* ═══════════════════════════════════════════════════════════════════
  * PART 2: 4-cmul Tempest v3 — Cryptographic CSPRNG (19.0 Gbit/s, dual-output)
+ * Weyl constants + ChaCha20-style key-schedule feedforward
  * Use for: key generation, authentication tokens, security
  * 2^128 conservative security (self-analyzed)
  * ═══════════════════════════════════════════════════════════════════ */
@@ -151,12 +152,7 @@ static inline uint64_t prng_cmul_lh(uint64_t a, uint64_t b) {
     return (uint64_t)(uint32_t)a * (uint64_t)(uint32_t)(b >> 32);
 }
 
-static const uint64_t TEMPEST_RC[8] = {
-    0x6A09E667F3BCC908ULL, 0xBB67AE8584CAA73BULL,
-    0x3C6EF372FE94F82BULL, 0xA54FF53A5F1D36F1ULL,
-    0x510E527FADE682D1ULL, 0x9B05688C2B3E6C1FULL,
-    0x1F83D9ABFB41BD6BULL, 0x5BE0CD19137E2179ULL
-};
+#define TEMPEST_WEYL 0x9E3779B97F4A7C15ULL
 
 static inline void tempest_round(tempest_state *s) {
     uint64_t u = s->u, v = s->v, w = s->w, z = s->z;
@@ -178,21 +174,23 @@ static inline void tempest_round(tempest_state *s) {
 
 static inline void tempest_init(tempest_state *s,
     const uint64_t key[4], const uint64_t nonce[2]) {
-    s->u = key[0]; s->v = key[1] ^ nonce[0];
-    s->w = key[2] ^ nonce[1]; s->z = key[3] ^ 0x54454D5035583543ULL;
+    uint64_t k0=key[0],k1=key[1],k2=key[2],k3=key[3];
+    s->u = k0; s->v = k1 ^ nonce[0];
+    s->w = k2 ^ nonce[1]; s->z = k3 ^ 0x54454D5035583543ULL;
     s->r = 0;
+    uint64_t weyl = 0x6A09E667F3BCC908ULL;
     for (int i = 0; i < 16; i++) {
         tempest_round(s);
+        weyl += TEMPEST_WEYL; /* Weyl sequence — 1 ADD replaces table */
         if (i < 8) {
-            uint64_t rc = TEMPEST_RC[i];
             if (i & 1) {
-                s->u ^= prng_rotl(key[0], (uint64_t)(i + 1)) ^ rc;
-                s->v ^= prng_rotl(key[1], (uint64_t)(i + 1)) ^ (rc << 17);
-                s->w ^= prng_rotl(key[2], (uint64_t)(i + 1)) ^ (rc >> 13);
-                s->z ^= prng_rotl(key[3], (uint64_t)(i + 1)) ^ prng_rotl(rc, 31);
+                s->u ^= prng_rotl(k0, (uint64_t)(i + 1)) ^ weyl;
+                s->v ^= prng_rotl(k1, (uint64_t)(i + 1)) ^ (weyl << 17);
+                s->w ^= prng_rotl(k2, (uint64_t)(i + 1)) ^ (weyl >> 13);
+                s->z ^= prng_rotl(k3, (uint64_t)(i + 1)) ^ prng_rotl(weyl, 31);
             } else {
-                s->u ^= key[0] ^ rc; s->v ^= key[1] ^ (rc << 17);
-                s->w ^= key[2] ^ (rc >> 13); s->z ^= key[3] ^ prng_rotl(rc, 31);
+                s->u ^= k0 ^ weyl; s->v ^= k1 ^ (weyl << 17);
+                s->w ^= k2 ^ (weyl >> 13); s->z ^= k3 ^ prng_rotl(weyl, 31);
             }
         } else {
             uint64_t nh = nonce[i & 1], nl = nonce[1 - (i & 1)];
@@ -202,6 +200,8 @@ static inline void tempest_init(tempest_state *s,
         }
     }
     for (int i = 0; i < 6; i++) tempest_round(s);
+    /* ChaCha20-style feedforward — makes key schedule non-invertible */
+    s->u ^= k0; s->v ^= k1; s->w ^= k2; s->z ^= k3;
 }
 
 static inline uint64_t tempest_u64(tempest_state *s) {

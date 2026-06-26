@@ -1,5 +1,6 @@
 /* tempest_v3.c — 4-cmul Tempest v3 (dual-output, 19.0 Gbit/s)
  * ADD pre-diffusion + 4-cmul Fibonacci-weave + AND-mix output
+ * + Weyl-sequence round constants + ChaCha20-style key-schedule feedforward
  * Dual-output: 128 bits per round via make_output(u,v,w,z) + make_output(v,w,z,u)
  * 2^128 CSPRNG, passes all tests. ChaCha20: 3.3× speedup. */
 #include "tempest_v3.h"
@@ -9,7 +10,7 @@ static inline uint64_t rotl(uint64_t x,int r){return (x<<r)|(x>>(64-r));}
 static inline uint64_t cmul_hl(uint64_t a,uint64_t b){return (uint32_t)(a>>32)*(uint32_t)b;}
 static inline uint64_t cmul_lh(uint64_t a,uint64_t b){return (uint32_t)a*(uint32_t)(b>>32);}
 static uint64_t fold4(uint64_t u,uint64_t v,uint64_t w,uint64_t z){return u^rotl(v,32)^w^rotl(z,16);}
-static const uint64_t RC[8]={0x6A09E667F3BCC908ULL,0xBB67AE8584CAA73BULL,0x3C6EF372FE94F82BULL,0xA54FF53A5F1D36F1ULL,0x510E527FADE682D1ULL,0x9B05688C2B3E6C1FULL,0x1F83D9ABFB41BD6BULL,0x5BE0CD19137E2179ULL};
+#define WEYL_GOLDEN 0x9E3779B97F4A7C15ULL
 
 /* ═══════════════════════════════════════════════════════════════════════
  * 4-cmul round function
@@ -83,18 +84,23 @@ void tx5cmul_next2(tx4_state*s,uint64_t out[2]){
  * Key schedule: 16 rounds absorption + 6 rounds blank warmup
  * ═══════════════════════════════════════════════════════════════════════ */
 void tx5cmul_init(tx4_state*s,const uint64_t key[4],const uint64_t nonce[2]){
-    s->u=key[0];s->v=key[1]^nonce[0];s->w=key[2]^nonce[1];s->z=key[3]^0x54454D5035583543ULL;s->r=0;
+    uint64_t k0=key[0],k1=key[1],k2=key[2],k3=key[3];
+    s->u=k0;s->v=k1^nonce[0];s->w=k2^nonce[1];s->z=k3^0x54454D5035583543ULL;s->r=0;
+    uint64_t weyl=0x6A09E667F3BCC908ULL;
     for(int i=0;i<16;i++){
         tx5_round(s);
-        if(i<8){uint64_t rc=RC[i];
-            if(i&1){s->u^=rotl(key[0],(unsigned)(i+1))^rc;s->v^=rotl(key[1],(unsigned)(i+1))^(rc<<17);s->w^=rotl(key[2],(unsigned)(i+1))^(rc>>13);s->z^=rotl(key[3],(unsigned)(i+1))^rotl(rc,31);}
-            else{s->u^=key[0]^rc;s->v^=key[1]^(rc<<17);s->w^=key[2]^(rc>>13);s->z^=key[3]^rotl(rc,31);}
+        weyl+=WEYL_GOLDEN; /* Weyl sequence — 1 ADD replaces RC[8] table */
+        if(i<8){
+            if(i&1){s->u^=rotl(k0,(unsigned)(i+1))^weyl;s->v^=rotl(k1,(unsigned)(i+1))^(weyl<<17);s->w^=rotl(k2,(unsigned)(i+1))^(weyl>>13);s->z^=rotl(k3,(unsigned)(i+1))^rotl(weyl,31);}
+            else{s->u^=k0^weyl;s->v^=k1^(weyl<<17);s->w^=k2^(weyl>>13);s->z^=k3^rotl(weyl,31);}
         }else{uint64_t nh=nonce[(i&1)],nl=nonce[1-(i&1)],nc=(nh<<32)|(nl&0xFFFFFFFFULL);s->u^=nc;s->v^=rotl(nc,19)^(uint64_t)i;s->z^=rotl(nc,43);}
     }
     for(int i=0;i<6;i++)tx5_round(s);
+    /* ChaCha20-style key feedforward — makes key schedule non-invertible */
+    s->u^=k0;s->v^=k1;s->w^=k2;s->z^=k3;
 }
 void tx5cmul_seed(tx4_state*s,uint64_t seed){
-    uint64_t k[4]={seed+0x9E3779B97F4A7C15ULL,((seed<<17)|(seed>>47))*0x6A09E667F3BCC909ULL,seed^0x3243F6A8885A308DULL,((seed<<32)|(seed>>32))+0xB7E151628AED2A6BULL};
+    uint64_t k[4]={seed+WEYL_GOLDEN,((seed<<17)|(seed>>47))*0x6A09E667F3BCC909ULL,seed^0x3243F6A8885A308DULL,((seed<<32)|(seed>>32))+0xB7E151628AED2A6BULL};
     uint64_t n[2]={0,0};tx5cmul_init(s,k,n);
 }
 uint64_t tx5cmul_next(tx4_state*s){tx5_round(s);return make_output(s->u,s->v,s->w,s->z);}
