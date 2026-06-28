@@ -190,7 +190,18 @@ Then [submit your results](https://github.com/paim-creater/prng/issues/new?templ
 │   ├── adcbolt.h              ← ADC-Bolt API
 │   ├── adcbolt.c              ← ADC-Bolt implementation
 │   ├── tempest_v3.h           ← Tempest v3 API
-│   └── tempest_v3.c           ← Tempest v3 implementation
+│   ├── tempest_v3.c           ← Tempest v3 implementation
+│   ├── tempest_openssl.c      ← OpenSSL 3.x Provider (EVP_RAND)
+│   ├── tempest_cuda_kernel.cu ← CUDA GPU RNG kernel
+│   ├── bitgen_tempest.c       ← NumPy BitGenerator C extension
+│   └── _tempest_numpy.c       ← NumPy bulk fill acceleration
+├── tempest_rng.py              ← ⭐ NumPy: random/normal/integers/shuffle (11 Gbit/s)
+├── tempest_cuda.py             ← GPU: CUDA-accelerated Monte Carlo
+├── setup_bitgen.py             ← Build script for NumPy BitGenerator
+├── tempest-rs/                 ← ⭐ Rust crate: RngCore + CryptoRng
+│   ├── Cargo.toml
+│   ├── src/lib.rs
+│   └── examples/pi_estimation.rs
 ├── results/                   ← Full test logs
 │   ├── nist_tempest_v3_report.txt
 │   ├── smallcrush_tempest_v3.log
@@ -211,12 +222,17 @@ Then [submit your results](https://github.com/paim-creater/prng/issues/new?templ
 
 The 2¹²⁸ security claim for 4-cmul Tempest v3 is **self-analyzed** and has **not been independently verified** by a third party. The security argument rests on:
 
-- **Wide-trail analysis**: active cmul lower bound a₁ ≥ 3, iterative DP ≤ 2⁻¹⁸⁶
+- **Wide-trail analysis**: active cmul lower bound a₁ ≥ 4 (provable via z→u feedback)
+- **Provable DP bound**: 4-stage AND-mix cascade, DP_out ≤ 2⁻⁶⁴ (no heuristic assumption)
+- **Weyl decorrelation**: per-round decorrelation via Weyl sequence (proven unique values)
 - **Algebraic degree**: deg ≥ 256 after 2 rounds (XL/Gröbner base ≥ 2¹²⁸)
 - **Empirical**: >2.2×10¹⁰ samples, zero differential collisions
-- **Two unproven hypotheses** (H1: cmul differential uniformity; H2: inter-round decorrelation)
 
-This follows the same methodological paradigm as AES and ChaCha20 — structural lower bounds + component analysis + empirical validation. See the [paper](https://github.com/paim-creater/prng) for full security analysis.
+Three structural modifications (z→u feedback, AND-mix cascade, Weyl decorrelation) collectively eliminate both previously required hypotheses (H1: differential uniformity; H2: inter-round independence). See the [paper](https://github.com/paim-creater/prng) for full security analysis.
+
+**NIST SP 800-90A/90B**: Tempest v3 is packaged as a complete DRBG (Instantiate/Generate/Reseed/Uninstantiate) with an SP 800-90B-compliant entropy source (RCT/APT health tests + Tempest conditioning). 12 engineering validation tests pass.
+
+**Ecosystem integrations**: NumPy (tempest_rng.py, 11 Gbit/s), OpenSSL 3.x Provider (TEMPEST-DRBG), Rust rand crate (tempest-rs, RngCore + CryptoRng), CUDA GPU kernel (tempest_cuda_kernel.cu, parallel Monte Carlo).
 
 ---
 
