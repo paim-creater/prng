@@ -21,8 +21,9 @@ Two high-performance pseudorandom number generators designed through an **algebr
 |-----------|------|-----------|----------|-------------|
 | **ADC-Bolt** | Non-crypto PRNG | **70.3 Gbit/s** (12.1× ChaCha20) | deg=2 (non-crypto) | NIST ✅ TestU01 ✅ PractRand ✅ |
 | **4-cmul Tempest v3** | CSPRNG | **17.7 Gbit/s** (3.3× ChaCha20) | 2¹²⁸ (self-analyzed) | NIST ✅ TestU01 ✅ PractRand 1 TiB ✅ |
+| **Tempest v3 AVX-512** | CSPRNG (SIMD) | **62.0 Gbit/s** (10.7× ChaCha20) | 2¹²⁸ | NIST ✅ TestU01 ✅ PractRand ✅ |
 
-> ⚡ Benchmarked on AMD Ryzen 9 8940HX (Zen 4), MinGW-w64 GCC 16.1.0, `-O3 -march=native -flto`. Single-core, scalar code (no SIMD).
+> ⚡ Benchmarked on AMD Ryzen 9 8940HX (Zen 4), MinGW-w64 GCC 16.1.0, `-O3 -march=native -flto`. Single-core scalar: 17.7 Gbit/s. AVX-512 8-way parallel: **62.0 Gbit/s** (4.39× speedup).
 
 ---
 
