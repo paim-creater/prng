@@ -464,10 +464,9 @@ impl Default for TempestRng {
         // 用 getrandom 从 OS 获取熵
         let mut key = [0u8; 32];
         let mut nonce = [0u8; 16];
-        let _ = rand_core::impls::fill_bytes_via_next; // ensure trait in scope
         // 直接调用 getrandom syscall
-        if getrandom::getrandom(&mut key).is_ok()
-            && getrandom::getrandom(&mut nonce).is_ok()
+        if getrandom::fill(&mut key).is_ok()
+            && getrandom::fill(&mut nonce).is_ok()
         {
             Self::new(&key, &nonce)
         } else {
