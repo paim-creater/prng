@@ -82,8 +82,8 @@ int main() {
     printf("\n============================================\n");
     printf("  Reference (same platform):\n");
     printf("    ADC-Bolt:             70,261 Mbit/s  (70.3 Gbit/s)\n");
-    printf("    4-cmul Tempest v3:    19,024 Mbit/s  (19.0 Gbit/s)  dual-output\n");
-    printf("    Platform: AMD Ryzen 9 8940HX, MinGW-w64 GCC -O3\n");
+    printf("    4-cmul Tempest v3:    17,700 Mbit/s  (17.7 Gbit/s)  dual-output  [w/ Weyl decorr]\n");
+    printf("    Platform: AMD Ryzen 9 8940HX, MinGW-w64 GCC -O3 -flto -march=native\n");
     printf("============================================\n");
     return 0;
 }

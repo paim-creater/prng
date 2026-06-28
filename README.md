@@ -20,7 +20,7 @@ Two high-performance pseudorandom number generators designed through an **algebr
 | Algorithm | Type | Throughput | Security | Test Status |
 |-----------|------|-----------|----------|-------------|
 | **ADC-Bolt** | Non-crypto PRNG | **70.3 Gbit/s** (12.1× ChaCha20) | deg=2 (non-crypto) | NIST ✅ TestU01 ✅ PractRand ✅ |
-| **4-cmul Tempest v3** | CSPRNG | **19.6 Gbit/s** (3.3× ChaCha20) | 2¹²⁸ (self-analyzed) | NIST ✅ TestU01 ✅ PractRand 1 TiB ✅ |
+| **4-cmul Tempest v3** | CSPRNG | **17.7 Gbit/s** (3.3× ChaCha20) | 2¹²⁸ (self-analyzed) | NIST ✅ TestU01 ✅ PractRand 1 TiB ✅ |
 
 > ⚡ Benchmarked on AMD Ryzen 9 8940HX (Zen 4), MinGW-w64 GCC 16.1.0, `-O3 -march=native -flto`. Single-core, scalar code (no SIMD).
 
@@ -39,7 +39,7 @@ Expected output:
   Bolt & Tempest — Throughput Benchmark
 ============================================
   ADC-Bolt:            62753 Mbit/s  (62.8 Gbit/s)
-  4-cmul Tempest v3:   19594 Mbit/s  (19.6 Gbit/s)  [dual-output]
+  4-cmul Tempest v3:   17736 Mbit/s  (17.7 Gbit/s)  [provable-security]
 ============================================
 ```
 
@@ -97,7 +97,7 @@ Replace MULX multiplication (3-cycle latency) with **carry-chain dual-addition**
 z = (z + u) + v;   // majority carry = quadratic over GF(2)
 ```
 
-### 4-cmul Tempest v3 (19.6 Gbit/s, 2¹²⁸ security)
+### 4-cmul Tempest v3 (17.7 Gbit/s, 2¹²⁸ security)
 
 Four architectural innovations after 11 generations of iteration:
 
@@ -133,7 +133,7 @@ Full test logs: [`results/`](results/)
 | Algorithm | Rounds | Time | Throughput |
 |-----------|--------|------|------------|
 | ADC-Bolt | 2×10⁸ | 182 ms | 70.3 Gbit/s |
-| 4-cmul Tempest v3 | 5×10⁷ | 168 ms | 19.6 Gbit/s |
+| 4-cmul Tempest v3 | 5×10⁷ | 168 ms | 17.7 Gbit/s |
 | ChaCha20 (scalar) | 2×10⁸ | — | 5.8 Gbit/s |
 
 ### Predicted Performance by Architecture
@@ -142,7 +142,7 @@ Full test logs: [`results/`](results/)
 |-----|----------|------------|------------|
 | **Apple M4 Pro/Max** 🥇 | 85–95 Gbit/s | 16–18 Gbit/s | UMULL=1c (=ADD latency) |
 | AMD Zen 5 | 75–82 Gbit/s | 13–15 Gbit/s | IPC +15% over Zen 4 |
-| **AMD Zen 4** | **70.3** ✅ | **19.0** ✅ | Reference platform |
+| **AMD Zen 4** | **70.3** ✅ | **17.7** ✅ | Reference platform |
 | Intel Arrow Lake | 75–85 Gbit/s | 12–14 Gbit/s | Higher clock (5.7 GHz) |
 | Intel Raptor Lake | 60–70 Gbit/s | 10–12 Gbit/s | Previous gen |
 | ARM Cortex-X4 | 55–65 Gbit/s | 10–13 Gbit/s | Mobile thermal limits |
@@ -162,7 +162,7 @@ Then [submit your results](https://github.com/paim-creater/prng/issues/new?templ
 | Contributor | CPU | ADC-Bolt | Tempest v3 |
 |-------------|-----|----------|------------|
 | [Submit yours →](https://github.com/paim-creater/prng/issues/new?template=benchmark_result.md) | — | — | — |
-| [@paim-creater](https://github.com/paim-creater) | Ryzen 9 8940HX (Zen 4) | 70.3 Gbit/s | 19.6 Gbit/s |
+| [@paim-creater](https://github.com/paim-creater) | Ryzen 9 8940HX (Zen 4) | 70.3 Gbit/s | 17.7 Gbit/s |
 | [GitHub Actions CI](https://github.com/paim-creater/prng/actions) | Xeon E5 v4 | 8.6 Gbit/s | 4.6 Gbit/s |
 
 ---
@@ -263,7 +263,7 @@ gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I
 
 | Algorithm | Throughput | Security | Verification |
 |-----------|-----------|----------|-------------|
-| **4-cmul Tempest v3** | **19.6 Gbit/s** | 2¹²⁸ (self-analyzed) | TestU01 all 5 levels, PractRand 1 TiB |
+| **4-cmul Tempest v3** | **17.7 Gbit/s** | 2¹²⁸ (self-analyzed) | TestU01 all 5 levels, PractRand 1 TiB |
 | ChaCha20 | 5.8 Gbit/s | 2²⁵⁶ | 15+ years of cryptanalysis |
 | AES-CTR DRBG (AES-NI) | 2–6 Gbit/s | 2²⁵⁶ | NIST standard |
 

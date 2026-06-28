@@ -1,6 +1,6 @@
 /* tempest_v3.h — 4-cmul Tempest v3 (dual-output)
  * ADD pre-diffusion + 4-cmul Fibonacci-weave + AND-mix output
- * 2^128 CSPRNG, 19.6 Gbit/s (dual-output: 128 bits/round)
+ * 2^128 CSPRNG, 17.7 Gbit/s (provable-security: 128 bits/round)
  * Passes NIST 15/15 + TestU01 all 5 levels + PractRand 1 TiB
  * See results/ for full test logs */
 #ifndef TEMPEST_V3_H
@@ -10,7 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-typedef struct { uint64_t u,v,w,z,r; } tx4_state;
+typedef struct { uint64_t u,v,w,z,r,weyl; } tx4_state;
 
 /* ── Core API ── */
 void tx5cmul_init(tx4_state *s, const uint64_t key[4], const uint64_t nonce[2]);

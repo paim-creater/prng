@@ -50,7 +50,7 @@ The CCM spectrum categorizes constructions by the number of cross-multiplies per
 | Configuration | cmul/round | deg/round | Active cmul bound | Security | Throughput (Gbit/s) |
 |---------------|------------|-----------|-------------------|----------|---------------------|
 | 2-cmul | 2 | 4 | a1 >= 2 | 2^64 | 25-30 |
-| **4-cmul** | **4** | **12** | **a1 >= 3** | **2^128** | **19.0** |
+| **4-cmul** | **4** | **12** | **a1 >= 3** | **2^128** | **17.7** |
 | 6-cmul | 6 | 18 | a1 >= 4 | 2^256 | 12-15 |
 
 The 4-cmul configuration occupies a sweet spot: enough nonlinearity for 2^128 security, but not so many multiplies that throughput suffers unacceptably. The active-cmul lower bound of a1 >= 3 (meaning any differential trail must activate at least 3 cmul operations) is the minimum required to push iterative differential probability below 2^(-128). Two-cmul constructions cannot achieve this bound; six-cmul constructions exceed it with margin to spare but pay a throughput penalty.
@@ -332,7 +332,7 @@ ARM64 (Apple M-series, Cortex-A76 and later) has a fundamental architectural adv
 
 On x86-64, MULX has 3-cycle latency, creating a 3:1 imbalance between multiply and addition. This makes multiply-heavy designs (like Tempest v3) inherently bottlenecked on the multiply ports, while addition-heavy designs (like ADC-Bolt) run at near-ALU bandwidth.
 
-On ARM64, this imbalance disappears. UMULL is as fast as ADD, meaning Tempest v3's 4 cmul operations per round each cost 1 cycle on the multiply pipelines. The expected Tempest v3 throughput on Apple M4 Pro/Max (which has 4-6 integer pipelines and 2-3 multiply pipelines) is 16-18 Gbit/s -- slightly lower than x86-64's 19.0 Gbit/s because Apple Silicon has lower clock speeds (~4 GHz vs Zen 4's ~5 GHz), but not bottlenecked by multiply latency.
+On ARM64, this imbalance disappears. UMULL is as fast as ADD, meaning Tempest v3's 4 cmul operations per round each cost 1 cycle on the multiply pipelines. The expected Tempest v3 throughput on Apple M4 Pro/Max (which has 4-6 integer pipelines and 2-3 multiply pipelines) is 16-18 Gbit/s -- slightly lower than x86-64's 17.7 Gbit/s because Apple Silicon has lower clock speeds (~4 GHz vs Zen 4's ~5 GHz), but not bottlenecked by multiply latency.
 
 For ADC-Bolt, the ARM64 advantage is less dramatic because ADC-Bolt already avoids multiplies. The expected throughput of 85-95 Gbit/s on M4 Pro/Max comes from wider issue width (8-10 instructions per cycle vs Zen 4's 6) and the fact that ARM's ADD-with-carry (ADC) instruction maps directly to ADC-Bolt's carry-chain pattern.
 

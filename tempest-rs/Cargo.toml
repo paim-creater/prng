@@ -1,0 +1,28 @@
+[package]
+name = "tempest-rng"
+version = "1.0.0"
+description = "Tempest v3: cryptographic-grade CSPRNG (2^128 security, 17.7 Gbit/s)"
+authors = ["Bolt & Tempest Project"]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/paim-creater/prng"
+keywords = ["crypto", "prng", "csprng", "random", "rng"]
+categories = ["cryptography", "algorithms", "no-std"]
+readme = "README.md"
+
+[features]
+default = ["std"]
+std = ["rand-core/std"]
+nightly = []
+
+[dependencies]
+rand-core = { package = "rand_core", version = ">=0.6", default-features = false }
+getrandom = { version = "0.3", default-features = false, features = ["std"] }
+
+[dev-dependencies]
+rand = ">=0.8"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

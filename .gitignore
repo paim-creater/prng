@@ -1,31 +1,18 @@
-# Build artifacts
+# Rust build artifacts
+tempest-rs/target/
+
+# Python compiled
+*.pyc
+__pycache__/
+*.dll
+*.so
+*.dylib
 *.o
 *.exe
-*.out
 *.obj
-*.lib
-*.dll
-*.dylib
-*.so
-*.a
 
-# Build directories
-build/
-cmake-build-*/
-
-# IDE files
-.vscode/
-.idea/
+# Editor
 *.swp
-*.swo
-
-# OS files
+*~
 .DS_Store
 Thumbs.db
-
-# Paper build artifacts
-paper/*.aux
-paper/*.log
-paper/*.out
-paper/*.toc
-paper/*.synctex.gz
