@@ -207,7 +207,7 @@ static inline void tempest_init(tempest_state *s,
 static inline uint64_t tempest_u64(tempest_state *s) {
     tempest_round(s);
     uint64_t t = s->u ^ prng_rotl(s->v, 32) ^ s->w ^ prng_rotl(s->z, 16);
-    t ^= prng_rotl(t, 27);
+    t += prng_rotl(t, 27);
     /* ADD-square mixing */
     __uint128_t sq = (__uint128_t)t * (__uint128_t)t;
     t += (uint64_t)(sq >> 32);
@@ -230,14 +230,14 @@ static inline void tempest_u64x2(tempest_state *s, uint64_t out[2]) {
     uint64_t u = s->u, v = s->v, w = s->w, z = s->z;
     /* Output 1: standard fold4 */
     uint64_t t1 = u ^ prng_rotl(v,32) ^ w ^ prng_rotl(z,16);
-    t1 ^= prng_rotl(t1, 27);
+    t1 += prng_rotl(t1, 27);
     __uint128_t sq = (__uint128_t)t1 * (__uint128_t)t1;
     t1 += (uint64_t)(sq >> 32);
     t1 ^= prng_rotl(t1, 31) & prng_rotl(t1, 53);
     t1 ^= t1 >> 32;
     /* Output 2: permuted fold4 */
     uint64_t t2 = v ^ prng_rotl(w,32) ^ z ^ prng_rotl(u,16);
-    t2 ^= prng_rotl(t2, 27);
+    t2 += prng_rotl(t2, 27);
     sq = (__uint128_t)t2 * (__uint128_t)t2;
     t2 += (uint64_t)(sq >> 32);
     t2 ^= prng_rotl(t2, 31) & prng_rotl(t2, 53);

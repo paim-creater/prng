@@ -204,7 +204,7 @@ This is a bitwise AND between two rotated copies of the same word. Over GF(2), b
 
 The key advantage is latency: AND has 1-cycle latency versus MULX's 3-cycle. The degree yield is slightly different (2d for AND-mix vs 2d+1 for MULX square), but 2d is sufficient because the single-output path already reaches degree 589 after 2 rounds (far exceeding the 256 target).
 
-The AND-mix is preceded by an ADD-square step (`t += (t*t) >> 32`) that provides the carry-chain mixing which AND alone cannot. The combination -- ADD-square for carry nonlinearity, AND-mix for degree doubling -- is architecturally analogous to the cipher's round + output construction in sponge-based designs.
+The output function uses a 4-stage AND-mix cascade preceded by an ADD self-diffusion step (`t += rotl(t,27)`). The ADD step provides carry-chain mixing that avoids the parity cancellation issue of XOR, while the 4-stage AND-mix cascade provides provable DP ≤ 2⁻⁶⁴. The design replaces the traditional ADD-square approach with a pure AND-mix cascade for the same degree amplification at lower cost.
 
 ### Dual-Output Optimization: Permuting State Word Combinations
 
@@ -221,7 +221,7 @@ out[1] = make_output(v, w, z, u);   // rotated order
 
 Because `fold4(u,v,w,z) = u ^ rotl(v,32) ^ w ^ rotl(z,16)` is a linear projection from a 256-bit space to a 64-bit space, and the four state words are (after the round) algebraically independent in their high-degree terms, the permuted projection `fold4(v,w,z,u)` accesses a different 64-dimensional subspace of the 256-bit state. The two outputs are uncorrelated under the assumption that the round function mixes all four words thoroughly -- an assumption supported by the wide-trail analysis.
 
-The additional cost for the second output is exactly one `make_output` invocation: 1 fold4 (4 XOR + 2 rotations), 1 self-XOR diffusion, 1 ADD-square, 1 AND-mix, and 1 whitener. This is approximately 10-12 ALU operations, far cheaper than a full additional round (which costs 4 cmul + 12+ ADD/XOR/rotations). The net throughput gain is 73%: single-output yields 64 bits per round, dual-output yields 128 bits per round at roughly the same per-round latency (the second output function executes in parallel with the first on available ALU ports).
+The additional cost for the second output is exactly one `make_output` invocation: 1 fold4 (4 XOR + 2 rotations), 1 ADD self-diffusion, 1 4-stage AND-mix cascade, and 1 whitener. This is approximately 10-12 ALU operations, far cheaper than a full additional round (which costs 4 cmul + 12+ ADD/XOR/rotations). The net throughput gain is 73%: single-output yields 64 bits per round, dual-output yields 128 bits per round at roughly the same per-round latency (the second output function executes in parallel with the first on available ALU ports).
 
 ### Alternating Boomerang ARX: Why Every 2nd Round Is Sufficient
 
@@ -267,7 +267,7 @@ The algebraic degree growth through Tempest v3 is:
 - **After ADD pre-diffusion** (1 round start): each state word deg=2 (carry chain)
 - **After 4-cmul cascade**: deg=12 (multiplicative chaining: 2->4->8->12)
 - **After post-ARX**: deg=14 (XOR+ADD combine degrees additively)
-- **After output function (AND-mix)**: deg ~ 43 (deg=14, self-XOR: 14, ADD-square: 2*14+1=29, AND-mix: +14 = 43)
+- **After output function (4-stage AND-mix)**: deg > 256 (deg=14, ADD self-diff: ~28, AND-mix ×4: 56→112→224→448)
 
 After 2 rounds, the state-word degree reaches approximately 196, and the output function maps this to degree approximately 589, far exceeding the 256 threshold needed to resist XL/Grobner basis attacks at the 2^128 security level.
 
