@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=64", "wheel", "oldest-supported-numpy"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "tempest-rng"
+version = "1.0.0"
+description = "Tempest v3: cryptographic-grade CSPRNG (17.7 Gbit/s, 2^128 security)"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Bolt & Tempest Project"},
+]
+keywords = ["csprng", "prng", "random", "crypto", "montecarlo", "numpy"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: C",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Security :: Cryptography",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.17",
+]
+
+[project.urls]
+Homepage = "https://github.com/paim-creater/prng"
+Repository = "https://github.com/paim-creater/prng"
+
+[project.scripts]
+tempest-bench = "tempest.bench:main"
+
+[tool.setuptools]
+packages = ["tempest"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+tempest = ["*.c", "*.h"]
+
+[tool.setuptools.cmdclass]
+build_ext = "tempest._build:BuildExt"
