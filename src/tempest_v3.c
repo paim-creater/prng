@@ -81,7 +81,7 @@ static void tx5_round(tx4_state*s){
  * word-wide diffusion.
  *
  * Stage 1: fold4 — full-rank linear extraction (64×256 matrix)
- * Stage 2: t ^= rotl(t,27) — bijective self-diffusion (linear, deg=1)
+ * Stage 2: t += rotl(t,27) — ADD self-diffusion (breaks parity) (linear, deg=1)
  * Stage 3: 4×AND-mix cascade:
  *   t ^= rotl(t,31) & rotl(t,53)  —  1 → 3 bit spread, DP ≤ 2⁻³
  *   t ^= rotl(t,17) & rotl(t,43)  —  3 → 9 bit spread, DP ≤ 2⁻⁹
