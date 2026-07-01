@@ -17,10 +17,11 @@ static void tp_init(const br_prng_class **ctx,
     const void *params, const void *seed, size_t seed_len)
 {
     TempestPrng *p = (TempestPrng*)*ctx;
-    uint64_t key[4], nonce[2];
+    uint64_t key[4] = {0}, nonce[2] = {0};
     memcpy(key, seed, seed_len > 32 ? 32 : seed_len);
-    memset(nonce, 0, 16);
-    tx5cmul_init(&p->state, key, nonce);
+    nonce[0] = key[0] ^ 0x9E3779B97F4A7C15ULL;
+    nonce[1] = key[1] ^ 0x6A09E667F3BCC908ULL;
+    tempest_init(&p->state, key, nonce);
 }
 
 static void tp_generate(const br_prng_class **ctx,

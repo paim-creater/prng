@@ -29,14 +29,14 @@ Add to `wolfcrypt/src/random.c` or your own source:
 ```c
 #include "tempest_v3.h"
 
-static tx4_state tempest_global_state;
-static int tempest_initialized = 0;
+static __thread tempest_state tempest_global_state;
+static __thread int tempest_initialized = 0;
 
 int tempest_generate_block(unsigned char* output, unsigned int sz) {
     if (!tempest_initialized) {
-        uint64_t key[4] = {1,2,3,4};
-        uint64_t nonce[2] = {5,6};
-        tx5cmul_init(&tempest_global_state, key, nonce);
+        uint64_t key[4], nonce[2];
+        /* Production: OS entropy (BCryptGenRandom / /dev/urandom) */
+        tempest_init(&tempest_global_state, key, nonce);
         tempest_initialized = 1;
     }
     tempest_bytes(&tempest_global_state, output, sz);
