@@ -92,7 +92,7 @@ static void tempest_round(TempestState *s) {
 
 static uint64_t make_output(uint64_t u, uint64_t v, uint64_t w, uint64_t z) {
     uint64_t t = u ^ ROTL(v, 32) ^ w ^ ROTL(z, 16);
-    t ^= ROTL(t, 27);
+    t ^= ROTL(t, 27) ^ ROTL(t, 17);
     t ^= ROTL(t, 31) & ROTL(t, 53);
     t ^= ROTL(t, 17) & ROTL(t, 43);
     t ^= ROTL(t,  7) & ROTL(t, 23);

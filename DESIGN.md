@@ -204,7 +204,7 @@ This is a bitwise AND between two rotated copies of the same word. Over GF(2), b
 
 The key advantage is latency: AND has 1-cycle latency versus MULX's 3-cycle. The degree yield is slightly different (2d for AND-mix vs 2d+1 for MULX square), but 2d is sufficient because the single-output path already reaches degree 589 after 2 rounds (far exceeding the 256 target).
 
-The output function uses a 4-stage AND-mix cascade preceded by an ADD self-diffusion step (`t += rotl(t,27)`). The ADD step provides carry-chain mixing that avoids the parity cancellation issue of XOR, while the 4-stage AND-mix cascade provides provable DP ≤ 2⁻⁶⁴. The design replaces the traditional ADD-square approach with a pure AND-mix cascade for the same degree amplification at lower cost.
+The output function uses a 4-stage AND-mix cascade preceded by a GF(2) self-diffusion step (`t ^= rotl(t,27) ^ rotl(t,17)`). The dual-XOR-rotate provides full bit diffusion within GF(2) (all operations are ZFC-analyzable). The 4-stage AND-mix cascade provides DP ≤ 2⁻⁶⁴ (proven per-bit). The design replaces the traditional ADD-square approach with a pure GF(2) cascade for the same degree amplification at lower cost.
 
 ### Dual-Output Optimization: Permuting State Word Combinations
 

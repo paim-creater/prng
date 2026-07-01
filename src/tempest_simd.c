@@ -257,7 +257,7 @@ uint64_t tempest_scalar_next(uint64_t state[4]) {
     u+=cmul_hl_s(v,w); v+=cmul_hl_s(w,z); w+=cmul_lh_s(u,v); u+=cmul_hl_s(w,z);
     u^=ROTL(v,19)+w; v^=ROTL(w,23)+z; w^=ROTL(z,7)+u; z^=ROTL(u,11)+v;
     state[0]=u; state[1]=v; state[2]=w; state[3]=z;
-    uint64_t t=u^ROTL(v,32)^w^ROTL(z,16); t+=ROTL(t,27);
+    uint64_t t=u^ROTL(v,32)^w^ROTL(z,16); t^=ROTL(t,27)^ROTL(t,17);
     t^=ROTL(t,31)&ROTL(t,53); t^=ROTL(t,17)&ROTL(t,43);
     t^=ROTL(t,7)&ROTL(t,23); t^=ROTL(t,5)&ROTL(t,19); t^=t>>32;
     return t;

@@ -218,7 +218,7 @@ impl TempestState {
     #[inline(always)]
     fn output(&self) -> u64 {
         let mut t = self.u ^ rotl(self.v, 32) ^ self.w ^ rotl(self.z, 16);
-        t ^= rotl(t, 27);
+        t ^= rotl(t, 27) ^ rotl(t, 17);
         t ^= rotl(t, 31) & rotl(t, 53);
         t ^= rotl(t, 17) & rotl(t, 43);
         t ^= rotl(t, 7) & rotl(t, 23);
