@@ -231,6 +231,7 @@ static int tempest_instantiate(void *vctx, unsigned int strength,
     /* 清理栈 */
     OPENSSL_cleanse(key, sizeof(key));
     OPENSSL_cleanse(nonce, sizeof(nonce));
+    OPENSSL_cleanse(feed, sizeof(feed));
 
     return 1;
 }
@@ -279,6 +280,9 @@ static int tempest_generate(void *vctx, unsigned char *out, size_t outlen,
     drbg_update(&ctx->core, zero);
 
     ctx->reseed_counter++;
+
+    /* Clear stack copies */
+    { volatile uint64_t v[4]; memcpy((void*)v, additional, 32); v[0]=0;v[1]=0;v[2]=0;v[3]=0; (void)v; }
     return 1;
 }
 
@@ -308,6 +312,9 @@ static int tempest_reseed(void *vctx, int prediction_resistance,
     ctx->reseed_counter = 1;
     ctx->initialized = 1;
 
+    /* Clear stack copy of key material */
+    { volatile uint64_t v[8]; memcpy((void*)v, data, 32); v[0]=0;v[1]=0;v[2]=0;v[3]=0;
+      memcpy((void*)(v+4), additional, 32); v[4]=0;v[5]=0;v[6]=0;v[7]=0; (void)v; }
     return 1;
 }
 

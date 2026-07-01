@@ -136,18 +136,11 @@ static double cb_next_double(void *state) {
     return (tempest_next((TempestState *)state) >> 11) * 0x1.0p-53;
 }
 
-/* reset_state — 重置状态 (从 seed 派生) */
+/* reset_state — 重置状态 (保留完整 256 bit 熵) */
 static void cb_reset_state(void *state) {
     TempestState *ts = (TempestState *)state;
-    /* 简单地从当前状态的值派生新种子 */
-    uint64_t s = ts->u ^ ts->v ^ ts->w ^ ts->z ^ ts->rounds;
-    uint64_t key[4] = {
-        s + WEYL_GOLDEN,
-        ((s << 17) | (s >> 47)) * 0x6A09E667F3BCC909ULL,
-        s ^ 0x3243F6A8885A308DULL,
-        ((s << 32) | (s >> 32)) + 0xB7E151628AED2A6BULL
-    };
-    uint64_t nonce[2] = {0, 0};
+    uint64_t key[4] = { ts->u, ts->v, ts->w, ts->z };
+    uint64_t nonce[2] = { ts->rounds, ts->weyl };
     tempest_init(ts, key, nonce);
 }
 
