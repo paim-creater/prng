@@ -209,13 +209,10 @@ static int tempest_instantiate(void *vctx, unsigned int strength,
         memcpy(nonce, entropy + 32, 16);
     else if (entropy_len >= 40)
         memcpy(nonce, entropy + 32, (entropy_len - 32 < 16) ? entropy_len - 32 : 16);
-
-    /* 额外扩散: 用所有熵位混合 nonce */
-    uint64_t extra = 0;
-    for (size_t i = 0; i < entropy_len; i++)
-        extra ^= ((uint64_t)entropy[i]) << ((i * 8) % 64);
-    nonce[0] ^= extra;
-    nonce[1] ^= ROTL(extra, 17);
+    else if (entropy_len >= 32) {
+        nonce[0] = key[0] ^ ROTL(key[2], 13);
+        nonce[1] = key[1] ^ ROTL(key[3], 17);
+    }
 
     /* 初始化 Tempest */
     tempest_init(&ctx->core, key, nonce);

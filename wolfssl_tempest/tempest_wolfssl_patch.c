@@ -160,9 +160,12 @@ int wc_InitRng(WC_RNG* rng) {
     return wc_InitRng_ex(rng, NULL, INVALID_DEVID);
 }
 
+static WC_RNG g_dummy_rng;
+
 WC_RNG* wc_rng_new(byte* seed, word32 sz, void* heap) {
     (void)seed; (void)sz; (void)heap;
-    return (WC_RNG*)1;  /* Dummy handle */
+    memset(&g_dummy_rng, 0, sizeof(g_dummy_rng));
+    return &g_dummy_rng;
 }
 
 void wc_rng_free(WC_RNG* rng) {

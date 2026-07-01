@@ -1,8 +1,16 @@
 /* tempest_v3.h — 4-cmul Tempest v3 (dual-output)
  * ADD pre-diffusion + 4-cmul Fibonacci-weave + AND-mix output
- * 2^128 CSPRNG, 17.7 Gbit/s (provable-security: 128 bits/round)
+ * 2^128 CSPRNG, 17.7 Gbit/s
  * Passes NIST 15/15 + TestU01 all 5 levels + PractRand 1 TiB
  * See results/ for full test logs */
+
+/* Version guard: tempest_v4.c uses RC[8] key schedule (no Weyl).
+   Only one version should be linked per build. */
+#define TEMPEST_VERSION 3
+#if defined(TEMPEST_USE_V4)
+#error "tempest_v4.c (RC[8]) conflicts with tempest_v3.c (Weyl). Define only one."
+#endif
+
 #ifndef TEMPEST_V3_H
 #define TEMPEST_V3_H
 #include <stdint.h>
