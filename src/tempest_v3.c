@@ -147,11 +147,10 @@ void tempest_init(tempest_state *s, const uint64_t key[4], const uint64_t nonce[
                 s->z ^= k3 ^ rotl(weyl, 31);
             }
         } else {
-            uint64_t nh = nonce[i & 1], nl = nonce[1 - (i & 1)];
-            uint64_t nc = (nh << 32) | (uint32_t)nl;
-            s->u ^= nc;
-            s->v ^= rotl(nc, 19) ^ (uint64_t)i;
-            s->z ^= rotl(nc, 43);
+            uint64_t n0 = nonce[i & 1], n1 = nonce[1 - (i & 1)];
+            s->u ^= n0;
+            s->v ^= rotl(n1, 19) ^ (uint64_t)i;
+            s->z ^= rotl(n0, 43);
         }
     }
     for(int i=0;i<6;i++) tx5_round(s);
@@ -185,5 +184,7 @@ void tempest_bytes(tempest_state *s, uint8_t *buf, size_t n){
     if(n > 0){
         uint64_t r = tempest_u64(s);
         memcpy(buf, &r, n);
+        volatile uint64_t vr = r;  /* prevent compiler from optimizing away */
+        vr = 0; (void)vr;
     }
 }

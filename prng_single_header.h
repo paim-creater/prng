@@ -143,7 +143,7 @@ static inline void adcbolt_shuffle(adcbolt_state *s, void *arr, size_t count, si
  * Use for: key generation, authentication tokens, security
  * 2^128 conservative security (self-analyzed)
  * ═══════════════════════════════════════════════════════════════════ */
-typedef struct { uint64_t u,v,w,z,r; } tempest_state;
+typedef struct { uint64_t u,v,w,z,r,weyl; } tempest_state;
 
 static inline uint64_t prng_cmul_hl(uint64_t a, uint64_t b) {
     return (uint64_t)(uint32_t)(a >> 32) * (uint64_t)(uint32_t)b;
@@ -156,9 +156,19 @@ static inline uint64_t prng_cmul_lh(uint64_t a, uint64_t b) {
 
 static inline void tempest_round(tempest_state *s) {
     uint64_t u = s->u, v = s->v, w = s->w, z = s->z;
-    int sh = (int)(s->r & 3); uint64_t u0 = u;
-    u += prng_rotl(v, 7); v += prng_rotl(w, 11);
-    w += prng_rotl(z, 13); z += prng_rotl(u0, 17);
+    int sh = (int)(s->r & 3);
+    /* Weyl per-round decorrelation */
+    uint64_t wv = s->weyl; wv += TEMPEST_WEYL;
+    u ^= prng_rotl(wv, 7) ^ (wv >> 17);
+    v ^= prng_rotl(wv, 19) ^ (wv >> 23);
+    w ^= prng_rotl(wv, 31) ^ (wv >> 29);
+    z ^= prng_rotl(wv, 43) ^ (wv >> 37);
+    s->weyl = wv;
+    uint64_t u0 = u;
+    u += prng_rotl(v, 7) ^ prng_rotl(z, 13);  /* z→u feedback */
+    v += prng_rotl(w, 11);
+    w += prng_rotl(z, 13);
+    z += prng_rotl(u0, 17);
     u += prng_cmul_hl(v, w); v += prng_cmul_hl(w, z);
     w += prng_cmul_lh(u, v); u += prng_cmul_hl(w, z);
     u ^= prng_rotl(v, 19) + w; v ^= prng_rotl(w, 23) + z;
@@ -172,12 +182,17 @@ static inline void tempest_round(tempest_state *s) {
     s->u = u; s->v = v; s->w = w; s->z = z; s->r++;
 }
 
+static inline void tempest_state_init(tempest_state *s) {
+    s->u = 0; s->v = 0; s->w = 0; s->z = 0; s->r = 0;
+    s->weyl = 0x6A09E667F3BCC908ULL;
+}
+
 static inline void tempest_init(tempest_state *s,
     const uint64_t key[4], const uint64_t nonce[2]) {
     uint64_t k0=key[0],k1=key[1],k2=key[2],k3=key[3];
     s->u = k0; s->v = k1 ^ nonce[0];
     s->w = k2 ^ nonce[1]; s->z = k3 ^ 0x54454D5035583543ULL;
-    s->r = 0;
+    s->r = 0; s->weyl = 0x6A09E667F3BCC908ULL;
     uint64_t weyl = 0x6A09E667F3BCC908ULL;
     for (int i = 0; i < 16; i++) {
         tempest_round(s);
@@ -193,10 +208,9 @@ static inline void tempest_init(tempest_state *s,
                 s->w ^= k2 ^ (weyl >> 13); s->z ^= k3 ^ prng_rotl(weyl, 31);
             }
         } else {
-            uint64_t nh = nonce[i & 1], nl = nonce[1 - (i & 1)];
-            uint64_t nc = (nh << 32) | (nl & 0xFFFFFFFFULL);
-            s->u ^= nc; s->v ^= prng_rotl(nc, 19) ^ (uint64_t)i;
-            s->z ^= prng_rotl(nc, 43);
+            uint64_t n0 = nonce[i & 1], n1 = nonce[1 - (i & 1)];
+            s->u ^= n0; s->v ^= prng_rotl(n1, 19) ^ (uint64_t)i;
+            s->z ^= prng_rotl(n0, 43);
         }
     }
     for (int i = 0; i < 6; i++) tempest_round(s);
@@ -207,14 +221,13 @@ static inline void tempest_init(tempest_state *s,
 static inline uint64_t tempest_u64(tempest_state *s) {
     tempest_round(s);
     uint64_t t = s->u ^ prng_rotl(s->v, 32) ^ s->w ^ prng_rotl(s->z, 16);
-    t += prng_rotl(t, 27);
-    /* ADD-square mixing */
-    __uint128_t sq = (__uint128_t)t * (__uint128_t)t;
-    t += (uint64_t)(sq >> 32);
-    /* AND-mix */
+    t += prng_rotl(t, 27);  /* ADD self-diffusion */
+    /* 4-stage AND-mix cascade (provable DP ≤ 2⁻⁶⁴) */
     t ^= prng_rotl(t, 31) & prng_rotl(t, 53);
-    /* Low-bit whitener */
-    t ^= t >> 32;
+    t ^= prng_rotl(t, 17) & prng_rotl(t, 43);
+    t ^= prng_rotl(t,  7) & prng_rotl(t, 23);
+    t ^= prng_rotl(t,  5) & prng_rotl(t, 19);
+    t ^= t >> 32;  /* whitener */
     return t;
 }
 

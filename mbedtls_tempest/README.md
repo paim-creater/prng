@@ -17,7 +17,7 @@ Mbed TLS supports external RNG via `MBEDTLS_PSA_CRYPTO_EXTERNAL_RNG`.
 #include "tempest_v3.h"
 #include "psa/crypto.h"
 
-static tx4_state tempest_ctx;
+static tempest_state tempest_ctx;
 static int tempest_ready = 0;
 
 psa_status_t mbedtls_psa_external_get_random(
@@ -26,9 +26,13 @@ psa_status_t mbedtls_psa_external_get_random(
 {
     (void)context;
     if (!tempest_ready) {
-        uint64_t key[4] = {1,2,3,4};
-        uint64_t nonce[2] = {5,6};
-        tx5cmul_init(&tempest_ctx, key, nonce);
+        uint64_t key[4], nonce[2];
+        /* Seed from Mbed TLS entropy — NOT hardcoded! */
+        if (mbedtls_psa_inject_entropy(key, sizeof(key)) != PSA_SUCCESS)
+            return PSA_ERROR_INSUFFICIENT_ENTROPY;
+        if (mbedtls_psa_inject_entropy(nonce, sizeof(nonce)) != PSA_SUCCESS)
+            return PSA_ERROR_INSUFFICIENT_ENTROPY;
+        tempest_init(&tempest_ctx, key, nonce);
         tempest_ready = 1;
     }
     tempest_bytes(&tempest_ctx, output, output_size);

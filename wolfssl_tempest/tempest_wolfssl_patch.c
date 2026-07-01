@@ -82,18 +82,49 @@ static void tempest_bytes(TempestState*s,uint8_t*buf,size_t n){
 
 /* ─── WolfSSL RNG Interface ─── */
 
-static TempestState wc_state;
-static int wc_initialized = 0;
+#include <wolfssl/wolfcrypt/random.h>
+#include <wolfssl/wolfcrypt/error-crypt.h>
+#include <stdlib.h>
+
+#ifdef _WIN32
+#include <windows.h>
+#include <bcrypt.h>
+#pragma comment(lib, "bcrypt.lib")
+#else
+#include <fcntl.h>
+#include <unistd.h>
+#endif
+
+/* Thread-local state: each thread gets its own Tempest instance.
+   No mutex needed, no cross-thread state corruption. */
+static __thread TempestState wc_state;
+static __thread int wc_initialized = 0;
+
+/* Seed from OS entropy source */
+static int seed_from_os(uint64_t key[4], uint64_t nonce[2]) {
+#ifdef _WIN32
+    if (BCryptGenRandom(NULL, (PUCHAR)key, sizeof(key),
+        BCRYPT_USE_SYSTEM_PREFERRED_RNG) < 0) return -1;
+    if (BCryptGenRandom(NULL, (PUCHAR)nonce, sizeof(nonce),
+        BCRYPT_USE_SYSTEM_PREFERRED_RNG) < 0) return -1;
+#else
+    int fd = open("/dev/urandom", O_RDONLY);
+    if (fd < 0) return -1;
+    size_t n = 0; unsigned char *p = (unsigned char *)key;
+    while (n < sizeof(key)) { ssize_t r = read(fd, p + n, sizeof(key) - n); if (r <= 0) break; n += r; }
+    n = 0; p = (unsigned char *)nonce;
+    while (n < sizeof(nonce)) { ssize_t r = read(fd, p + n, sizeof(nonce) - n); if (r <= 0) break; n += r; }
+    close(fd);
+#endif
+    return 0;
+}
 
 /* CUSTOM_RAND_GENERATE_BLOCK: called by WolfSSL when it needs random bytes.
    Fills 'sz' bytes at 'output'. Returns 0 on success. */
 int tempest_generate_block(unsigned char* output, unsigned int sz) {
     if (!wc_initialized) {
-        /* Seed from stack entropy (a real implementation should use
-           wolfSSL's OS entropy source for the key/nonce) */
-        uint64_t key[4] = {0};
-        uint64_t nonce[2] = {0};
-        /* In production: read from /dev/urandom or similar */
+        uint64_t key[4], nonce[2];
+        if (seed_from_os(key, nonce) < 0) return -1;
         tempest_init(&wc_state, key, nonce);
         wc_initialized = 1;
     }
@@ -106,8 +137,8 @@ int tempest_generate_block(unsigned char* output, unsigned int sz) {
 int tempest_seed_cb(OS_Seed* os, byte* seed, word32 sz) {
     (void)os;
     if (!wc_initialized) {
-        uint64_t key[4] = {0};
-        uint64_t nonce[2] = {0};
+        uint64_t key[4], nonce[2];
+        if (seed_from_os(key, nonce) < 0) return -1;
         tempest_init(&wc_state, key, nonce);
         wc_initialized = 1;
     }

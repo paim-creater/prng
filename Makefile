@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O3 -march=native -flto -Wall -I.
+CFLAGS = -O3 -march=native -flto -Wall -Wextra -Wpedantic -fstack-protector-strong -D_FORTIFY_SOURCE=2 -I.
 
 .PHONY: all test clean bench
 
