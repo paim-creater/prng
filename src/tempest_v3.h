@@ -13,17 +13,17 @@ extern "C" {
 /* ── State type ── */
 typedef struct { uint64_t u,v,w,z,r,weyl; } tempest_state;
 
-/* ── Primary API ── */
+/* ── API ── */
 void    tempest_init(tempest_state *s, const uint64_t key[4], const uint64_t nonce[2]);
 uint64_t tempest_u64(tempest_state *s);
 void    tempest_u64x2(tempest_state *s, uint64_t out[2]);
 void    tempest_bytes(tempest_state *s, uint8_t *buf, size_t n);
 
-/* ── Legacy aliases (same as above) ── */
+/* ── Backward-compatible aliases (same functions) ── */
 typedef tempest_state tx4_state;
-#define tx5cmul_init  tempest_init
-#define tx5cmul_next  tempest_u64
-#define tx5cmul_next2 tempest_u64x2
+static inline void    tx5cmul_init(tempest_state *s, const uint64_t k[4], const uint64_t n[2]) { tempest_init(s,k,n); }
+static inline uint64_t tx5cmul_next(tempest_state *s) { return tempest_u64(s); }
+static inline void   tx5cmul_next2(tempest_state *s, uint64_t o[2]) { tempest_u64x2(s,o); }
 
 #ifdef __cplusplus
 }

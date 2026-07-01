@@ -114,7 +114,7 @@ static uint64_t make_output(uint64_t u,uint64_t v,uint64_t w,uint64_t z){
 
 /* Dual-output: 2 × 64-bit per round. Amortizes round cost over 2 outputs.
    out[0] = make_output(u,v,w,z), out[1] = make_output(v,w,z,u) */
-void tx5cmul_next2(tx4_state*s,uint64_t out[2]){
+void tempest_u64x2(tempest_state*s,uint64_t out[2]){
     tx5_round(s);
     out[0]=make_output(s->u,s->v,s->w,s->z);
     out[1]=make_output(s->v,s->w,s->z,s->u);
@@ -125,7 +125,7 @@ void tx5cmul_next2(tx4_state*s,uint64_t out[2]){
  * s->weyl initialized at start — round function uses it for per-round
  * decorrelation (§Y.3, Mod 3). Key schedule's own weyl kept local.
  * ═══════════════════════════════════════════════════════════════════════ */
-void tx5cmul_init(tx4_state *s, const uint64_t key[4], const uint64_t nonce[2]){
+void tempest_init(tempest_state *s, const uint64_t key[4], const uint64_t nonce[2]){
     uint64_t k0=key[0],k1=key[1],k2=key[2],k3=key[3];
     s->u=k0; s->v=k1^nonce[0]; s->w=k2^nonce[1];
     s->z=k3^0x54454D5035583543ULL; s->r=0;
@@ -169,32 +169,21 @@ void tx5cmul_seed(tx4_state *s, uint64_t seed){
     /* derive nonce from seed to avoid hardcoded zero */
     uint64_t n[2] = {seed ^ 0x9E3779B97F4A7C15ULL,
                      ~seed + 0x6A09E667F3BCC908ULL};
-    tx5cmul_init(s, k, n);
+    tempest_init(s, k, n);
 }
-uint64_t tx5cmul_next(tx4_state *s){
+uint64_t tempest_u64(tempest_state *s){
     tx5_round(s);
     return make_output(s->u, s->v, s->w, s->z);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
- * Python binding wrappers (alias functions with Python-friendly names)
- * ═══════════════════════════════════════════════════════════════════════ */
-void tempest_init(tx4_state *s, const uint64_t key[4], const uint64_t nonce[2]){
-    tx5cmul_init(s, key, nonce);
-}
-uint64_t tempest_u64(tx4_state *s){
-    return tx5cmul_next(s);
-}
-void tempest_u64x2(tx4_state *s, uint64_t out[2]){
-    tx5cmul_next2(s, out);
-}
-void tempest_bytes(tx4_state *s, uint8_t *buf, size_t n){
+/* ── Byte-fill helper ── */
+void tempest_bytes(tempest_state *s, uint8_t *buf, size_t n){
     while(n >= 8){
-        uint64_t r = tx5cmul_next(s);
+        uint64_t r = tempest_u64(s);
         memcpy(buf, &r, 8); buf += 8; n -= 8;
     }
     if(n > 0){
-        uint64_t r = tx5cmul_next(s);
+        uint64_t r = tempest_u64(s);
         memcpy(buf, &r, n);
     }
 }
