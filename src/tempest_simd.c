@@ -115,7 +115,7 @@ static void simd_round(TempestSIMD8 *s) {
 static __m512i simd_make_output(__m512i u, __m512i v, __m512i w, __m512i z) {
     __m512i t = _mm512_xor_si512(u, _mm512_xor_si512(
         simd_rotl(v, 32), _mm512_xor_si512(w, simd_rotl(z, 16))));
-    t = _mm512_add_epi64(t, simd_rotl(t, 27));   /* ADD 自扩散: 避免奇偶性抵消 */
+    t = _mm512_xor_si512(t, _mm512_xor_si512(simd_rotl(t, 27), simd_rotl(t, 17))); /* GF(2) self-diff */   /* ADD 自扩散: 避免奇偶性抵消 */
     t = _mm512_xor_si512(t, _mm512_and_si512(simd_rotl(t, 31), simd_rotl(t, 53)));
     t = _mm512_xor_si512(t, _mm512_and_si512(simd_rotl(t, 17), simd_rotl(t, 43)));
     t = _mm512_xor_si512(t, _mm512_and_si512(simd_rotl(t,  7), simd_rotl(t, 23)));

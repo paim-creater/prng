@@ -221,7 +221,7 @@ static inline void tempest_init(tempest_state *s,
 static inline uint64_t tempest_u64(tempest_state *s) {
     tempest_round(s);
     uint64_t t = s->u ^ prng_rotl(s->v, 32) ^ s->w ^ prng_rotl(s->z, 16);
-    t += prng_rotl(t, 27);  /* ADD self-diffusion */
+    t ^= prng_rotl(t, 27) ^ prng_rotl(t, 17);  /* GF(2) self-diffusion */
     /* 4-stage AND-mix cascade (provable DP ≤ 2⁻⁶⁴) */
     t ^= prng_rotl(t, 31) & prng_rotl(t, 53);
     t ^= prng_rotl(t, 17) & prng_rotl(t, 43);

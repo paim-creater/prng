@@ -100,7 +100,7 @@ __device__ void tempest_round_gpu(TempestStateGPU *s) {
  * ═══════════════════════════════════════════════════════════════════════ */
 __device__ uint64_t tempest_output_gpu(uint64_t u, uint64_t v, uint64_t w, uint64_t z) {
     uint64_t t = u ^ rotl64(v, 32) ^ w ^ rotl64(z, 16);
-    t += rotl64(t, 27);   /* ADD自扩散避免奇偶性抵消 */
+    t ^= rotl64(t, 27) ^ rotl64(t, 17);  /* GF(2) self-diff */
     t ^= rotl64(t, 31) & rotl64(t, 53);
     t ^= rotl64(t, 17) & rotl64(t, 43);
     t ^= rotl64(t,  7) & rotl64(t, 23);
