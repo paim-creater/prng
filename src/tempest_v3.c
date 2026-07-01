@@ -1,4 +1,4 @@
-/* tempest_v3.c — 4-cmul Tempest v3 (provable-security edition)
+/* tempest_v3.c — 4-cmul Tempest v3 (conservative-security edition)
  * ======================================================================
  * STRUCTURAL OPTIMIZATIONS FOR PROVEN SECURITY (H1/H2 eliminated):
  *

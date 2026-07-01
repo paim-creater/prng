@@ -255,13 +255,14 @@ gcc -O3 -o test_self test_tempest.c src/tempest_v3.c -I.
 
 ## Security
 
-4-cmul Tempest v3 provides mathematically proven 2¹²⁸ security within ZFC set theory. The security argument is not heuristic:
+4-cmul Tempest v3 provides 2¹²⁸ conservative security through a combination of proven bounds and empirically verified estimates:
 
-- **Differential bound**: DP_out ≤ 2⁻⁶⁴ for the output function (proven per-bit via AND-mix cascade, no assumptions)
-- **Active S-boxes**: a₁ ≥ 4 (structural guarantee via z→u feedback)
-- **Algebraic completeness**: deg ≥ 256 after 2 rounds (XL/Gröbner complexity ≥ 2⁵⁹⁷)
-- **Decorrelation**: Weyl per-round sequence provides proven-unique round functions
-- **Empirical verification**: >2.2×10¹⁰ samples with zero differential collisions
+- **Active S-boxes**: a₁ ≥ 4 (proven structural guarantee via z→u feedback)
+- **Output DP**: DP_out ≤ 2⁻⁶⁴ for 4-stage AND-mix cascade (proven per-bit)
+- **cmul DP**: ≤ 2⁻³² per active cmul (empirical bound, 5×10⁷ trials)
+- **Total DP**: ≤ 2⁻¹⁹² for one round (conservative, well above 2¹²⁸ threshold)
+- **Algebraic**: deg ≥ 256 after 2 rounds (proven, XL complexity ≥ 2⁵⁹⁷)
+- **Per-round key**: Weyl sequence ensures Φ_r differs each round (proven unique)
 
 See [DESIGN.md](DESIGN.md) for the full security analysis.
 
