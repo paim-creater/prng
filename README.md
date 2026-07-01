@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Language: C99](https://img.shields.io/badge/Language-C99-blue.svg)](src/)
 [![Benchmark](https://github.com/paim-creater/prng/actions/workflows/benchmark.yml/badge.svg)](https://github.com/paim-creater/prng/actions/workflows/benchmark.yml)
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/master/media/badge.svg)](https://github.com/rust-cc/awesome-cryptography-rust)
 
 Two high-performance pseudorandom number generators designed through an **algebraic degree-driven methodology** — target the algebraic degree (deg) over GF(2) first, then reverse-engineer the optimal primitive combination.
 
