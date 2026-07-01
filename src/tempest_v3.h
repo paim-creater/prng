@@ -10,20 +10,20 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-typedef struct { uint64_t u,v,w,z,r,weyl; } tx4_state;
-typedef tx4_state tempest_state;  /* clearer alias */
+/* ── State type ── */
+typedef struct { uint64_t u,v,w,z,r,weyl; } tempest_state;
 
-/* ── Core API ── */
-void tx5cmul_init(tx4_state *s, const uint64_t key[4], const uint64_t nonce[2]);
-void tx5cmul_seed(tx4_state *s, uint64_t seed);  /* WARNING: only 64-bit entropy, NOT crypto-grade */
-uint64_t tx5cmul_next(tx4_state *s);
-void   tx5cmul_next2(tx4_state *s, uint64_t out[2]);
+/* ── Primary API ── */
+void    tempest_init(tempest_state *s, const uint64_t key[4], const uint64_t nonce[2]);
+uint64_t tempest_u64(tempest_state *s);
+void    tempest_u64x2(tempest_state *s, uint64_t out[2]);
+void    tempest_bytes(tempest_state *s, uint8_t *buf, size_t n);
 
-/* ── Python-friendly aliases (same functionality) ── */
-void    tempest_init(tx4_state *s, const uint64_t key[4], const uint64_t nonce[2]);
-uint64_t tempest_u64(tx4_state *s);
-void    tempest_u64x2(tx4_state *s, uint64_t out[2]);
-void    tempest_bytes(tx4_state *s, uint8_t *buf, size_t n);
+/* ── Legacy aliases (same as above) ── */
+typedef tempest_state tx4_state;
+#define tx5cmul_init  tempest_init
+#define tx5cmul_next  tempest_u64
+#define tx5cmul_next2 tempest_u64x2
 
 #ifdef __cplusplus
 }

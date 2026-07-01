@@ -158,6 +158,7 @@ void tx5cmul_init(tx4_state *s, const uint64_t key[4], const uint64_t nonce[2]){
     /* ChaCha20-style key feedforward — makes key schedule non-invertible */
     s->u ^= k0; s->v ^= k1; s->w ^= k2; s->z ^= k3;
 }
+/* Internal: 64-bit seed for testing/non-crypto use. Not in public header. */
 void tx5cmul_seed(tx4_state *s, uint64_t seed){
     uint64_t k[4] = {
         seed + WEYL_GOLDEN,

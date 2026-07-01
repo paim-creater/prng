@@ -14,7 +14,6 @@ typedef struct { uint64_t u,v,w,z,r,weyl; } tx4_state;
 
 /* ── Core API ── */
 void tx5cmul_init(tx4_state *s, const uint64_t key[4], const uint64_t nonce[2]);
-void tx5cmul_seed(tx4_state *s, uint64_t seed);
 uint64_t tx5cmul_next(tx4_state *s);
 void   tx5cmul_next2(tx4_state *s, uint64_t out[2]);
 

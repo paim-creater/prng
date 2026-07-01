@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <string.h>
 
+/* seed function not in public header, declare locally */
+void tx5cmul_seed(tx4_state *s, uint64_t seed);
+
 #if defined(_MSC_VER)
 #include <intrin.h>
 static int popcnt(uint64_t x) { return (int)__popcnt64(x); }
