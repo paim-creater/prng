@@ -1,0 +1,13 @@
+# Tempest v3 build snippet — add these lines to makefile_include.mk
+#
+# In OBJECTS, add:
+#   src/tempest/tempest_v3.o \
+#   src/prngs/tempest_prng.o \
+#
+# In include path (CFLAGS), add:
+#   -Isrc/tempest
+#
+# Build test:
+#   gcc -O3 -I. -Isrc/tempest -o tempest_test src/tempest/tempest_test.c \
+#       src/tempest/tempest_v3.c src/prngs/tempest_prng.c -ltomcrypt -lm
+#   ./tempest_test

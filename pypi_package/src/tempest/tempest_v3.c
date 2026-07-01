@@ -162,7 +162,7 @@ void tx5cmul_seed(tx4_state *s, uint64_t seed){
         seed ^ 0x3243F6A8885A308DULL,
         ((seed << 32) | (seed >> 32)) + 0xB7E151628AED2A6BULL
     };
-    uint64_t n[2] = {0, 0};
+    uint64_t n[2] = {seed ^ 0x9E3779B97F4A7C15ULL, ~seed + 0x6A09E667F3BCC908ULL};
     tx5cmul_init(s, k, n);
 }
 uint64_t tx5cmul_next(tx4_state *s){

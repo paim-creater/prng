@@ -311,7 +311,8 @@ fn derive_key_from_seed(seed: u64) -> ([u64; 4], [u64; 2]) {
         seed ^ 0x3243F6A8885A308D,
         ((seed << 32) | (seed >> 32)).wrapping_add(0xB7E151628AED2A6B),
     ];
-    (key, [0, 0])
+    let nonce = [seed ^ 0x9E3779B97F4A7C15, !seed.wrapping_add(0x6A09E667F3BCC908)];
+    (key, nonce)
 }
 
 // ═══════════════════════════════════════════════════════════════════════
