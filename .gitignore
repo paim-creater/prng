@@ -1,0 +1,49 @@
+# Rust build artifacts
+tempest-rs/target/
+
+# C / C++ build artifacts
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.lib
+*.a
+*.exp
+*.pdb
+*.ilk
+*.su
+build/
+cmake-build-*/
+
+# Python compiled
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# Editor / OS
+*.swp
+*~
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Test data (regeneratable)
+results/*.log
+results/*.txt
+*.cnf
+*.stp
+# Third-party integrations (not core algorithm)
+bearssl_tempest/
+gnutls_tempest/
+libtomcrypt_tempest/
+mbedtls_tempest/
+wolfssl_tempest/
+*.bin
+*.bin

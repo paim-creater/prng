@@ -1,0 +1,26 @@
+# Auto-detect text files and normalize line endings
+* text=auto
+
+# Source code
+*.c   text diff=cpp
+*.h   text diff=cpp
+*.rs  text diff=rust
+*.py  text diff=python
+*.cu  text diff=cpp
+*.sh  text eol=lf
+*.yml text eol=lf
+*.toml text
+*.md  text
+
+# Binaries (never modify)
+*.exe binary
+*.dll binary
+*.so  binary
+*.dylib binary
+*.o   binary
+*.obj binary
+
+# Images
+*.png binary
+*.jpg binary
+*.svg text
