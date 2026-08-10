@@ -1,0 +1,28 @@
+{
+ "meta": "doubling law: full DP at shadow min-rank deltas",
+ "W4": {
+  "shadow_min_rank": 3,
+  "delta": "0x1",
+  "full_DP_dlog2": 11.0,
+  "doubling_prediction": 6,
+  "fiber": 32,
+  "full_worst_delta_0x5005": 5.9611
+ },
+ "W8": {
+  "shadow_min_rank": 6,
+  "delta": "0x40000000",
+  "full_DP_dlog2_sampled": 20.415,
+  "doubling_prediction": 12,
+  "fiber": 3
+ },
+ "W16": {
+  "min_rank": 9,
+  "delta": "0x1",
+  "secs": 36.2
+ },
+ "W32": {
+  "min_rank": 9,
+  "delta": "0x200000000000000000000",
+  "secs": 79.3
+ }
+}

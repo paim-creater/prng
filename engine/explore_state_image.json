@@ -1,0 +1,145 @@
+{
+ "meta": "state-image shrinkage of Algorithm 1",
+ "w4_image": [
+  {
+   "R": 1,
+   "image_size": 3501,
+   "-log2 frac": 4.226
+  },
+  {
+   "R": 2,
+   "image_size": 2066,
+   "-log2 frac": 4.987
+  },
+  {
+   "R": 3,
+   "image_size": 1443,
+   "-log2 frac": 5.505
+  },
+  {
+   "R": 4,
+   "image_size": 1077,
+   "-log2 frac": 5.927
+  },
+  {
+   "R": 5,
+   "image_size": 884,
+   "-log2 frac": 6.212
+  },
+  {
+   "R": 6,
+   "image_size": 732,
+   "-log2 frac": 6.484
+  },
+  {
+   "R": 7,
+   "image_size": 620,
+   "-log2 frac": 6.724
+  },
+  {
+   "R": 8,
+   "image_size": 544,
+   "-log2 frac": 6.913
+  },
+  {
+   "R": 9,
+   "image_size": 471,
+   "-log2 frac": 7.12
+  },
+  {
+   "R": 10,
+   "image_size": 404,
+   "-log2 frac": 7.342
+  },
+  {
+   "R": 11,
+   "image_size": 353,
+   "-log2 frac": 7.536
+  },
+  {
+   "R": 12,
+   "image_size": 311,
+   "-log2 frac": 7.719
+  },
+  {
+   "R": 13,
+   "image_size": 277,
+   "-log2 frac": 7.886
+  },
+  {
+   "R": 14,
+   "image_size": 250,
+   "-log2 frac": 8.034
+  },
+  {
+   "R": 15,
+   "image_size": 227,
+   "-log2 frac": 8.173
+  },
+  {
+   "R": 16,
+   "image_size": 210,
+   "-log2 frac": 8.286
+  },
+  {
+   "R": 17,
+   "image_size": 191,
+   "-log2 frac": 8.423
+  },
+  {
+   "R": 18,
+   "image_size": 176,
+   "-log2 frac": 8.541
+  },
+  {
+   "R": 19,
+   "image_size": 165,
+   "-log2 frac": 8.634
+  },
+  {
+   "R": 20,
+   "image_size": 156,
+   "-log2 frac": 8.715
+  },
+  {
+   "R": 21,
+   "image_size": 146,
+   "-log2 frac": 8.81
+  },
+  {
+   "R": 22,
+   "image_size": 139,
+   "-log2 frac": 8.881
+  }
+ ],
+ "w64_1round_image_of_2^24": 16777216,
+ "w64_22round_image_of_2^22": 4194304,
+ "w4_phase_images": [
+  {
+   "prefix": 2,
+   "op": "X3",
+   "image": 65536
+  },
+  {
+   "prefix": 3,
+   "op": "AND",
+   "image": 65536
+  },
+  {
+   "prefix": 4,
+   "op": "CONST",
+   "image": 65536
+  },
+  {
+   "prefix": 5,
+   "op": "X3",
+   "image": 65536
+  },
+  {
+   "prefix": 6,
+   "op": "AND",
+   "image": 61504
+  }
+ ],
+ "elapsed_s": 126.8
+}

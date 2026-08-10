@@ -1,0 +1,29 @@
+{
+ "status": "EXPLORATION intermediate (construction bug in generator; see readword_theorem.py for the final verification: 35 designs, 0 failures)",
+ "exploration_data": {
+  "1": {
+   "designs": 12,
+   "fails": 12,
+   "scan_min_min": 9
+  },
+  "2": {
+   "designs": 12,
+   "fails": 12,
+   "scan_min_min": 12
+  },
+  "3": {
+   "designs": 12,
+   "fails": 12,
+   "scan_min_min": 17
+  },
+  "4": {
+   "designs": 12,
+   "fails": 12,
+   "scan_min_min": 19
+  },
+  "shadow_a1": {
+   "single_bit_min": 3,
+   "single_bit_max": 3
+  }
+ }
+}

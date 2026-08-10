@@ -1,0 +1,360 @@
+=== ADC-Bolt Alphabit ===
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          Starting Alphabit:   nb = 100000000
+          Version: TestU01 1.2.3
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+ADC-Bolt
+
+
+smultin_MultinomialBitsOver test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r =  0,   s = 32,   L =    2,
+       Sparse =  FALSE
+
+       Number of bits = n = 100000000
+       Number of cells = 2^L =                  4
+       Expected number per cell =    25000000
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =  5.0000001e-09,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          :    2
+Value of the statistic                :    2.70
+p-value of test                       :    0.26
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ ADC-Bolt\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+ADC-Bolt
+
+
+smultin_MultinomialBitsOver test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r =  0,   s = 32,   L =    4,
+       Sparse =  FALSE
+
+       Number of bits = n = 100000000
+       Number of cells = 2^L =                 16
+       Expected number per cell =     6250000
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =  3.5000001e-08,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          :    8
+Value of the statistic                :   13.43
+p-value of test                       :    0.10
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ ADC-Bolt\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+ADC-Bolt
+
+
+smultin_MultinomialBitsOver test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r =  0,   s = 32,   L =    8,
+       Sparse =  FALSE
+
+       Number of bits = n = 100000000
+       Number of cells = 2^L =                256
+       Expected number per cell =      390625
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =  6.3500001e-07,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          :  128
+Value of the statistic                :  144.83
+p-value of test                       :    0.15
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ ADC-Bolt\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+ADC-Bolt
+
+
+smultin_MultinomialBitsOver test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r =  0,   s = 32,   L =   16,
+       Sparse =  FALSE
+
+       Number of bits = n = 100000000
+       Number of cells = 2^L =              65536
+       Expected number per cell =   1525.8789
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =    0.000163835,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          : 32768
+Value of the statistic                :32464.53
+p-value of test                       :    0.88
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.09
+
+Generator state:
+ ADC-Bolt\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+ADC-Bolt
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 3125000,  r =  0,   s = 32,   L = 16,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          :  205
+Chi-square statistic                  :  232.92
+p-value of test                       :    0.09
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.07
+
+Generator state:
+ ADC-Bolt\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+ADC-Bolt
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 1562500,  r =  0,   s = 32,   L = 32,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          :  377
+Chi-square statistic                  :  393.13
+p-value of test                       :    0.27
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.04
+
+Generator state:
+ ADC-Bolt\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+ADC-Bolt
+
+
+sstring_HammingCorr test:
+-----------------------------------------------
+   N =  1,  n = 3125000,  r =  0,   s = 32,   L = 32
+
+
+
+-----------------------------------------------
+Normal statistic                      :   -0.75
+p-value of test                       :    0.77
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.04
+
+Generator state:
+ ADC-Bolt\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+ADC-Bolt
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 1562500,  r =  0,   s = 32,   L0 =   64,   L1 =   64
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :   34
+ChiSquare statistic                   :   42.66
+p-value of test                       :    0.15
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :   35
+ChiSquare statistic                   :   27.68
+p-value of test                       :    0.81
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :   32
+ChiSquare statistic                   :   33.95
+p-value of test                       :    0.37
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :   26
+ChiSquare statistic                   :   16.31
+p-value of test                       :    0.93
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   17
+ChiSquare statistic                   :   10.98
+p-value of test                       :    0.86
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.26
+
+Generator state:
+ ADC-Bolt\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+ADC-Bolt
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 312500,  r =  0,   s = 32,   L0 =  320,   L1 =  320
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :   70
+ChiSquare statistic                   :   81.72
+p-value of test                       :    0.16
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :   70
+ChiSquare statistic                   :   58.31
+p-value of test                       :    0.84
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :  160
+ChiSquare statistic                   :  173.74
+p-value of test                       :    0.22
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :   63
+ChiSquare statistic                   :   72.64
+p-value of test                       :    0.19
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   35
+ChiSquare statistic                   :   26.71
+p-value of test                       :    0.84
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.23
+
+Generator state:
+ ADC-Bolt\n
+
+
+
+
+========= Summary results of Alphabit =========
+
+ Version:          TestU01 1.2.3
+ Generator:        ADC-Bolt
+ Number of bits:   100000000
+ Number of statistics:  17
+ Total CPU time:   00:00:00.95
+
+ All tests were passed
+
+
+

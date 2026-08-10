@@ -1,0 +1,6 @@
+bit-exactness vs baseline: PASS (all variants identical)
+baseline          : 7.00 Gbit/s
+pipe4             : 7.33 Gbit/s  (+4.8%)
+batch2            : 7.29 Gbit/s  (+4.1%)
+pipe4b            : 8.05 Gbit/s  (+14.9%)
+checksum: 0f8fd3d373ef5ef4 e6afa54acd53ec35 11e23d4c2154546e 16757f474f7731f4

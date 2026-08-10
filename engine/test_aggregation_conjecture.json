@@ -1,0 +1,35 @@
+{
+ "randfn_4": {
+  "total_agg_fails": 109,
+  "first": {
+   "n": 4,
+   "delta": 2,
+   "r_lin": 1,
+   "dlog2dp": 2.0
+  }
+ },
+ "randfn_5": {
+  "total_agg_fails": 187,
+  "first": {
+   "n": 5,
+   "delta": 20,
+   "r_lin": 2,
+   "dlog2dp": 2.415037499278844
+  }
+ },
+ "quad_4": {
+  "total_agg_fails": 0,
+  "total_ident_fails": 0,
+  "first": null
+ },
+ "quad_5": {
+  "total_agg_fails": 0,
+  "total_ident_fails": 0,
+  "first": null
+ },
+ "quad_6": {
+  "total_agg_fails": 0,
+  "total_ident_fails": 0,
+  "first": null
+ }
+}

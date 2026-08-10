@@ -1,0 +1,58 @@
+{
+ "meta": "cascade degree law and differential-degree curve, W=4 full domain (snapshot semantics)",
+ "cascade_degree": [
+  {
+   "levels": 0,
+   "deg(Phi)": 2
+  },
+  {
+   "levels": 1,
+   "deg(Phi)": 4
+  },
+  {
+   "levels": 2,
+   "deg(Phi)": 8
+  },
+  {
+   "levels": 3,
+   "deg(Phi)": 14
+  },
+  {
+   "levels": 4,
+   "deg(Phi)": 16
+  }
+ ],
+ "cross_round": [
+  {
+   "R": 1,
+   "deg(Phi^R)": 16,
+   "deg(D_R)": 15
+  },
+  {
+   "R": 2,
+   "deg(Phi^R)": 16,
+   "deg(D_R)": 15
+  },
+  {
+   "R": 3,
+   "deg(Phi^R)": 16,
+   "deg(D_R)": 15
+  },
+  {
+   "R": 4,
+   "deg(Phi^R)": 16,
+   "deg(D_R)": 15
+  },
+  {
+   "R": 5,
+   "deg(Phi^R)": 16,
+   "deg(D_R)": 15
+  },
+  {
+   "R": 6,
+   "deg(Phi^R)": 16,
+   "deg(D_R)": 15
+  }
+ ],
+ "elapsed_s": 26.4
+}

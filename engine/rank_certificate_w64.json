@@ -1,0 +1,13 @@
+{
+ "design": "tempest pre-mix-free quadratic shadow (Phase A + A(lin) + key + D)",
+ "width": 64,
+ "witness_delta": "0x4",
+ "rank": 3,
+ "rank_verified_independently": 3,
+ "dp": "2^-3 (exact, by Affine-Differential Theorem)",
+ "barrier_scan_min_rank_32_random": 174,
+ "verify_recipe": "rank_of_delta(64, shadow, 0x4) + GF(2) elimination",
+ "script": "rank_certificate_demo.py",
+ "sha256_of_C2_matrix": "2cf82b8fb19369c6",
+ "secs": 27.2
+}

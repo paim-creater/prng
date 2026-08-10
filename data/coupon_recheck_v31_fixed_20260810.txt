@@ -1,0 +1,78 @@
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, Linux
+
+v3.1 fixed
+
+
+sknuth_CouponCollector test:
+-----------------------------------------------
+   N =  1,  n = 200000000,  r = 20,   d =    8
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   54
+Chi-square statistic                  :   75.95
+p-value of test                       :    0.03
+
+-----------------------------------------------
+CPU time used                    :  00:01:03.02
+
+Generator state:
+ v3.1 fixed
+
+
+
+
+trial 0: chi2 = 0, df = 54, p-value = 0   *****
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, Linux
+
+v3.1 fixed
+
+
+sknuth_CouponCollector test:
+-----------------------------------------------
+   N =  1,  n = 200000000,  r = 20,   d =    8
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   54
+Chi-square statistic                  :   53.55
+p-value of test                       :    0.49
+
+-----------------------------------------------
+CPU time used                    :  00:01:01.65
+
+Generator state:
+ v3.1 fixed
+
+
+
+
+trial 1: chi2 = 0, df = 54, p-value = 0   *****
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, Linux
+
+v3.1 fixed
+
+
+sknuth_CouponCollector test:
+-----------------------------------------------
+   N =  1,  n = 200000000,  r = 20,   d =    8
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   54
+Chi-square statistic                  :   42.27
+p-value of test                       :    0.88
+
+-----------------------------------------------
+CPU time used                    :  00:01:02.03
+
+Generator state:
+ v3.1 fixed
+
+
+
+
+trial 2: chi2 = 0, df = 54, p-value = 0   *****

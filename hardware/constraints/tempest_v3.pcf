@@ -1,0 +1,6 @@
+# Tempest v3 (Algorithm 1) — iCE40UP5K pin constraints
+# Generic pins for iCEBreaker / upduino-style boards (clock + IO).
+# The design is synchronous; timing is what matters, not pin assignment.
+set_io clk 35
+set_io rst_n 36
+set_io en 37

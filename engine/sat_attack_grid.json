@@ -1,0 +1,50 @@
+{
+ "W8_R1": {
+  "vars": 784,
+  "clauses": 2696,
+  "sat": true,
+  "solve_s": 0.2,
+  "gen_s": 0.0,
+  "timed_out": false
+ },
+ "W8_R2": {
+  "vars": 1504,
+  "clauses": 5296,
+  "sat": true,
+  "solve_s": 47.6,
+  "gen_s": 0.0,
+  "timed_out": false
+ },
+ "W12_R1": {
+  "vars": 1162,
+  "clauses": 4009,
+  "sat": true,
+  "solve_s": 0.4,
+  "gen_s": 0.0,
+  "timed_out": false
+ },
+ "W12_R2": {
+  "vars": 2278,
+  "clauses": 7999,
+  "sat": true,
+  "solve_s": 3.5,
+  "gen_s": 0.0,
+  "timed_out": false
+ },
+ "W16_R1": {
+  "vars": 1548,
+  "clauses": 5342,
+  "sat": true,
+  "solve_s": 0.9,
+  "gen_s": 0.0,
+  "timed_out": false
+ },
+ "W16_R2": {
+  "vars": 3016,
+  "clauses": 10612,
+  "sat": true,
+  "solve_s": 559.5,
+  "gen_s": 0.01,
+  "timed_out": false
+ }
+}

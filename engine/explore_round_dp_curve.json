@@ -1,0 +1,354 @@
+{
+ "meta": "W=4 full-domain exact DP_R for Algorithm 1 (snapshot semantics, evolving Weyl key)",
+ "rounds": 22,
+ "rows": [
+  {
+   "R": 1,
+   "-log2 DP_R max": 11.3,
+   "at delta": "0x8000",
+   "barrier product 3R": 3,
+   "-log2 DP_R(0x1)": 11.0,
+   "-log2 min over single-bit": 9.791,
+   "-log2 max over single-bit": 11.3
+  },
+  {
+   "R": 2,
+   "-log2 DP_R max": 11.193,
+   "at delta": "0x40",
+   "barrier product 3R": 6,
+   "-log2 DP_R(0x1)": 9.445,
+   "-log2 min over single-bit": 9.445,
+   "-log2 max over single-bit": 11.193
+  },
+  {
+   "R": 3,
+   "-log2 DP_R max": 9.956,
+   "at delta": "0x4000",
+   "barrier product 3R": 9,
+   "-log2 DP_R(0x1)": 8.625,
+   "-log2 min over single-bit": 8.625,
+   "-log2 max over single-bit": 9.956
+  },
+  {
+   "R": 4,
+   "-log2 DP_R max": 8.934,
+   "at delta": "0x4000",
+   "barrier product 3R": 12,
+   "-log2 DP_R(0x1)": 8.011,
+   "-log2 min over single-bit": 8.0,
+   "-log2 max over single-bit": 8.934
+  },
+  {
+   "R": 5,
+   "-log2 DP_R max": 8.476,
+   "at delta": "0x400",
+   "barrier product 3R": 15,
+   "-log2 DP_R(0x1)": 7.669,
+   "-log2 min over single-bit": 7.582,
+   "-log2 max over single-bit": 8.476
+  },
+  {
+   "R": 6,
+   "-log2 DP_R max": 8.069,
+   "at delta": "0x4000",
+   "barrier product 3R": 18,
+   "-log2 DP_R(0x1)": 7.43,
+   "-log2 min over single-bit": 7.307,
+   "-log2 max over single-bit": 8.069
+  },
+  {
+   "R": 7,
+   "-log2 DP_R max": 7.651,
+   "at delta": "0x1000",
+   "barrier product 3R": 21,
+   "-log2 DP_R(0x1)": 7.293,
+   "-log2 min over single-bit": 7.063,
+   "-log2 max over single-bit": 7.651
+  },
+  {
+   "R": 8,
+   "-log2 DP_R max": 7.516,
+   "at delta": "0x1000",
+   "barrier product 3R": 24,
+   "-log2 DP_R(0x1)": 7.155,
+   "-log2 min over single-bit": 6.967,
+   "-log2 max over single-bit": 7.516
+  },
+  {
+   "R": 9,
+   "-log2 DP_R max": 7.408,
+   "at delta": "0x1000",
+   "barrier product 3R": 27,
+   "-log2 DP_R(0x1)": 6.902,
+   "-log2 min over single-bit": 6.805,
+   "-log2 max over single-bit": 7.408
+  },
+  {
+   "R": 10,
+   "-log2 DP_R max": 7.069,
+   "at delta": "0x1000",
+   "barrier product 3R": 30,
+   "-log2 DP_R(0x1)": 6.678,
+   "-log2 min over single-bit": 6.629,
+   "-log2 max over single-bit": 7.069
+  },
+  {
+   "R": 11,
+   "-log2 DP_R max": 6.897,
+   "at delta": "0x1000",
+   "barrier product 3R": 33,
+   "-log2 DP_R(0x1)": 6.492,
+   "-log2 min over single-bit": 6.445,
+   "-log2 max over single-bit": 6.897
+  },
+  {
+   "R": 12,
+   "-log2 DP_R max": 6.692,
+   "at delta": "0x400",
+   "barrier product 3R": 36,
+   "-log2 DP_R(0x1)": 6.36,
+   "-log2 min over single-bit": 6.265,
+   "-log2 max over single-bit": 6.692
+  },
+  {
+   "R": 13,
+   "-log2 DP_R max": 6.504,
+   "at delta": "0x1000",
+   "barrier product 3R": 39,
+   "-log2 DP_R(0x1)": 6.225,
+   "-log2 min over single-bit": 6.105,
+   "-log2 max over single-bit": 6.504
+  },
+  {
+   "R": 14,
+   "-log2 DP_R max": 6.248,
+   "at delta": "0x1000",
+   "barrier product 3R": 42,
+   "-log2 DP_R(0x1)": 6.055,
+   "-log2 min over single-bit": 5.873,
+   "-log2 max over single-bit": 6.248
+  },
+  {
+   "R": 15,
+   "-log2 DP_R max": 6.158,
+   "at delta": "0x1000",
+   "barrier product 3R": 45,
+   "-log2 DP_R(0x1)": 5.978,
+   "-log2 min over single-bit": 5.769,
+   "-log2 max over single-bit": 6.158
+  },
+  {
+   "R": 16,
+   "-log2 DP_R max": 6.046,
+   "at delta": "0x400",
+   "barrier product 3R": 48,
+   "-log2 DP_R(0x1)": 5.891,
+   "-log2 min over single-bit": 5.722,
+   "-log2 max over single-bit": 6.046
+  },
+  {
+   "R": 17,
+   "-log2 DP_R max": 5.989,
+   "at delta": "0x2000",
+   "barrier product 3R": 51,
+   "-log2 DP_R(0x1)": 5.82,
+   "-log2 min over single-bit": 5.671,
+   "-log2 max over single-bit": 5.989
+  },
+  {
+   "R": 18,
+   "-log2 DP_R max": 5.907,
+   "at delta": "0x2000",
+   "barrier product 3R": 54,
+   "-log2 DP_R(0x1)": 5.774,
+   "-log2 min over single-bit": 5.647,
+   "-log2 max over single-bit": 5.907
+  },
+  {
+   "R": 19,
+   "-log2 DP_R max": 5.876,
+   "at delta": "0x8",
+   "barrier product 3R": 57,
+   "-log2 DP_R(0x1)": 5.701,
+   "-log2 min over single-bit": 5.623,
+   "-log2 max over single-bit": 5.876
+  },
+  {
+   "R": 20,
+   "-log2 DP_R max": 5.84,
+   "at delta": "0x2000",
+   "barrier product 3R": 60,
+   "-log2 DP_R(0x1)": 5.665,
+   "-log2 min over single-bit": 5.57,
+   "-log2 max over single-bit": 5.84
+  },
+  {
+   "R": 21,
+   "-log2 DP_R max": 5.793,
+   "at delta": "0x100",
+   "barrier product 3R": 63,
+   "-log2 DP_R(0x1)": 5.614,
+   "-log2 min over single-bit": 5.549,
+   "-log2 max over single-bit": 5.793
+  },
+  {
+   "R": 22,
+   "-log2 DP_R max": 5.764,
+   "at delta": "0x100",
+   "barrier product 3R": 66,
+   "-log2 DP_R(0x1)": 5.599,
+   "-log2 min over single-bit": 5.51,
+   "-log2 max over single-bit": 5.764
+  }
+ ],
+ "rank_trail_0x1": [
+  {
+   "round": 2,
+   "delta": "0x1",
+   "rank": 14,
+   "-log2 DP_k": 8.0,
+   "dominant": "0x6724"
+  },
+  {
+   "round": 3,
+   "delta": "0x6724",
+   "rank": 14,
+   "-log2 DP_k": 6.008,
+   "dominant": "0x3925"
+  },
+  {
+   "round": 4,
+   "delta": "0x3925",
+   "rank": 13,
+   "-log2 DP_k": 5.929,
+   "dominant": "0x122b"
+  },
+  {
+   "round": 5,
+   "delta": "0x122b",
+   "rank": 13,
+   "-log2 DP_k": 5.642,
+   "dominant": "0xef11"
+  },
+  {
+   "round": 6,
+   "delta": "0xef11",
+   "rank": 13,
+   "-log2 DP_k": 5.3,
+   "dominant": "0x9a2f"
+  },
+  {
+   "round": 7,
+   "delta": "0x9a2f",
+   "rank": 13,
+   "-log2 DP_k": 4.925,
+   "dominant": "0x68b7"
+  },
+  {
+   "round": 8,
+   "delta": "0x68b7",
+   "rank": 13,
+   "-log2 DP_k": 4.913,
+   "dominant": "0xae1c"
+  },
+  {
+   "round": 9,
+   "delta": "0xae1c",
+   "rank": 13,
+   "-log2 DP_k": 4.913,
+   "dominant": "0x8a22"
+  },
+  {
+   "round": 10,
+   "delta": "0x8a22",
+   "rank": 13,
+   "-log2 DP_k": 4.561,
+   "dominant": "0x65a1"
+  },
+  {
+   "round": 11,
+   "delta": "0x65a1",
+   "rank": 13,
+   "-log2 DP_k": 4.561,
+   "dominant": "0x477f"
+  },
+  {
+   "round": 12,
+   "delta": "0x477f",
+   "rank": 12,
+   "-log2 DP_k": 4.561,
+   "dominant": "0x15a4"
+  },
+  {
+   "round": 13,
+   "delta": "0x15a4",
+   "rank": 13,
+   "-log2 DP_k": 4.561,
+   "dominant": "0xe38f"
+  },
+  {
+   "round": 14,
+   "delta": "0xe38f",
+   "rank": 13,
+   "-log2 DP_k": 4.561,
+   "dominant": "0x6559"
+  },
+  {
+   "round": 15,
+   "delta": "0x6559",
+   "rank": 13,
+   "-log2 DP_k": 4.229,
+   "dominant": "0xea3c"
+  },
+  {
+   "round": 16,
+   "delta": "0xea3c",
+   "rank": 13,
+   "-log2 DP_k": 4.229,
+   "dominant": "0x1ef3"
+  },
+  {
+   "round": 17,
+   "delta": "0x1ef3",
+   "rank": 13,
+   "-log2 DP_k": 4.229,
+   "dominant": "0x6ebf"
+  },
+  {
+   "round": 18,
+   "delta": "0x6ebf",
+   "rank": 13,
+   "-log2 DP_k": 4.229,
+   "dominant": "0x780c"
+  },
+  {
+   "round": 19,
+   "delta": "0x780c",
+   "rank": 13,
+   "-log2 DP_k": 4.229,
+   "dominant": "0x8cce"
+  },
+  {
+   "round": 20,
+   "delta": "0x8cce",
+   "rank": 13,
+   "-log2 DP_k": 4.197,
+   "dominant": "0xaafa"
+  },
+  {
+   "round": 21,
+   "delta": "0xaafa",
+   "rank": 13,
+   "-log2 DP_k": 4.197,
+   "dominant": "0xf3da"
+  },
+  {
+   "round": 22,
+   "delta": "0xf3da",
+   "rank": 13,
+   "-log2 DP_k": 4.197,
+   "dominant": "0x7291"
+  }
+ ],
+ "elapsed_s": 10.6
+}

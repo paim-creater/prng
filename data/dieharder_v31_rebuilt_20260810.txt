@@ -1,0 +1,39 @@
+#=============================================================================#
+# v3.1 (rebuilt) Dieharder run — 2026-08-10, dieharder 3.31.1 (WSL Ubuntu)
+#=============================================================================#
+# Generator: code/v31_gen.c — v3.1 round function reconstructed from the
+# audit record (cryptanalysis_v2.c: snapshot XOR-ROT + pre-mix + 4-word
+# andmix4, v3.1 output function). The archived v3.1 stream generator is
+# not in the repository; this rebuild reproduces the v3.1 class structure
+# (key-independent output, tau = 0), not necessarily the exact archived
+# stream. Result: detectable anomalies (WEAK) at rgb_lagged_sum ntup=7
+# and marsaglia_tsang_gcd — directionally consistent with the archived
+# FAILED (p=0) log (14_dieharder_v31.txt) but weaker; the exact p=0
+# requires the original v3.1 binary.
+# Input: 200 MB stream, file_input_raw (rewound as needed).
+#=============================================================================#
+   rng_name    |           filename             |rands/second|
+ file_input_raw|                    /tmp/v31.bin|  8.52e+07  |
+#=============================================================================#
+        test_name   |ntup| tsamples |psamples|  p-value |Assessment
+#=============================================================================#
+      rgb_lagged_sum|   0|   1000000|     100|0.61182649|  PASSED
+      rgb_lagged_sum|   1|   1000000|     100|0.44210022|  PASSED
+      rgb_lagged_sum|   2|   1000000|     100|0.57363266|  PASSED
+      rgb_lagged_sum|   3|   1000000|     100|0.08422785|  PASSED
+      rgb_lagged_sum|   4|   1000000|     100|0.43053141|  PASSED
+      rgb_lagged_sum|   5|   1000000|     100|0.01278785|  PASSED
+      rgb_lagged_sum|   6|   1000000|     100|0.25724577|  PASSED
+      rgb_lagged_sum|   7|   1000000|     100|0.00020092|   WEAK
+      rgb_lagged_sum|   8|   1000000|     100|0.03458612|  PASSED
+      rgb_lagged_sum|   9|   1000000|     100|0.73802796|  PASSED
+      rgb_lagged_sum|  10|   1000000|     100|0.61991943|  PASSED
+ marsaglia_tsang_gcd|   0|  10000000|     100|0.00153699|   WEAK
+ marsaglia_tsang_gcd|   0|  10000000|     100|0.00026786|   WEAK
+#=============================================================================#
+# Archived v3.1 log for comparison (14_dieharder_v31.txt):
+#   rgb_lagged_sum ntup=3:  p=0.00000000 FAILED
+#   rgb_lagged_sum ntup=7:  p=0.00000000 FAILED
+#   marsaglia_tsang_gcd:    p=0.00000000 FAILED (x2)
+# Control (Algorithm 1, PractRand 1 TiB / BigCrush / NIST): all pass.
+#=============================================================================#

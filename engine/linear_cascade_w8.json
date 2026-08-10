@@ -1,0 +1,10 @@
+{
+ "shadow_R1_24masks": 0.008301,
+ "shadow_R1_2000masks": 0.013916,
+ "shadow_R2_24masks": 0.008881,
+ "shadow_R2_2000masks": 0.013214,
+ "cascade_R1_24masks": 0.00824,
+ "cascade_R1_2000masks": 0.015778,
+ "cascade_R2_24masks": 0.006256,
+ "cascade_R2_2000masks": 0.01416
+}

@@ -1,0 +1,23 @@
+{
+ "W8_150x2^16 (paper recipe)": {
+  "H_inf_sample": 15.0,
+  "worst_delta": [
+   "0x5d",
+   "0x77",
+   "0x14",
+   "0x5e"
+  ]
+ },
+ "W8_60x2^18 (higher res)": {
+  "H_inf_sample": 17.0,
+  "worst_delta": [
+   "0xda",
+   "0x2d",
+   "0x6",
+   "0xa3"
+  ]
+ },
+ "tau_W4_exact": 0.6132,
+ "H2_W4_nokey": null,
+ "H2_W4_nokey_mean300": 14.367
+}

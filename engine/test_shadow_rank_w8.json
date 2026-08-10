@@ -1,0 +1,21 @@
+{
+ "meta": {
+  "W": 8,
+  "n": 32,
+  "note": "cascade-doubling law test"
+ },
+ "shadow_k0": {
+  "min_dlog2DP_64deltas": 15.415,
+  "min_polar_rank": 26,
+  "identity_fails": 52,
+  "agg_fails": 64,
+  "secs": 5.1
+ },
+ "full_k4": {
+  "min_dlog2DP_64deltas": 16.0,
+  "min_polar_rank": 30,
+  "identity_fails": 0,
+  "agg_fails": 64,
+  "secs": 10.8
+ }
+}

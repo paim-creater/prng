@@ -68,7 +68,7 @@ typedef struct {
 /* Pure GF(2) round — no integer ADD/CMUL. strictly provable deg growth. */
 static void tempest_round(TempestState *s) {
     uint64_t u = s->u, v = s->v, w = s->w, z = s->z;
-    /* Phase A: Weyl per-round key */
+    /* Phase B: Weyl per-round key */
     uint64_t wval = s->weyl + WEYL_GOLDEN;
     u ^= ROTL(wval, 7) ^ (wval >> 17);
     v ^= ROTL(wval, 19) ^ (wval >> 23);
@@ -76,7 +76,7 @@ static void tempest_round(TempestState *s) {
     z ^= ROTL(wval, 43) ^ (wval >> 37);
     s->weyl = wval;
     uint64_t u0 = u, v0 = v, w0 = w, z0 = z;
-    /* Phase B: Enhanced cross-word diffusion (each word ← 2 sources) */
+    /* Phase A: Enhanced cross-word diffusion (each word ← 2 sources) */
     u = u0 ^ ROTL(v0, 7) ^ ROTL(w0, 17);
     v = v0 ^ ROTL(w0, 11) ^ ROTL(z0, 23);
     w = w0 ^ ROTL(z0, 13) ^ ROTL(u0, 31);

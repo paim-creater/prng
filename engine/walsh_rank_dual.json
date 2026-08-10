@@ -1,0 +1,7 @@
+{
+ "W4_verify": {
+  "failures": 0,
+  "max_r_sampled": 16
+ },
+ "W4_rmax_all_masks": 16
+}

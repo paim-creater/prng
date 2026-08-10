@@ -1,0 +1,16 @@
+bit-exactness: PASS (all variants identical)
+scalar base   : 7.76 Gbit/s
+scalar pipe4b : 10.42 Gbit/s  (+34.3%)
+avx512 base   : 38.94 Gbit/s
+avx512 pipe4b : 46.26 Gbit/s  (+18.8%)
+sink e0a44425d9cbb0e6
+MT scalar T= 1 : 8.34 Gbit/s
+MT scalar T= 2 : 13.77 Gbit/s
+MT scalar T= 4 : 25.99 Gbit/s
+MT scalar T= 8 : 43.98 Gbit/s
+MT scalar T=16 : 53.39 Gbit/s
+MT avx512 T= 1 : 38.07 Gbit/s
+MT avx512 T= 2 : 71.15 Gbit/s
+MT avx512 T= 4 : 137.71 Gbit/s
+MT avx512 T= 8 : 248.86 Gbit/s
+MT avx512 T=16 : 270.14 Gbit/s

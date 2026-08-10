@@ -1,0 +1,27 @@
+{
+ "4": {
+  "min_rank": 3,
+  "delta": "0x1",
+  "secs": 18.8
+ },
+ "8": {
+  "min_rank": 3,
+  "delta": "0x1000",
+  "secs": 31.1
+ },
+ "16": {
+  "min_rank": 3,
+  "delta": "0x8",
+  "secs": 55.4
+ },
+ "32": {
+  "min_rank": 3,
+  "delta": "0x40",
+  "secs": 124.4
+ },
+ "64": {
+  "min_rank": 3,
+  "delta": "0x4",
+  "secs": 325.4
+ }
+}

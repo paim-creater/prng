@@ -1,362 +1,90 @@
-# Bolt & Tempest: Algebraic Degree-Driven PRNG Design
+# AM-SEV / Tempest v3 — Verifiable Cryptographic Design
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Language: C99](https://img.shields.io/badge/Language-C99-blue.svg)](src/)
-[![CI](https://img.shields.io/badge/CI-passing-brightgreen)](https://github.com/paim-creater/prng/actions)
+[![Language: C99 / Python / Verilog](https://img.shields.io/badge/Language-C99%20%2F%20Python%20%2F%20Verilog-blue.svg)](src/)
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/master/media/badge.svg)](https://github.com/rust-cc/awesome-cryptography-rust)
 
-Two high-performance pseudorandom number generators designed through an **algebraic degree-driven methodology** — target the algebraic degree (deg) over GF(2) first, then reverse-engineer the optimal primitive combination.
+This repository is the **code and evidence companion** to the paper
+*AM-SEV: A Metric Theory of Verifiable Cryptographic Design, Its AI
+Engine, and the Tempest Instance* (Yuèzhōu Tiān, 2026). The paper itself
+is not distributed here; every claim in it is backed by a runnable
+artifact in this repository.
 
-| Platform | Status |
-|----------|--------|
-| x86-64 (GCC/Clang/MSVC) | ✅ Full support |
-| ARM64 (Apple M / Cortex-A) | ✅ Full support |
-| RISC-V 64 | ✅ Full support |
-| MSVC | ✅ Supported via `src/platform.h` |
+**Core idea.** Security is traditionally assessed only after
+implementation. AM-SEV is a metric theory over GF(2) that makes the
+one-round differential probability of two-layer AND-RX designs
+*exactly computable at design time*: the Polar-Rank Theorem gives
+DP(Δ) = 2^(−rank B_Δ), a polynomial-time linear-algebra computation at
+any width. The two-layer polar-rank barrier (min rank 3 at every width)
+explains why cascades are necessary, and the andmix4 cascade eliminates
+the shadow's weak differentials (2⁻³ → 2⁻¹¹ exact at W=4, below 2⁻²⁴
+sampled at W=64). The theory is instantiated as an AI design engine
+whose calibrated verifier stack adjudicates every proposal — human,
+evolutionary, or LLM-authored — with verification as the invariant.
 
----
+## Repository layout
 
-## At a Glance
+| Directory | Contents |
+|---|---|
+| [`src/`](src/) | C99 implementations: Tempest v3/v4, AVX-512 port, ADC-Bolt (legacy non-crypto PRNG), ChaCha20 reference, benchmarks |
+| [`code/`](code/) | Reference C sources (KAT-verified), stream-cipher demo, runtime self-check, SAT/MILP analysis tools |
+| [`engine/`](engine/) | **Python verification engine** — every metric, certificate, and audit script of the paper, with its JSON result data (38 scripts, 25 datasets) |
+| [`hardware/`](hardware/) | KAT-verified Verilog RTL, synthesis/place-and-route logs, the completed k=2 bitstream (135 KB) |
+| [`data/`](data/) | Statistical test logs: NIST SP 800-22, TestU01 BigCrush/Crush, PractRand 1 TiB, and the v3.1 failure control |
+| [`tests/`](tests/) | KAT verification harness |
+| [`examples/`](examples/) | Application demos (dice, tokens, UUIDs, passwords) |
+| [`results/`](results/) | Historical benchmark and test reports |
+| `tempest-rs/`, `pypi_package/`, `homebrew/` | Rust crate, PyPI package, Homebrew formula |
+| [`docs/`](docs/) | Design rationale, API reference, and the audit record |
 
-| Algorithm | Type | Throughput | Security | Test Status |
-|-----------|------|-----------|----------|-------------|
-| **ADC-Bolt** | Non-crypto PRNG | **70.3 Gbit/s** (12.1× ChaCha20) | deg=2 (non-crypto) | NIST ✅ TestU01 ✅ PractRand ✅ |
-| **Tempest v3** | CSPRNG | **17.7 Gbit/s** (2.7× ChaCha20) | β₁≥16, βᵣ≥₂=256, a_min≥7 (MILP), DP⁽²⁵⁾≤2⁻¹⁷⁵, c⁽²⁵⁾²≤2⁻¹⁵⁰ | NIST ✅ TestU01 ✅ PractRand 1 TiB ✅ |
-| **Tempest v3 AVX-512** | CSPRNG (SIMD) | **76.5 Gbit/s** (13.2× ChaCha20) | deg≥256 | NIST ✅ TestU01 ✅ PractRand ✅ |
-
-> ⚡ Benchmarked on AMD Ryzen 9 8940HX (Zen 4), MinGW-w64 GCC 16.1.0, `-O3 -march=native`. Single-core scalar: 17.7 Gbit/s (dual-output), AVX-512 8-way parallel: **76.5 Gbit/s** (4.32× speedup, 13.2× ChaCha20).
-
----
-
-## Quick Start
-
-```bash
-git clone https://github.com/paim-creater/prng.git && cd prng
-make && make bench
-```
-
-Expected output:
-```
-============================================
-  Bolt & Tempest — Throughput Benchmark
-============================================
-  ADC-Bolt:            70261 Mbit/s  (70.3 Gbit/s)
-  Tempest v3:          17700 Mbit/s  (17.7 Gbit/s)  [provable degree, DP bound]
-============================================
-```
-
-### Drop-In Usage (Single Header)
-
-Copy one file — no build system needed:
-
-```c
-#include "prng_single_header.h"
-
-// Non-crypto: games, Monte Carlo, ML
-adcbolt_state rng;
-adcbolt_seed(&rng, 42);
-double x = adcbolt_double(&rng);
-int dice = adcbolt_range(&rng, 1, 6);
-
-// Cryptographic: keys, tokens, authentication
-tempest_state csprng;
-tempest_init(&csprng, key, nonce);
-uint64_t token = tempest_u64(&csprng);
-```
-
-### Python
-
-```python
-import prng
-
-rng = prng.ADC_Bolt(seed=42)
-print(rng.randint(1, 6))
-
-csprng = prng.Tempest(key=bytes(32), nonce=bytes(16))
-print(csprng.hex(16))
-```
-
----
-
-## Design Methodology
-
-Traditional PRNG design follows: *choose structure → test → add rounds*. We reverse this:
-
-**First determine the target algebraic degree (deg), then reverse-engineer the primitives.**
-
-The key metric is **deg-per-op** — algebraic degree yield per nonlinear operation (AND-gate, ADD-carry, or MULX). ADC-Bolt uses ADD+ADD (deg-per-op = 1.0, 2c latency). Tempest v3 uses AND-mix cascade (deg ×16 per 4-stage chain, 4c latency).
-
-### ADC-Bolt (70.3 Gbit/s)
-
-Replace MULX multiplication (3-cycle latency) with **carry-chain dual-addition** (ADD+ADD, 2-cycle latency). Same algebraic degree (deg=2), shorter critical path, **52% throughput gain** over the MULX baseline.
-
-```c
-// Core nonlinearity: carry-chain provides deg=2 at 2c latency
-z = (z + u) + v;   // majority carry = quadratic over GF(2)
-```
-
-### Tempest v3 (Pure GF(2), Strictly Provable)
-
-**Algebraic guarantee:** After 2 rounds, output deg ≥ 256, XL complexity ≥ 2³⁴⁴ (heuristic). Core nonlinearity via AND (GF(2) multiplication) only — all operations are over GF(2): AND, XOR, ROT. No integer ADDs or carry chains.
-
-1. **Pure GF(2) round function** — only {XOR, ROTL, AND} + constant XORs (transparent to differential analysis)
-2. **4-stage AND-mix cascade** — each stage doubles algebraic degree (proven by induction), deg×16 per round
-3. **XOR+AND nonlinear diffusion** — 4 ANDs per round covering all 6 word pairings, 4 constants break all-1s state
-4. **Dual-output** — 2×64-bit per round via state permutation
-
----
-
-## Statistical Testing
-
-Both algorithms have passed **all** statistical tests applied:
-
-| Test Suite | Tests | ADC-Bolt | Tempest v3 |
-|------------|-------|----------|-------------------|
-| NIST SP 800-22 | 15 series | ✅ 15/15 | ✅ 15/15 |
-| TestU01 SmallCrush | 15 | ✅ Pass | ✅ Pass |
-| TestU01 Rabbit | 40 | ✅ Pass | ✅ Pass |
-| TestU01 Alphabit | 17 | ✅ Pass | ✅ Pass |
-| TestU01 BigCrush | 160 | ✅ Pass (1h39m) | ✅ Pass (3h20m) |
-| TestU01 Crush | 144 | ✅ Pass (12h46m) | ✅ Pass (23m) |
-| PractRand | — | ✅ 1 TiB, 354 sets | ✅ 1 TiB, 354 sets, 0 anomalies |
-
-Full test logs: [`results/`](results/)
-
----
-
-## Performance
-
-### Reference Platform (AMD Zen 4)
-
-| Algorithm | Rounds | Time | Throughput |
-|-----------|--------|------|------------|
-| ADC-Bolt | 2×10⁸ | 182 ms | 70.3 Gbit/s |
-| Tempest v3 | 5×10⁷ | 168 ms | 17.7 Gbit/s |
-| ChaCha20 (scalar) | 2×10⁸ | — | 5.8 Gbit/s |
-
-### Predicted Performance by Architecture
-
-| CPU | ADC-Bolt | Tempest v3 | Key Factor |
-|-----|----------|------------|------------|
-| **Apple M4 Pro/Max** 🥇 | 85–95 Gbit/s | 16–18 Gbit/s | UMULL=1c (=ADD latency) |
-| AMD Zen 5 | 75–82 Gbit/s | 13–15 Gbit/s | IPC +15% over Zen 4 |
-| **AMD Zen 4** | **70.3** ✅ | **17.7** ✅ | Reference platform (25 rounds) |
-| Intel Arrow Lake | 75–85 Gbit/s | 12–14 Gbit/s | Higher clock (5.7 GHz) |
-| Intel Raptor Lake | 60–70 Gbit/s | 10–12 Gbit/s | Previous gen |
-| ARM Cortex-X4 | 55–65 Gbit/s | 10–13 Gbit/s | Mobile thermal limits |
-
-> 🥇 ARM64 is the ideal platform — multiply latency (UMULL=1c) equals ADD latency (1c), eliminating the MULX bottleneck that limits x86-64.
-
-### Reproduce on Your Hardware
+## Quick start
 
 ```bash
-git clone https://github.com/paim-creater/prng.git && cd prng
-gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
-./benchmark
+# C implementation + KAT (needs a C99 compiler)
+make kat           # or: gcc -O3 -o kat_check src/kat_check_main.c code/tempest_v3.c && ./kat_check
+# expect: all 5 KAT blocks match, including 0x6BBE30BB1D12DDD0
+
+# Python verification engine (needs numpy; SAT parts need pysat)
+cd engine
+python cipher.py            # self-test of the bit-exact port
+python audit_true_algorithm1.py   # W=4 full-domain exact metrics
+python readword_theorem.py  # Read-Word Polar-Rank Theorem verification
+
+# Hardware (needs the OSS CAD Suite: yosys, nextpnr-ice40, icepack)
+cd hardware
+bash scripts/synth.sh       # synthesize; k=2 variant completes place-and-route
 ```
 
-Then [submit your results](https://github.com/paim-creater/prng/issues/new?template=benchmark_result.md) to the community database!
+## Listed in
 
-| Contributor | CPU | ADC-Bolt | Tempest v3 |
-|-------------|-----|----------|------------|
-| [Submit yours →](https://github.com/paim-creater/prng/issues/new?template=benchmark_result.md) | — | — | — |
-| [@paim-creater](https://github.com/paim-creater) | Ryzen 9 8940HX (Zen 4) | 70.3 Gbit/s | 17.7 Gbit/s |
-| [GitHub Actions CI](https://github.com/paim-creater/prng/actions) | Xeon E5 v4 | 8.6 Gbit/s | 4.6 Gbit/s |
+Featured in the curated list [Awesome Cryptography Rust](https://github.com/rust-cc/awesome-cryptography-rust).
 
----
+## Headline numbers (measured, all reproducible from this repo)
 
-## Repository Structure
+| Quantity | Value | Evidence |
+|---|---|---|
+| DP(1), two-layer shadow | 2⁻³, exact at every width | Polar-Rank Theorem + W=64 rank-3 certificate |
+| DP(1), full design | 2⁻⁵·⁹⁴²⁰ exact at W=4; <2⁻²⁴ sampled at W=64 | `engine/audit_true_algorithm1.json` |
+| Algebraic degree | β₁ = 16, certificate at W=64 | `engine/explore_cascade_degree.py` |
+| KAT | 5/5 blocks, incl. 0x6BBE30BB1D12DDD0 | `tests/`, `hardware/sim/` |
+| Statistical tests | NIST 15/15, BigCrush all-pass, **PractRand 1 TiB** clean | `data/` |
+| C scalar (dual) | 6.4 Gbit/s (13.4 @5 GHz), same-harness vs ChaCha20 6.1 | `src/bench_*` |
+| C AVX-512 (8-way) | 35.5 Gbit/s (≈74 @5 GHz) | `src/bench_a1_avx512.c` |
+| FPGA (k=2 variant) | 5,915 LUT4 / 1,034 FF, 34.21 MHz, **2.19 Gbit/s, completed bitstream (135 KB)** | `hardware/` |
 
-```
-.
-├── README.md
-├── LICENSE                    ← MIT
-├── CONTRIBUTING.md
-├── CMakeLists.txt             ← CMake build (MSVC / Xcode / Make / Ninja)
-├── Makefile                   ← One-click: make && make bench
-├── prng_single_header.h       ← Drop-in: copy one file, #include it
-├── prng.py                    ← Python bindings
-├── benchmark.c                ← Throughput benchmark
-├── test_bolt.c                ← ADC-Bolt self-test
-├── test_tempest.c             ← Tempest v3 self-test
-├── examples/
-│   ├── dice_roll.c            ← Game dice roller
-│   ├── generate_token.c       ← Secure API token
-│   └── monte_carlo.c          ← π via Monte Carlo
-├── src/
-│   ├── platform.h             ← Auto-detects x86-64 / ARM64 / RISC-V / MSVC
-│   ├── adcbolt.h              ← ADC-Bolt API
-│   ├── adcbolt.c              ← ADC-Bolt implementation
-│   ├── tempest_v3.h           ← Tempest v3 API
-│   ├── tempest_v3.c           ← Tempest v3 implementation
-│   ├── tempest_openssl.c      ← OpenSSL 3.x Provider (EVP_RAND)
-│   ├── tempest_cuda_kernel.cu ← CUDA GPU RNG kernel
-│   ├── bitgen_tempest.c       ← NumPy BitGenerator C extension
-│   └── _tempest_numpy.c       ← NumPy bulk fill acceleration
-├── tempest_rng.py              ← ⭐ NumPy: random/normal/integers/shuffle (11 Gbit/s)
-├── tempest_cuda.py             ← GPU: CUDA-accelerated Monte Carlo
-├── setup_bitgen.py             ← Build script for NumPy BitGenerator
-├── tempest-rs/                 ← ⭐ Rust crate: RngCore + CryptoRng
-│   ├── Cargo.toml
-│   ├── src/lib.rs
-│   └── examples/pi_estimation.rs
-├── submission/                ← MILP verification scripts & paper source
-│   ├── milp_deg_exact.py       Division property MILP (W=64, r=2)
-│   ├── milp_diff_bit_correct.py Bit-level differential MILP
-│   ├── milp_diff_bit_gold.py   Gold-standard free-Δ trail search
-│   ├── milp_linear_xor.py      Linear trail MILP (exact XOR rule)
-│   ├── milp_trail_w64.py       Free-Δ bit-level trail (W=64)
-│   ├── milp_solver.py          Shared HiGHS/CBC solver module
-│   ├── gen_tempest_cnf.py      SAT CNF generator
-│   └── sat_results.txt         SAT experiment results
-├── results/                   ← Full test logs
-│   ├── tempest_nist_results_20260704.txt
-│   ├── smallcrush_tempest_v3.log
-│   ├── rabbit_tempest_v3.log
-│   ├── alphabit_tempest_v3.log
-│   ├── bigcrush_tempest_v3_20260704.log
-│   ├── crush_tempest_v3_20260704.log
-│   ├── practrand_tempest_v3_1tb_20260705.log
-│   ├── adcbolt_nist_report.txt
-│   ├── smallcrush_adcbolt.log
-│   ├── rabbit_adcbolt.log
-│   ├── alphabit_adcbolt.log
-│   ├── bigcrush_adcbolt.log
-│   ├── crush_adcbolt.log
-│   └── practrand_adcbolt.log
-└── .github/
-    └── ISSUE_TEMPLATE/
-```
+## Audit record
 
----
+The paper ships a full audit record, and so does this repository: see
+[`docs/AUDIT_RECORD.md`](docs/AUDIT_RECORD.md). The short version —
+every earlier claim that did not survive verification was corrected and
+the correction is documented, including: the v3.1 dead-key predecessor,
+the W=4 snapshot-semantics discrepancy, the withdrawn half-entropy law,
+the W=8 linear-measurement multiple-testing artifact, and the
+differential-trail zero-cancellation artifact in the multi-round model.
 
-## Quick Verification
+## Reproducibility promise
 
-Anyone can verify the implementation is correct in under a second:
-
-```c
-#include "src/kat_tempest.h"
-
-tempest_state s;
-if (tempest_kat_verify(&s) == 0) {
-    printf("Tempest v3: correct\n");
-}
-```
-
-This runs a known-answer test (key={1,2,3,4}, nonce={5,6}) and checks against reference outputs. No external dependencies, no build system required.
-
-Full test suite:
-```bash
-gcc -O3 -o test_self test_tempest.c src/tempest_v3.c -I.  
-./test_self
-```
-
-## Security
-
-All Tempest v3 security bounds are **strictly proven over GF(2)** with no integer carry assumptions.
-
-### Pure GF(2) Round Function (Strict Security Bounds)
-
-All round function operations are in {AND, XOR, ROT} — no integer ADDs or carry chains. Security bounds follow a three-tier classification:
-
-- **Algebraic degree**: deg ≥ 16^r **Strict** (rotation uniqueness lemma, cross-word AND monotonicity, MILP-validated W=64). After r=2: deg≥256 → XL ≥ 2³⁴⁴ (heuristic)
-- **Per-bit AND DP**: = 1/2 **Strict** (GF(2) algebra)
-- **DP(1) strict bound**: ≤ 2^{-7} **Strict** (a_min ≥ 7, MILP-verified)
-- **DP(r) multi-round**: ≤ 2^{-7r} **Strict** (exact Weyl transparency, no carries)
-- **Adv_lin(25)**: c^{(25)²} ≤ 2^{-150} **MILP-verified** (exact XOR rule + snapshot ANDs, linear trail enumeration)
-- **Output function DP**: DP_φ ≤ 2^{-4} per word (dual Pre-mix aligned)
-
-### Empirical Cross-Validation
-
-- **Linear bias**: ε^{(2)} ≤ 2^{-22} (empirical, 2×10¹⁰ samples)
-- **Differential path weight**: ≥ 11/64 per 3 rounds (measured)
-- **AND-mix diffusion**: 1→3→9→27→64 bit coverage per cascade (measured)
-
-### Design Rationale
-
-- **Pure GF(2) operations**: AND (GF(2) multiplication), XOR, ROT — carries not needed
-- **Constant K_u..K_z**: break all-1s state fixed point, transparent to differential analysis
-- **Weyl per-round key**: slide-attack resistance (round-dependent mixing)
-- **Dual-output**: 2×64-bit per round via state permutation
-
-See [DESIGN.md](DESIGN.md) for the full security analysis.
-
-**NIST SP 800-90A/90B**: Tempest v3 is packaged as a complete DRBG (Instantiate/Generate/Reseed/Uninstantiate) with an SP 800-90B-compliant entropy source (RCT/APT health tests + Tempest conditioning). 12 engineering validation tests pass.
-
-**Ecosystem integrations**: NumPy (tempest_rng.py, 11 Gbit/s), OpenSSL 3.x Provider (TEMPEST-DRBG), Rust rand crate (tempest-rs, RngCore + CryptoRng), CUDA GPU kernel (tempest_cuda_kernel.cu, parallel Monte Carlo).
-
----
-
-## Build Options
-
-### Make (Linux / macOS / MSYS2)
-
-```bash
-make            # compile + run self-tests
-make test       # build and run both test programs
-make benchmark  # build benchmark binary
-make bench      # build and run benchmark
-make clean      # remove binaries
-```
-
-### CMake (All platforms including MSVC)
-
-```bash
-mkdir build && cd build
-cmake ..
-cmake --build .
-ctest           # run test_all
-./benchmark     # run benchmark
-```
-
-### Manual Compilation
-
-```bash
-# ADC-Bolt
-gcc -O3 -march=native -o test_bolt test_bolt.c src/adcbolt.c -I.
-
-# Tempest v3
-gcc -O3 -march=native -o test_tempest test_tempest.c src/tempest_v3.c -I.
-
-# Benchmark
-gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
-```
-
----
-
-## Comparison
-
-### Scalar CSPRNG
-
-| Algorithm | Throughput | Security | Verification |
-|-----------|-----------|----------|-------------|
-| **Tempest v3** | **17.7 Gbit/s** | β₁≥16, βᵣ≥₂=256, a_min≥7 (MILP), DP⁽²⁵⁾≤2⁻¹⁷⁵, c⁽²⁵⁾²≤2⁻¹⁵⁰ | TestU01 all 5 levels, PractRand 1 TiB |
-| ChaCha20 | 5.8 Gbit/s | 2²⁵⁶ | 15+ years of cryptanalysis |
-| AES-CTR DRBG (AES-NI) | 2–6 Gbit/s | 2²⁵⁶ | NIST standard |
-
-### Non-Crypto PRNG
-
-| Algorithm | Throughput | State Update | TestU01 BigCrush |
-|-----------|-----------|-------------|-----------------|
-| RomuTrio | ~213 Gbit/s | Linear | ❌ Fails after 2¹⁹ bytes |
-| wyrand | ~178 Gbit/s | Linear | Partial pass |
-| xoroshiro128+ | ~90 Gbit/s | Linear | ❌ Some failures |
-| **ADC-Bolt** | **70.3 Gbit/s** | **Nonlinear (deg=2)** | ✅ Full pass |
-
----
-
-## Citation
-
-```bibtex
-@misc{bolt_tempest_2026,
-  title = {Tempest v3 \& ADC-Bolt:
-           Algebraic Degree-Driven PRNG Design},
-  author = {Tian Yuezhou},
-  year = {2026},
-  url = {https://github.com/paim-creater/prng},
-}
-```
-
-## License
-
-MIT — free for academic, commercial, and personal use. See [LICENSE](LICENSE).
+Every number in the paper can be re-derived from this repository on a
+stock laptop: the engine scripts print the exact values into JSON, the
+KAT harnesses verify bit-exactness against the published vector, and
+the FPGA flow is fully open-source (Yosys → nextpnr → icepack).

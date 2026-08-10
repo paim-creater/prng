@@ -1,0 +1,160 @@
+{
+ "k0_withpremix": {
+  "label": "k=0 (with premix)",
+  "ddt_max_dlog2": 3.0,
+  "agg_fail_count": 0,
+  "agg_fail_examples": [],
+  "rlin_hist": {
+   "3": 20,
+   "6": 377,
+   "9": 9006,
+   "4": 58,
+   "7": 916,
+   "10": 16970,
+   "8": 2808,
+   "11": 23532,
+   "5": 120,
+   "12": 11728
+  },
+  "fiber_identity_fail": 0,
+  "fiber_identity_first_mismatch": null,
+  "secs": 30.5
+ },
+ "k1_withpremix": {
+  "label": "k=1 (with premix)",
+  "ddt_max_dlog2": 5.9611,
+  "agg_fail_count": 0,
+  "agg_fail_examples": [],
+  "rlin_hist": {
+   "11": 24,
+   "13": 622,
+   "12": 47,
+   "14": 9713,
+   "10": 4,
+   "15": 37527,
+   "16": 17598
+  },
+  "fiber_identity_fail": 65533,
+  "fiber_identity_first_mismatch": {
+   "delta": 1,
+   "r_lin": 11,
+   "fiber": 174,
+   "expected": 32
+  },
+  "secs": 31.0
+ },
+ "k2_withpremix": {
+  "label": "k=2 (with premix)",
+  "ddt_max_dlog2": 5.9529,
+  "agg_fail_count": 3,
+  "agg_fail_examples": [
+   {
+    "delta": 10305,
+    "r_lin": 12,
+    "dlog2dp": 12.415037499278844
+   },
+   {
+    "delta": 11713,
+    "r_lin": 12,
+    "dlog2dp": 12.415037499278844
+   },
+   {
+    "delta": 40040,
+    "r_lin": 12,
+    "dlog2dp": 12.415037499278844
+   }
+  ],
+  "rlin_hist": {
+   "14": 8529,
+   "13": 380,
+   "12": 13,
+   "15": 37963,
+   "16": 18650
+  },
+  "fiber_identity_fail": 65535,
+  "fiber_identity_first_mismatch": {
+   "delta": 1,
+   "r_lin": 14,
+   "fiber": 70,
+   "expected": 4
+  },
+  "secs": 31.0
+ },
+ "k3_withpremix": {
+  "label": "k=3 (with premix)",
+  "ddt_max_dlog2": 5.9529,
+  "agg_fail_count": 2,
+  "agg_fail_examples": [
+   {
+    "delta": 45054,
+    "r_lin": 12,
+    "dlog2dp": 12.415037499278844
+   },
+   {
+    "delta": 48297,
+    "r_lin": 12,
+    "dlog2dp": 12.678071905112638
+   }
+  ],
+  "rlin_hist": {
+   "15": 37880,
+   "14": 8451,
+   "13": 354,
+   "12": 8,
+   "16": 18842
+  },
+  "fiber_identity_fail": 65535,
+  "fiber_identity_first_mismatch": {
+   "delta": 1,
+   "r_lin": 15,
+   "fiber": 32,
+   "expected": 2
+  },
+  "secs": 31.3
+ },
+ "k4_withpremix": {
+  "label": "k=4 (with premix)",
+  "ddt_max_dlog2": 5.9447,
+  "agg_fail_count": 0,
+  "agg_fail_examples": [],
+  "rlin_hist": {
+   "14": 8408,
+   "13": 342,
+   "15": 37965,
+   "12": 4,
+   "16": 18815,
+   "11": 1
+  },
+  "fiber_identity_fail": 65535,
+  "fiber_identity_first_mismatch": {
+   "delta": 1,
+   "r_lin": 14,
+   "fiber": 32,
+   "expected": 4
+  },
+  "secs": 30.9
+ },
+ "k0_nopremix": {
+  "label": "k=0 no-premix (pure quadratic)",
+  "ddt_max_dlog2": 3.0,
+  "agg_fail_count": 0,
+  "agg_fail_examples": [],
+  "rlin_hist": {
+   "3": 20,
+   "6": 336,
+   "9": 5724,
+   "12": 18564,
+   "4": 58,
+   "7": 660,
+   "10": 11008,
+   "8": 2001,
+   "5": 116,
+   "11": 16008,
+   "13": 9440,
+   "14": 1600
+  },
+  "fiber_identity_fail": 0,
+  "fiber_identity_first_mismatch": null,
+  "secs": 31.9
+ }
+}
