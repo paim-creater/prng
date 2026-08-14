@@ -1,7 +1,7 @@
 /* gen_kat_tempest.c — Generate KAT for Tempest v3 */
 #include <stdio.h>
 #include <stdint.h>
-#include "src/tempest_v3.h"
+#include "tempest_v3.h"
 
 int main(void) {
     tempest_state s;

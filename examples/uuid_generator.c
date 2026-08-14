@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "src/tempest_v3.h"
+#include "tempest_v3.h"
 
 static void generate_uuid(tx4_state *csprng) {
     uint8_t bytes[16];

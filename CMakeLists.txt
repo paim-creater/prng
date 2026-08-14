@@ -14,19 +14,19 @@ if(NOT MSVC)
 endif()
 
 # Library targets
-add_library(adcbolt STATIC src/adcbolt.c)
-target_include_directories(adcbolt PUBLIC src)
+add_library(adcbolt STATIC code/adcbolt.c)
+target_include_directories(adcbolt PUBLIC code)
 
-add_library(tempest STATIC src/tempest_v3.c)
-target_include_directories(tempest PUBLIC src)
+add_library(tempest STATIC code/tempest_v3.c)
+target_include_directories(tempest PUBLIC code)
 
-# Test programs (separate executables — each has its own main())
-add_executable(test_bolt test_bolt.c)
-target_include_directories(test_bolt PRIVATE src)
+# Test programs
+add_executable(test_bolt tests/test_bolt.c)
+target_include_directories(test_bolt PRIVATE code)
 target_link_libraries(test_bolt adcbolt)
 
-add_executable(test_tempest test_tempest.c)
-target_include_directories(test_tempest PRIVATE src)
+add_executable(test_tempest tests/test_tempest.c)
+target_include_directories(test_tempest PRIVATE code)
 target_link_libraries(test_tempest tempest)
 
 # Custom target to run all tests
@@ -36,20 +36,15 @@ add_custom_target(test_all
     DEPENDS test_bolt test_tempest
 )
 
-# Benchmark
-add_executable(benchmark benchmark.c)
-target_include_directories(benchmark PRIVATE src)
-target_link_libraries(benchmark adcbolt tempest)
-
 # SIMD benchmark (AVX-512 required)
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
-    add_executable(bench_simd bench_simd.c src/tempest_simd.c)
-    target_include_directories(bench_simd PRIVATE src)
+    add_executable(bench_simd code/bench_simd.c code/tempest_simd.c)
+    target_include_directories(bench_simd PRIVATE code)
     target_compile_options(bench_simd PRIVATE -mavx512f)
     target_link_libraries(bench_simd m)
 endif()
 
 # Install
 install(TARGETS adcbolt tempest DESTINATION lib)
-install(FILES src/adcbolt.h src/tempest_v3.h src/platform.h DESTINATION include)
+install(FILES code/adcbolt.h code/tempest_v3.h code/platform.h include/prng_single_header.h DESTINATION include)
 install(TARGETS bench_simd DESTINATION bin OPTIONAL)

@@ -126,11 +126,11 @@ generation failed a property the stack now detects in milliseconds.
   replaces on a LUT4 FPGA).
 
 All figures are measured on the same machine/harness; see
-`src/bench_*` and `hardware/build/*.log`.
+`code/bench_*` and `hardware/build/*.log`.
 
 ## 6. Relation to ADC-Bolt (legacy)
 
 ADC-Bolt is the earlier non-cryptographic PRNG of this project (degree-2
-design, 70 Gbit/s class). It is retained in `src/` for historical
+design, 70 Gbit/s class). It is retained in `code/` for historical
 continuity and as the degree-2 counterexample that motivated the
 cascade analysis; it is **not** a security claim.

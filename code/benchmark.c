@@ -7,8 +7,8 @@
  * Tempest v3 uses dual-output (tempest_u64x2, 128 bits/round) for ~17.7 Gbit/s.
  * Platform note: uses QueryPerformanceCounter on Windows, clock_gettime on Linux.
  */
-#include "src/adcbolt.h"
-#include "src/tempest_v3.h"
+#include "adcbolt.h"
+#include "tempest_v3.h"
 #include <stdio.h>
 #include <stdint.h>
 

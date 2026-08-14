@@ -2,7 +2,7 @@
 
 A generic round-function DSL (word-level ops) with a numpy-vectorized
 interpreter, plus bit-exact Python ports of Tempest v3 (Algorithm 1, from
-github_release/src/tempest_v3.c) and Tempest v3.1 (submission/code/tempest_v3.c).
+github_release/code/tempest_v3.c) and Tempest v3.1 (submission/code/tempest_v3.c).
 
 Verifiers (neural distinguisher, empirical DP/linear, fast stats, exact trail
 simulation) all consume designs expressed in this DSL, so the engine can
@@ -73,7 +73,7 @@ def splitmix64(seed):
 
 
 # ==============================================================================
-# Tempest v3 Algorithm 1 (github_release/src/tempest_v3.c) — round program
+# Tempest v3 Algorithm 1 (github_release/code/tempest_v3.c) — round program
 # ==============================================================================
 def tempest_a1_round_program():
     """Round-function op list for Algorithm 1 (paper Algorithm 1)."""

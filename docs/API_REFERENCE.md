@@ -3,7 +3,7 @@
 > Updated 2026-08 to the audited, current API surface. Legacy Bolt-era
 > interfaces are marked *(legacy)*.
 
-## C library (`src/tempest_v3.h`, `code/tempest_v3.h`)
+## C library (`code/tempest_v3.h`, `code/tempest_v3.h`)
 
 ### Tempest v3 (CSPRNG)
 
@@ -29,12 +29,12 @@ uint64_t adcbolt_u64(adcbolt_state *s);
 double   adcbolt_double(adcbolt_state *s);
 ```
 
-### AVX-512 port (`src/tempest_a1_avx512.c`)
+### AVX-512 port (`code/tempest_a1_avx512.c`)
 
 8-way SIMD implementation of Algorithm 1; API mirrors the scalar
 `tempest_*` with `_8x` suffixed batch functions (see header).
 
-### KAT verification (`src/kat_tempest.h`)
+### KAT verification (`code/kat_tempest.h`)
 
 ```c
 int tempest_kat_verify(tx4_state *s);   /* returns 1 if all blocks match */

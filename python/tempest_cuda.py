@@ -221,7 +221,7 @@ class TempestGPU:
             "CUDA kernel 调用需要在 Python 中通过 PyCUDA 或 CuPy 封装。\n"
             "当前输出: 回退到 CPU 版 Tempest。\n"
             "完整 GPU 流水线实现请参考:\n"
-            "  github_release/src/tempest_cuda_kernel.cu"
+            "  github_release/code/tempest_cuda_kernel.cu"
         )
         return self._cpu.random(n)
 

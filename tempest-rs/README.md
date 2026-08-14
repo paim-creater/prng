@@ -1,4 +1,4 @@
-# Tempest v3 — Pure GF(2) CSPRNG (2^128 strictly provable security)
+# Tempest v3 — Pure Rust CSPRNG
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Crates.io](https://img.shields.io/crates/v/tempest-rng.svg)](https://crates.io/crates/tempest-rng)
@@ -10,8 +10,8 @@ providing [`rand_core::RngCore`] and [`rand_core::CryptoRng`] traits.
 
 | Metric | Value |
 |--------|-------|
-| Throughput | **17.7 Gbit/s** (3.0× ChaCha20, pure GF(2)) |
-| Security | **2^128** (strictly provable deg ≥ 256, XL ≥ 2⁹⁷) |
+| Throughput | **17.7 Gbit/s** dual-output scalar (v4 build; 3.0× ChaCha20 on the same harness) |
+| Security | deg ≥ 16/round (W=4 exact), DP/linear-bias bounds certified; 1 TiB PractRand, BigCrush, NIST SP 800-22 |
 | NIST SP 800-22 | 15/15 PASS |
 | TestU01 | BigCrush + Crush (304 tests) |
 | PractRand | 1 TiB zero anomalies |

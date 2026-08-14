@@ -1,90 +1,90 @@
-# AM-SEV / Tempest v3 — Verifiable Cryptographic Design
+# Tempest v3 — Verifiable Cryptographic Design
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Language: C99 / Python / Verilog](https://img.shields.io/badge/Language-C99%20%2F%20Python%20%2F%20Verilog-blue.svg)](src/)
-[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/master/media/badge.svg)](https://github.com/rust-cc/awesome-cryptography-rust)
+Tempest v3 is an AND-RX cryptographic random number generator whose
+security statements are exact design-time computations. It accompanies
+the paper *AM-SEV: A Metric Theory of Verifiable Cryptographic Design,
+Its AI Engine, and the Tempest Instance* (Yuèzhōu Tiān, 2026); the
+paper is not distributed here, but every quantitative claim in it is
+backed by a runnable artifact in this repository.
 
-This repository is the **code and evidence companion** to the paper
-*AM-SEV: A Metric Theory of Verifiable Cryptographic Design, Its AI
-Engine, and the Tempest Instance* (Yuèzhōu Tiān, 2026). The paper itself
-is not distributed here; every claim in it is backed by a runnable
-artifact in this repository.
+The core result is the Polar-Rank Theorem: for two-layer AND-RX round
+functions the one-round differential probability is
+DP(Δ) = 2^(−rank B_Δ), computable in polynomial time at any word width.
+The two-layer polar-rank barrier (minimum rank 3 at every width) shows
+why cascades are necessary, and the andmix4 cascade eliminates the
+shadow's weak differentials (2⁻³ → 2⁻¹¹ exact at W=4, below 2⁻²⁴
+sampled at W=64). The same metrics drive an AI design engine whose
+calibrated verifier stack adjudicates every candidate.
 
-**Core idea.** Security is traditionally assessed only after
-implementation. AM-SEV is a metric theory over GF(2) that makes the
-one-round differential probability of two-layer AND-RX designs
-*exactly computable at design time*: the Polar-Rank Theorem gives
-DP(Δ) = 2^(−rank B_Δ), a polynomial-time linear-algebra computation at
-any width. The two-layer polar-rank barrier (min rank 3 at every width)
-explains why cascades are necessary, and the andmix4 cascade eliminates
-the shadow's weak differentials (2⁻³ → 2⁻¹¹ exact at W=4, below 2⁻²⁴
-sampled at W=64). The theory is instantiated as an AI design engine
-whose calibrated verifier stack adjudicates every proposal — human,
-evolutionary, or LLM-authored — with verification as the invariant.
+Archived in the [Software Heritage universal
+archive](https://archive.softwareheritage.org/browse/origin/https://github.com/paim-creater/prng/)
+— snapshot `swh:1:snp:b8b273a6ff0b12e5f262f71d2299db26a7181353` (2026-08-11).
 
 ## Repository layout
 
 | Directory | Contents |
 |---|---|
-| [`src/`](src/) | C99 implementations: Tempest v3/v4, AVX-512 port, ADC-Bolt (legacy non-crypto PRNG), ChaCha20 reference, benchmarks |
-| [`code/`](code/) | Reference C sources (KAT-verified), stream-cipher demo, runtime self-check, SAT/MILP analysis tools |
-| [`engine/`](engine/) | **Python verification engine** — every metric, certificate, and audit script of the paper, with its JSON result data (38 scripts, 25 datasets) |
-| [`hardware/`](hardware/) | KAT-verified Verilog RTL, synthesis/place-and-route logs, the completed k=2 bitstream (135 KB) |
-| [`data/`](data/) | Statistical test logs: NIST SP 800-22, TestU01 BigCrush/Crush, PractRand 1 TiB, and the v3.1 failure control |
-| [`tests/`](tests/) | KAT verification harness |
+| [`code/`](code/) | C sources: Algorithm 1 and v4 implementations, KAT vectors, benchmarks, stream-cipher demo, runtime self-check, SAT/MILP analysis tools, legacy v3.1 tools |
+| [`engine/`](engine/) | Python verification engine: every metric, certificate, and audit script of the paper, with JSON result data |
+| [`hardware/`](hardware/) | Verilog RTL, synthesis/place-and-route logs, the completed k=2 bitstream (135 KB) |
+| [`data/`](data/) | Statistical test logs: NIST SP 800-22, TestU01 BigCrush, PractRand 1 TiB, and the v3.1 failure control |
+| [`docs/`](docs/) | Design rationale, API reference, audit record, v3.1 fix record |
+| [`tests/`](tests/) | KAT and self-test harnesses |
 | [`examples/`](examples/) | Application demos (dice, tokens, UUIDs, passwords) |
+| [`include/`](include/) | `prng_single_header.h` — single-header drop-in |
+| [`python/`](python/) | Python tools: ctypes bindings, CUDA kernel, setup helper |
+| [`golang/`](golang/), [`cpp/`](cpp/), [`tempest-rs/`](tempest-rs/), [`wolfssl_tempest/`](wolfssl_tempest/) | Language bindings and integrations |
+| [`pypi_package/`](pypi_package/), [`homebrew/`](homebrew/) | PyPI package, Homebrew formula |
 | [`results/`](results/) | Historical benchmark and test reports |
-| `tempest-rs/`, `pypi_package/`, `homebrew/` | Rust crate, PyPI package, Homebrew formula |
-| [`docs/`](docs/) | Design rationale, API reference, and the audit record |
 
 ## Quick start
 
 ```bash
-# C implementation + KAT (needs a C99 compiler)
-make kat           # or: gcc -O3 -o kat_check src/kat_check_main.c code/tempest_v3.c && ./kat_check
-# expect: all 5 KAT blocks match, including 0x6BBE30BB1D12DDD0
+# C implementation + KAT check (needs a C99 compiler)
+make kat              # compiles code/kat_check, verifies 0x6BBE30BB1D12DDD0
+make test             # self-tests for Algorithm 1 and ADC-Bolt
 
-# Python verification engine (needs numpy; SAT parts need pysat)
+# Python verification engine (numpy; SAT parts need pysat)
 cd engine
-python cipher.py            # self-test of the bit-exact port
-python audit_true_algorithm1.py   # W=4 full-domain exact metrics
-python readword_theorem.py  # Read-Word Polar-Rank Theorem verification
+python cipher.py                   # bit-exact port self-test
+python audit_true_algorithm1.py    # W=4 full-domain exact metrics
+python readword_theorem.py         # Read-Word Polar-Rank Theorem
 
-# Hardware (needs the OSS CAD Suite: yosys, nextpnr-ice40, icepack)
+# FPGA flow (OSS CAD Suite: yosys, nextpnr-ice40, icepack)
 cd hardware
-bash scripts/synth.sh       # synthesize; k=2 variant completes place-and-route
+bash scripts/synth.sh              # k=2 variant completes place-and-route
 ```
 
-## Listed in
-
-Featured in the curated list [Awesome Cryptography Rust](https://github.com/rust-cc/awesome-cryptography-rust).
-
-## Headline numbers (measured, all reproducible from this repo)
+## Headline numbers (all reproducible from this repository)
 
 | Quantity | Value | Evidence |
 |---|---|---|
 | DP(1), two-layer shadow | 2⁻³, exact at every width | Polar-Rank Theorem + W=64 rank-3 certificate |
 | DP(1), full design | 2⁻⁵·⁹⁴²⁰ exact at W=4; <2⁻²⁴ sampled at W=64 | `engine/audit_true_algorithm1.json` |
+| Multi-round floor, W=4 | 2⁻⁴·⁸² at 22 rounds (full domain) | `engine/audit_true_algorithm1.json` |
 | Algebraic degree | β₁ = 16, certificate at W=64 | `engine/explore_cascade_degree.py` |
 | KAT | 5/5 blocks, incl. 0x6BBE30BB1D12DDD0 | `tests/`, `hardware/sim/` |
-| Statistical tests | NIST 15/15, BigCrush all-pass, **PractRand 1 TiB** clean | `data/` |
-| C scalar (dual) | 6.4 Gbit/s (13.4 @5 GHz), same-harness vs ChaCha20 6.1 | `src/bench_*` |
-| C AVX-512 (8-way) | 35.5 Gbit/s (≈74 @5 GHz) | `src/bench_a1_avx512.c` |
-| FPGA (k=2 variant) | 5,915 LUT4 / 1,034 FF, 34.21 MHz, **2.19 Gbit/s, completed bitstream (135 KB)** | `hardware/` |
+| Statistical tests | NIST 15/15 (97–100/100), BigCrush all-pass, PractRand 1 TiB clean | `data/` |
+| C scalar (dual) | 22.1 Gbit/s @5 GHz (measured 10.42, 2026-08-10 build) | `code/bench_opt3.c`, `code/bench_opt3_20260810.txt` |
+| C AVX-512 (8-way) | ≈96 Gbit/s @5 GHz (measured 46.26) | `code/bench_opt3.c` |
+| FPGA (k=2 variant) | 5,915 LUT4 / 1,034 FF, 31.12 MHz, 2.0 Gbit/s, completed bitstream | `hardware/` |
 
 ## Audit record
 
-The paper ships a full audit record, and so does this repository: see
-[`docs/AUDIT_RECORD.md`](docs/AUDIT_RECORD.md). The short version —
-every earlier claim that did not survive verification was corrected and
-the correction is documented, including: the v3.1 dead-key predecessor,
-the W=4 snapshot-semantics discrepancy, the withdrawn half-entropy law,
-the W=8 linear-measurement multiple-testing artifact, and the
-differential-trail zero-cancellation artifact in the multi-round model.
+The paper's audit record is mirrored here: see
+[`docs/AUDIT_RECORD.md`](docs/AUDIT_RECORD.md). Every earlier claim
+that did not survive verification was corrected and documented — the
+v3.1 dead-key predecessor, the W=4 snapshot-semantics discrepancy, the
+withdrawn half-entropy law, the W=8 multiple-testing artifact, and the
+differential-trail zero-cancellation artifact.
 
-## Reproducibility promise
+## Reproducibility
 
 Every number in the paper can be re-derived from this repository on a
-stock laptop: the engine scripts print the exact values into JSON, the
-KAT harnesses verify bit-exactness against the published vector, and
-the FPGA flow is fully open-source (Yosys → nextpnr → icepack).
+stock laptop: the engine scripts print exact values into JSON, the KAT
+harnesses verify bit-exactness against the published vector, and the
+FPGA flow is fully open-source (Yosys → nextpnr → icepack). The
+2026-08-13 statistical reruns (PractRand 1 TiB, BigCrush, NIST SP
+800-22) were run against Algorithm 1 itself; the generators
+(`code/gen_a1_stream.c`, `code/gen_nist_a1.c`, `code/testu01_v3.c`)
+self-check the KAT before streaming.

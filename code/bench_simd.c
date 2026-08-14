@@ -1,7 +1,7 @@
 /* bench_simd.c — Tempest v3 AVX-512 SIMD vs Scalar 基准测试
  * gcc -O3 -march=native -mavx512f -o bench_simd bench_simd.c src/tempest_simd.c -lm
  */
-#include "src/tempest_simd.h"
+#include "tempest_simd.h"
 #include <stdio.h>
 
 int main() {

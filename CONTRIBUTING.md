@@ -15,7 +15,7 @@ the whole point of this repository.
 ### 2. Run the benchmark on your hardware
 
 ```bash
-gcc -O3 -march=native -o benchmark benchmark.c src/adcbolt.c src/tempest_v3.c -I.
+gcc -O3 -march=native -o benchmark benchmark.c code/adcbolt.c code/tempest_v3.c -I.
 ./benchmark
 ```
 

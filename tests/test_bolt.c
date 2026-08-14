@@ -1,5 +1,5 @@
 /* test_bolt.c — Self-test for ADC-Bolt (70.3 Gbit/s non-crypto PRNG) */
-#include "src/adcbolt.h"
+#include "adcbolt.h"
 #include <stdio.h>
 #include <string.h>
 

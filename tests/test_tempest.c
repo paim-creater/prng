@@ -1,6 +1,6 @@
 /* test_tempest.c — Self-test for Tempest v3 (17.7 Gbit/s, pure GF(2)) */
-#include "src/tempest_v3.h"
-#include "src/kat_tempest.h"
+#include "tempest_v3.h"
+#include "kat_tempest.h"
 #include <stdio.h>
 #include <string.h>
 

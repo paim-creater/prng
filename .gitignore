@@ -47,3 +47,6 @@ mbedtls_tempest/
 wolfssl_tempest/
 *.bin
 *.bin
+
+# Python compiled extensions
+*.pyd

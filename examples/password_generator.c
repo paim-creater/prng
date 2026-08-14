@@ -17,7 +17,7 @@
 #include <windows.h>
 #include <wincrypt.h>
 #endif
-#include "src/tempest_v3.h"
+#include "tempest_v3.h"
 
 /* Character sets */
 static const char UPPER[] = "ABCDEFGHJKLMNPQRSTUVWXYZ";       /* no I,O (ambiguous) */

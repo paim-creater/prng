@@ -1,8 +1,8 @@
-# code/ — reference C sources and tools
+# code/ — C sources and tools
 
-KAT-verified reference implementations of Algorithm 1 and companion
-tools. `src/` contains the same core plus the SIMD/legacy ports;
-`code/` is the canonical, paper-cited set.
+The canonical C sources for Algorithm 1 (the KAT ground truth) and its
+companion tools: benchmarks, stream-cipher demo, runtime self-check,
+SAT/MILP analysis, and the legacy v3.1 tools.
 
 ## Core
 
@@ -20,7 +20,7 @@ tools. `src/` contains the same core plus the SIMD/legacy ports;
 Same-machine, same-harness comparison (locked base clock, long loops,
 register accumulator, medians of three): Tempest v3/v4 scalar and
 AVX-512 vs ChaCha20 (scalar and OpenSSL AVX) vs AES-NI. See the paper's
-Table XIII for the measured table; `src/bench_a1_avx512.c` is the
+Table XIII for the measured table; `code/bench_a1_avx512.c` is the
 8-way SIMD benchmark.
 
 ## Analysis tools
@@ -36,6 +36,6 @@ Table XIII for the measured table; `src/bench_a1_avx512.c` is the
 ## Build
 
 ```bash
-gcc -O3 -o kat_check src/kat_check_main.c code/tempest_v3.c && ./kat_check
+gcc -O3 -o kat_check code/kat_check_main.c code/tempest_v3.c && ./kat_check
 gcc -O3 -o runtime_check code/runtime_check.c code/tempest_v3.c && ./runtime_check
 ```

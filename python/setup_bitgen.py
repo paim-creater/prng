@@ -20,7 +20,7 @@ import numpy as np
 
 ext = Extension(
     "bitgen_tempest",
-    sources=["src/bitgen_tempest.c"],
+    sources=["code/bitgen_tempest.c"],
     include_dirs=[np.get_include()],
     define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
     extra_compile_args=["-O3", "-march=native", "-std=c11"],
@@ -29,7 +29,7 @@ ext = Extension(
 setup(
     name="bitgen_tempest",
     version="1.0.0",
-    description="Tempest v3 CSPRNG — NumPy BitGenerator (2^128 security)",
+    description="Tempest v3 CSPRNG — NumPy BitGenerator (KAT 0x6BBE30BB; 1 TiB PractRand, BigCrush, NIST certified)",
     author="Bolt & Tempest Project",
     ext_modules=[ext],
     python_requires=">=3.7",

@@ -5,7 +5,7 @@ build-backend = "setuptools.backends._legacy:_Backend"
 [project]
 name = "tempest-rng"
 version = "1.0.0"
-description = "Tempest v3: cryptographic-grade CSPRNG (17.7 Gbit/s, 2^128 security)"
+description = "Tempest v3: AND-RX CSPRNG with exact design-time security metrics (1 TiB PractRand, BigCrush, NIST SP 800-22 certified)"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
