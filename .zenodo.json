@@ -1,0 +1,24 @@
+{
+  "title": "AM-SEV / Tempest v3: KAT-verified AND-RX CSPRNG with verifier engine, certificates, and hardware",
+  "description": "The complete code and evidence package of the AM-SEV paper: the Tempest v3/v4 CSPRNG (KAT-verified C reference, AVX-512 port, Go math/rand/v2.Source, C++ <random> URBG + GSL gsl_rng_type, Rust rand_core crate, NumPy BitGenerator), the Python verification engine (polar-rank certificates, differential/linear/algebraic metrics, SAT/MILP tools), statistical test logs (NIST SP 800-22, TestU01, PractRand 1 TiB), KAT-verified FPGA RTL with a completed iCE40 bitstream, and the full audit record.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Tian, Yuezhou",
+      "affiliation": "Xi'an High School, Shaanxi Province"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "keywords": [
+    "cryptography",
+    "prng",
+    "csprng",
+    "and-rx",
+    "verifiable-design",
+    "nist-sp800-22",
+    "fpga",
+    "ice40"
+  ],
+  "language": "eng"
+}

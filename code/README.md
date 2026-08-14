@@ -27,8 +27,7 @@ Table XIII for the measured table; `src/bench_a1_avx512.c` is the
 
 | File | Role |
 |---|---|
-| `sat_analysis/` | MILP/SAT scripts: `milp_diff_bit_correct.py`, `milp_deg_exact.py`, `milp_multiround_free.py`, `milp_trail_w64.py`, `gen_dimacs.py`, `run_sat_analysis.py` |
-| `sat_benchmark.c` / `sat_gen_dimacs.c` | CNF generation (legacy) |
+| `sat_analysis/` | MILP/SAT scripts: `milp_diff_bit_correct.py`, `milp_deg_exact.py`, `milp_multiround_free.py`, `milp_trail_w64.py`, `gen_dimacs.py`, `gen_tempest_cnf.c`, `run_sat_analysis.py` (CNF generation supersedes the older C generators) |
 | `diff_search_v3.c`, `cryptanalysis_v2.c`, `markov_validate.c` | exploratory cryptanalysis (audit record) |
 | `v31_gen.c` | v3.1 dead-key predecessor stream generator (rebuilt from the audit record; feeds Dieharder as `file_input_raw` — see `data/dieharder_v31_rebuilt_20260810.txt`) |
 | `v31_fixed_gen.c` | **v3.1 with the Phase-B linear-part fix** (drop one rotation per word: rank 248 → 256, kills the all-ones kernel and the 64-step collapse; full Dieharder `-a` passes — see `docs/V31_FIX_RECORD.md`) |
