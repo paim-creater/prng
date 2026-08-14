@@ -1,0 +1,3334 @@
+=== ADC-Bolt Crush ===
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                 Starting Crush
+                 Version: TestU01 1.2.3
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+***********************************************************
+Test smarsa_SerialOver calling smultin_MultinomialOver
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_MultinomialOver test:
+-----------------------------------------------
+   N =  1,  n = 500000000,  r =  0,   d = 4096,   t =  2,
+       Sparse =  FALSE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =           16777216
+       Expected number per cell =   29.802322
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =     0.01677312,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          : 16773120
+Value of the statistic                : 1.68e+7
+p-value of test                       :    0.04
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:12.29
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test smarsa_SerialOver calling smultin_MultinomialOver
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_MultinomialOver test:
+-----------------------------------------------
+   N =  1,  n = 300000000,  r =  0,   d =   64,   t =  4,
+       Sparse =  FALSE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =           16777216
+       Expected number per cell =   17.881393
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =    0.027525119,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          : 16515072
+Value of the statistic                : 1.65e+7
+p-value of test                       :  9.7e-4    *****
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:07.07
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test smarsa_CollisionOver calling smultin_MultinomialOver
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_MultinomialOver test:
+-----------------------------------------------
+   N = 10,  n = 10000000,  r =  0,   d = 1048576,   t =  2,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =      1099511627776
+       Expected number per cell =  1 /  109951.16
+       EColl = n^2 / (2k) =  45.47473509
+       Hashing =   TRUE
+
+       Collision test
+
+       CollisionOver:   density = n / k =  1 /  109951.16
+       Expected number of collisions = Mu =      45.47
+
+
+-----------------------------------------------
+Results of CollisionOver test:
+
+POISSON approximation                 :
+Expected number of collisions = N*Mu  :      454.75
+Observed number of collisions         :      496
+p-value of test                       :    0.03
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :   10995016278256
+  j =  1                              :         99999008
+  j =  2                              :              496
+  j =  3                              :                0
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:14.87
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test smarsa_CollisionOver calling smultin_MultinomialOver
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_MultinomialOver test:
+-----------------------------------------------
+   N = 10,  n = 10000000,  r = 10,   d = 1048576,   t =  2,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =      1099511627776
+       Expected number per cell =  1 /  109951.16
+       EColl = n^2 / (2k) =  45.47473509
+       Hashing =   TRUE
+
+       Collision test
+
+       CollisionOver:   density = n / k =  1 /  109951.16
+       Expected number of collisions = Mu =      45.47
+
+
+-----------------------------------------------
+Results of CollisionOver test:
+
+POISSON approximation                 :
+Expected number of collisions = N*Mu  :      454.75
+Observed number of collisions         :      436
+p-value of test                       :    0.80
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :   10995016278196
+  j =  1                              :         99999128
+  j =  2                              :              436
+  j =  3                              :                0
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:14.93
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test smarsa_CollisionOver calling smultin_MultinomialOver
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_MultinomialOver test:
+-----------------------------------------------
+   N = 10,  n = 10000000,  r =  0,   d = 1024,   t =  4,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =      1099511627776
+       Expected number per cell =  1 /  109951.16
+       EColl = n^2 / (2k) =  45.47473509
+       Hashing =   TRUE
+
+       Collision test
+
+       CollisionOver:   density = n / k =  1 /  109951.16
+       Expected number of collisions = Mu =      45.47
+
+
+-----------------------------------------------
+Results of CollisionOver test:
+
+POISSON approximation                 :
+Expected number of collisions = N*Mu  :      454.75
+Observed number of collisions         :      419
+p-value of test                       :    0.95
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :   10995016278179
+  j =  1                              :         99999162
+  j =  2                              :              419
+  j =  3                              :                0
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:18.50
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test smarsa_CollisionOver calling smultin_MultinomialOver
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_MultinomialOver test:
+-----------------------------------------------
+   N = 10,  n = 10000000,  r = 20,   d = 1024,   t =  4,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =      1099511627776
+       Expected number per cell =  1 /  109951.16
+       EColl = n^2 / (2k) =  45.47473509
+       Hashing =   TRUE
+
+       Collision test
+
+       CollisionOver:   density = n / k =  1 /  109951.16
+       Expected number of collisions = Mu =      45.47
+
+
+-----------------------------------------------
+Results of CollisionOver test:
+
+POISSON approximation                 :
+Expected number of collisions = N*Mu  :      454.75
+Observed number of collisions         :      446
+p-value of test                       :    0.65
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :   10995016278206
+  j =  1                              :         99999108
+  j =  2                              :              446
+  j =  3                              :                0
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:18.89
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test smarsa_CollisionOver calling smultin_MultinomialOver
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_MultinomialOver test:
+-----------------------------------------------
+   N = 10,  n = 10000000,  r =  0,   d =   32,   t =  8,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =      1099511627776
+       Expected number per cell =  1 /  109951.16
+       EColl = n^2 / (2k) =  45.47473509
+       Hashing =   TRUE
+
+       Collision test
+
+       CollisionOver:   density = n / k =  1 /  109951.16
+       Expected number of collisions = Mu =      45.47
+
+
+-----------------------------------------------
+Results of CollisionOver test:
+
+POISSON approximation                 :
+Expected number of collisions = N*Mu  :      454.75
+Observed number of collisions         :      453
+p-value of test                       :    0.52
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :   10995016278213
+  j =  1                              :         99999094
+  j =  2                              :              453
+  j =  3                              :                0
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:18.34
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test smarsa_CollisionOver calling smultin_MultinomialOver
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_MultinomialOver test:
+-----------------------------------------------
+   N = 10,  n = 10000000,  r = 25,   d =   32,   t =  8,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =      1099511627776
+       Expected number per cell =  1 /  109951.16
+       EColl = n^2 / (2k) =  45.47473509
+       Hashing =   TRUE
+
+       Collision test
+
+       CollisionOver:   density = n / k =  1 /  109951.16
+       Expected number of collisions = Mu =      45.47
+
+
+-----------------------------------------------
+Results of CollisionOver test:
+
+POISSON approximation                 :
+Expected number of collisions = N*Mu  :      454.75
+Observed number of collisions         :      405
+p-value of test                       :    0.9905
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :   10995016278165
+  j =  1                              :         99999190
+  j =  2                              :              405
+  j =  3                              :                0
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:18.85
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test smarsa_CollisionOver calling smultin_MultinomialOver
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_MultinomialOver test:
+-----------------------------------------------
+   N = 10,  n = 10000000,  r =  0,   d =    4,   t = 20,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =      1099511627776
+       Expected number per cell =  1 /  109951.16
+       EColl = n^2 / (2k) =  45.47473509
+       Hashing =   TRUE
+
+       Collision test
+
+       CollisionOver:   density = n / k =  1 /  109951.16
+       Expected number of collisions = Mu =      45.47
+
+
+-----------------------------------------------
+Results of CollisionOver test:
+
+POISSON approximation                 :
+Expected number of collisions = N*Mu  :      454.74
+Observed number of collisions         :      478
+p-value of test                       :    0.14
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :   10995016278238
+  j =  1                              :         99999044
+  j =  2                              :              478
+  j =  3                              :                0
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:18.73
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test smarsa_CollisionOver calling smultin_MultinomialOver
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_MultinomialOver test:
+-----------------------------------------------
+   N = 10,  n = 10000000,  r = 28,   d =    4,   t = 20,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellSerial
+       Number of cells = d^t =      1099511627776
+       Expected number per cell =  1 /  109951.16
+       EColl = n^2 / (2k) =  45.47473509
+       Hashing =   TRUE
+
+       Collision test
+
+       CollisionOver:   density = n / k =  1 /  109951.16
+       Expected number of collisions = Mu =      45.47
+
+
+-----------------------------------------------
+Results of CollisionOver test:
+
+POISSON approximation                 :
+Expected number of collisions = N*Mu  :      454.74
+Observed number of collisions         :      434
+p-value of test                       :    0.83
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :   10995016278194
+  j =  1                              :         99999132
+  j =  2                              :              434
+  j =  3                              :                0
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:18.39
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_BirthdaySpacings test:
+-----------------------------------------------
+   N = 10,  n = 10000000,  r =  0,    d = 1073741824,    t = 2,    p = 1
+
+
+      Number of cells = d^t = 1152921504606846976
+      Lambda = Poisson mean =     216.8404
+
+
+----------------------------------------------------
+Total expected number = N*Lambda      :    2168.40
+Total observed number                 :    2132
+p-value of test                       :    0.78
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:12.29
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_BirthdaySpacings test:
+-----------------------------------------------
+   N =  5,  n = 20000000,  r =  0,    d = 2097152,    t = 3,    p = 1
+
+
+      Number of cells = d^t = 9223372036854775808
+      Lambda = Poisson mean =     216.8404
+
+
+----------------------------------------------------
+Total expected number = N*Lambda      :    1084.20
+Total observed number                 :    1102
+p-value of test                       :    0.30
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:13.20
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_BirthdaySpacings test:
+-----------------------------------------------
+   N =  5,  n = 20000000,  r =  0,    d = 65536,    t = 4,    p = 1
+
+
+      Number of cells = d^t = 18446744073709551616
+      Lambda = Poisson mean =     108.4202
+
+
+----------------------------------------------------
+Total expected number = N*Lambda      :     542.10
+Total observed number                 :     537
+p-value of test                       :    0.58
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:13.54
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_BirthdaySpacings test:
+-----------------------------------------------
+   N =  3,  n = 20000000,  r =  0,    d = 512,    t = 7,    p = 1
+
+
+      Number of cells = d^t = 9223372036854775808
+      Lambda = Poisson mean =     216.8404
+
+
+----------------------------------------------------
+Total expected number = N*Lambda      :     650.52
+Total observed number                 :     645
+p-value of test                       :    0.58
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:08.76
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_BirthdaySpacings test:
+-----------------------------------------------
+   N =  3,  n = 20000000,  r =  7,    d = 512,    t = 7,    p = 1
+
+
+      Number of cells = d^t = 9223372036854775808
+      Lambda = Poisson mean =     216.8404
+
+
+----------------------------------------------------
+Total expected number = N*Lambda      :     650.52
+Total observed number                 :     654
+p-value of test                       :    0.45
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:08.82
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_BirthdaySpacings test:
+-----------------------------------------------
+   N =  3,  n = 20000000,  r = 14,    d = 256,    t = 8,    p = 1
+
+
+      Number of cells = d^t = 18446744073709551616
+      Lambda = Poisson mean =     108.4202
+
+
+----------------------------------------------------
+Total expected number = N*Lambda      :     325.26
+Total observed number                 :     305
+p-value of test                       :    0.86
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:08.95
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_BirthdaySpacings test:
+-----------------------------------------------
+   N =  3,  n = 20000000,  r = 22,    d = 256,    t = 8,    p = 1
+
+
+      Number of cells = d^t = 18446744073709551616
+      Lambda = Poisson mean =     108.4202
+
+
+----------------------------------------------------
+Total expected number = N*Lambda      :     325.26
+Total observed number                 :     320
+p-value of test                       :    0.60
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:09.73
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+snpair_ClosePairs test:
+-----------------------------------------------
+   N = 10,  n = 2000000,  r =  0,  t = 2,  p = 0,  m = 30,  Torus =  TRUE
+
+
+---------------------------------------
+Test based on the 2 nearest points (NP):
+
+Stat. AD on the N values (NP)         :    0.81
+p-value of test                       :    0.47
+
+
+A2 test based on the spacings between the
+   successive jump times of process Y_n(t):
+
+A2 test on the values of A2 (m-NP)    :    1.22
+p-value of test                       :    0.26
+
+Test on the Nm values of W_{n,i}(mNP1):    1.08
+p-value of test                       :    0.32
+
+Test on the jump times of Y
+   (superposition of Yn):
+
+Expected number of jumps of Y = mN    :     300
+Number of jumps of Y                  :     288
+p-value of test                       :    0.74
+
+Stat. AD (mNP2)                       :    0.78
+p-value of test                       :    0.50
+
+-----------------------------------------------
+CPU time used                    :  00:00:04.25
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+snpair_ClosePairs test:
+-----------------------------------------------
+   N = 10,  n = 2000000,  r =  0,  t = 3,  p = 0,  m = 30,  Torus =  TRUE
+
+
+---------------------------------------
+Test based on the 2 nearest points (NP):
+
+Stat. AD on the N values (NP)         :    0.91
+p-value of test                       :    0.40
+
+
+A2 test based on the spacings between the
+   successive jump times of process Y_n(t):
+
+A2 test on the values of A2 (m-NP)    :    3.77
+p-value of test                       :    0.01
+
+Test on the Nm values of W_{n,i}(mNP1):    0.61
+p-value of test                       :    0.63
+
+Test on the jump times of Y
+   (superposition of Yn):
+
+Expected number of jumps of Y = mN    :     300
+Number of jumps of Y                  :     309
+p-value of test                       :    0.31
+
+Stat. AD (mNP2)                       :    0.91
+p-value of test                       :    0.41
+
+Stat. AD after spacings (mNP2-S)      :    0.23
+p-value of test                       :    0.98
+
+-----------------------------------------------
+CPU time used                    :  00:00:05.76
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+snpair_ClosePairs test:
+-----------------------------------------------
+   N =  5,  n = 2000000,  r =  0,  t = 7,  p = 0,  m = 30,  Torus =  TRUE
+
+
+---------------------------------------
+Test based on the 2 nearest points (NP):
+
+Stat. AD on the N values (NP)         :    0.61
+p-value of test                       :    0.63
+
+
+A2 test based on the spacings between the
+   successive jump times of process Y_n(t):
+
+A2 test on the values of A2 (m-NP)    :    3.16
+p-value of test                       :    0.02
+
+Test on the Nm values of W_{n,i}(mNP1):    0.43
+p-value of test                       :    0.82
+
+Test on the jump times of Y
+   (superposition of Yn):
+
+Expected number of jumps of Y = mN    :     150
+Number of jumps of Y                  :     145
+p-value of test                       :    0.64
+
+Stat. AD (mNP2)                       :    0.66
+p-value of test                       :    0.59
+
+Stat. AD after spacings (mNP2-S)      :    0.22
+p-value of test                       :    0.98
+
+-----------------------------------------------
+CPU time used                    :  00:00:10.50
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+snpair_ClosePairsBitMatch test:
+-----------------------------------------------
+   N =  4,  n = 4000000,  r =  0,  t = 2
+
+
+-----------------------------------------------
+Max of all bit distances              :   23.00
+p-value of test                       :    0.11
+
+-----------------------------------------------
+CPU time used                    :  00:00:03.96
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+snpair_ClosePairsBitMatch test:
+-----------------------------------------------
+   N =  2,  n = 4000000,  r =  0,  t = 4
+
+
+-----------------------------------------------
+Max of all bit distances              :   10.00
+p-value of test                       :    0.60
+
+-----------------------------------------------
+CPU time used                    :  00:00:03.54
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_SimpPoker test:
+-----------------------------------------------
+   N =  1,  n = 40000000,  r =  0,   d =   16,   k =   16
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   12
+Chi-square statistic                  :    8.95
+p-value of test                       :    0.71
+
+-----------------------------------------------
+CPU time used                    :  00:00:04.59
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_SimpPoker test:
+-----------------------------------------------
+   N =  1,  n = 40000000,  r = 26,   d =   16,   k =   16
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   12
+Chi-square statistic                  :   11.30
+p-value of test                       :    0.50
+
+-----------------------------------------------
+CPU time used                    :  00:00:05.43
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_SimpPoker test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r =  0,   d =   64,   k =   64
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   23
+Chi-square statistic                  :   18.06
+p-value of test                       :    0.75
+
+-----------------------------------------------
+CPU time used                    :  00:00:04.32
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_SimpPoker test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r = 24,   d =   64,   k =   64
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   23
+Chi-square statistic                  :   18.39
+p-value of test                       :    0.74
+
+-----------------------------------------------
+CPU time used                    :  00:00:05.59
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_CouponCollector test:
+-----------------------------------------------
+   N =  1,  n = 40000000,  r =  0,   d =    4
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   51
+Chi-square statistic                  :   74.96
+p-value of test                       :    0.02
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.12
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_CouponCollector test:
+-----------------------------------------------
+   N =  1,  n = 40000000,  r = 28,   d =    4
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   51
+Chi-square statistic                  :   65.51
+p-value of test                       :    0.08
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.65
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_CouponCollector test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r =  0,   d =   16
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   46
+Chi-square statistic                  :   36.27
+p-value of test                       :    0.85
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.78
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_CouponCollector test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r = 26,   d =   16
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   46
+Chi-square statistic                  :   38.77
+p-value of test                       :    0.77
+
+-----------------------------------------------
+CPU time used                    :  00:00:03.46
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_Gap test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r =  0,   Alpha =        0,   Beta  =    0.125
+
+
+-----------------------------------------------
+Number of degrees of freedom          :  106
+Chi-square statistic                  :  116.40
+p-value of test                       :    0.23
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.93
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_Gap test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r = 27,   Alpha =        0,   Beta  =    0.125
+
+
+-----------------------------------------------
+Number of degrees of freedom          :  106
+Chi-square statistic                  :  115.87
+p-value of test                       :    0.24
+
+-----------------------------------------------
+CPU time used                    :  00:00:03.95
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_Gap test:
+-----------------------------------------------
+   N =  1,  n = 5000000,  r =  0,   Alpha =        0,   Beta  = 0.00390625
+
+
+-----------------------------------------------
+Number of degrees of freedom          : 1936
+Chi-square statistic                  : 1911.71
+p-value of test                       :    0.65
+
+-----------------------------------------------
+CPU time used                    :  00:00:03.64
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_Gap test:
+-----------------------------------------------
+   N =  1,  n = 5000000,  r = 22,   Alpha =        0,   Beta  = 0.00390625
+
+
+-----------------------------------------------
+Number of degrees of freedom          : 1936
+Chi-square statistic                  : 1935.11
+p-value of test                       :    0.50
+
+-----------------------------------------------
+CPU time used                    :  00:00:04.70
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_Run test:
+-----------------------------------------------
+   N =  1,  n = 500000000,  r =  0,   Up =  TRUE
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    6
+Chi-square statistic                  :    3.05
+p-value of test                       :    0.80
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.75
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_Run test:
+-----------------------------------------------
+   N =  1,  n = 500000000,  r = 15,   Up = FALSE
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    6
+Chi-square statistic                  :    2.38
+p-value of test                       :    0.88
+
+-----------------------------------------------
+CPU time used                    :  00:00:03.76
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test sknuth_Permutation calling smultin_Multinomial
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_Multinomial test:
+-----------------------------------------------
+   N =  1,  n = 50000000,  r =  0,   t = 10,
+       Sparse =  FALSE
+
+       GenerCell = smultin_GenerCellPermut
+       Number of cells = t! =            3628800
+       Expected number per cell =    13.77866
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =     0.03628799,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          : 3628799
+Value of the statistic                : 3.63e+6
+p-value of test                       :    0.47
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:09.34
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test sknuth_Permutation calling smultin_Multinomial
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_Multinomial test:
+-----------------------------------------------
+   N =  1,  n = 50000000,  r = 15,   t = 10,
+       Sparse =  FALSE
+
+       GenerCell = smultin_GenerCellPermut
+       Number of cells = t! =            3628800
+       Expected number per cell =    13.77866
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =     0.03628799,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          : 3628799
+Value of the statistic                : 3.63e+6
+p-value of test                       :    0.68
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:09.35
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test sknuth_CollisionPermut calling smultin_Multinomial
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_Multinomial test:
+-----------------------------------------------
+   N =  5,  n = 10000000,  r =  0,   t = 13,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellPermut
+       Number of cells = t! =         6227020800
+       Expected number per cell =  1 /  622.70208
+       EColl = n^2 / (2k) =  8029.521918
+       Hashing =   TRUE
+
+       Collision test,    Mu =      8025.2245,    Sigma =    89.5098
+
+-----------------------------------------------
+Test Results for Collisions
+
+For the total number of collisions, we use
+      the Poisson approximation:
+Expected number of collisions = N*Mu  :    40126.12
+Observed number of collisions         :    40122
+p-value of test                       :    0.51
+
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :      31085144122
+  j =  1                              :         49919777
+  j =  2                              :            40080
+  j =  3                              :               21
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:22.84
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+Test sknuth_CollisionPermut calling smultin_Multinomial
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smultin_Multinomial test:
+-----------------------------------------------
+   N =  5,  n = 10000000,  r = 15,   t = 13,
+       Sparse =   TRUE
+
+       GenerCell = smultin_GenerCellPermut
+       Number of cells = t! =         6227020800
+       Expected number per cell =  1 /  622.70208
+       EColl = n^2 / (2k) =  8029.521918
+       Hashing =   TRUE
+
+       Collision test,    Mu =      8025.2245,    Sigma =    89.5098
+
+-----------------------------------------------
+Test Results for Collisions
+
+For the total number of collisions, we use
+      the Poisson approximation:
+Expected number of collisions = N*Mu  :    40126.12
+Observed number of collisions         :    40001
+p-value of test                       :    0.73
+
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :      31085144001
+  j =  1                              :         49920027
+  j =  2                              :            39943
+  j =  3                              :               29
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:23.01
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_MaxOft test:
+-----------------------------------------------
+   N = 10,  n = 10000000,  r =  0,   d = 100000,   t =  5
+
+      Number of categories = 100000
+      Expected number per category  = 100.00
+
+
+-----------------------------------------------
+Test results for chi2 with 99999 degrees of freedom:
+
+Kolmogorov-Smirnov+ statistic = D+    :    0.24
+p-value of test                       :    0.29
+
+Kolmogorov-Smirnov- statistic = D-    :    0.22
+p-value of test                       :    0.33
+
+Anderson-Darling statistic = A2       :    0.64
+p-value of test                       :    0.61
+
+Test on the sum of all N observations
+Number of degrees of freedom          : 999990
+Chi-square statistic                  : 1.00e+6
+p-value of test                       :    0.33
+
+
+-----------------------------------------------
+Test results for Anderson-Darling:
+
+Kolmogorov-Smirnov+ statistic = D+    :    0.23
+p-value of test                       :    0.31
+
+Kolmogorov-Smirnov- statistic = D-    :    0.17
+p-value of test                       :    0.50
+
+Anderson-Darling statistic = A2       :    0.69
+p-value of test                       :    0.57
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:18.45
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_MaxOft test:
+-----------------------------------------------
+   N =  5,  n = 10000000,  r =  0,   d = 100000,   t = 10
+
+      Number of categories = 100000
+      Expected number per category  = 100.00
+
+
+-----------------------------------------------
+Test results for chi2 with 99999 degrees of freedom:
+
+Kolmogorov-Smirnov+ statistic = D+    :    0.27
+p-value of test                       :    0.41
+
+Kolmogorov-Smirnov- statistic = D-    :    0.36
+p-value of test                       :    0.21
+
+Anderson-Darling statistic = A2       :    0.79
+p-value of test                       :    0.48
+
+Test on the sum of all N observations
+Number of degrees of freedom          : 499995
+Chi-square statistic                  : 5.00e+5
+p-value of test                       :    0.33
+
+
+-----------------------------------------------
+Test results for Anderson-Darling:
+
+Kolmogorov-Smirnov+ statistic = D+    :    0.29
+p-value of test                       :    0.37
+
+Kolmogorov-Smirnov- statistic = D-    :    0.12
+p-value of test                       :    0.80
+
+Anderson-Darling statistic = A2       :    0.50
+p-value of test                       :    0.74
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:09.87
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_MaxOft test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r =  0,   d = 100000,   t = 20
+
+      Number of categories = 100000
+      Expected number per category  = 100.00
+
+
+-----------------------------------------------
+Number of degrees of freedom          : 99999
+Chi-square statistic                  : 1.01e+5
+p-value of test                       :    0.06
+
+
+-----------------------------------------------
+Anderson-Darling statistic            :    0.30
+p-value of test                       :    0.70
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.31
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sknuth_MaxOft test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r =  0,   d = 100000,   t = 30
+
+      Number of categories = 100000
+      Expected number per category  = 100.00
+
+
+-----------------------------------------------
+Number of degrees of freedom          : 99999
+Chi-square statistic                  :99156.68
+p-value of test                       :    0.97
+
+
+-----------------------------------------------
+Anderson-Darling statistic            :    0.68
+p-value of test                       :    0.32
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.64
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_SampleProd test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r =  0,   t = 10
+
+
+-----------------------------------------------
+Anderson-Darling statistic            :   0.092
+p-value of test                       :    0.91
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.25
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_SampleProd test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r =  0,   t = 30
+
+
+-----------------------------------------------
+Anderson-Darling statistic            :   0.018
+p-value of test                       :    0.98
+
+-----------------------------------------------
+CPU time used                    :  00:00:03.03
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_SampleMean test:
+-----------------------------------------------
+   N = 10000000,  n = 20,  r =  0
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    : 2.84e-4
+p-value of test                       :    0.20
+
+Kolmogorov-Smirnov- statistic = D-    : 8.98e-5
+p-value of test                       :    0.85
+
+Anderson-Darling statistic = A2       :    0.77
+p-value of test                       :    0.50
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.92
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_SampleCorr test:
+-----------------------------------------------
+   N =  1,  n = 500000000,  r =  0,   k = 1
+
+
+-----------------------------------------------
+Normal statistic                      :   -1.99
+p-value of test                       :    0.98
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.42
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_AppearanceSpacings test:
+-----------------------------------------------
+   N =  1,   Q = 10000000,   K = 400000000,   r = 0,   s = 30,   L = 15
+
+   Sequences of n = (K + Q)L =   6150000000 bits
+   Q = 10000000 initialization blocks
+   K = 400000000 blocks for the test
+   the blocks have L = 15 bits
+
+
+
+-----------------------------------------------
+Normal statistic                      :   -0.49
+p-value of test                       :    0.69
+
+-----------------------------------------------
+CPU time used                    :  00:00:14.95
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_AppearanceSpacings test:
+-----------------------------------------------
+   N =  1,   Q = 10000000,   K = 100000000,   r = 20,   s = 10,   L = 15
+
+   Sequences of n = (K + Q)L =   1650000000 bits
+   Q = 10000000 initialization blocks
+   K = 100000000 blocks for the test
+   the blocks have L = 15 bits
+
+
+
+-----------------------------------------------
+Normal statistic                      :    1.84
+p-value of test                       :    0.03
+
+-----------------------------------------------
+CPU time used                    :  00:00:03.75
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_WeightDistrib test:
+-----------------------------------------------
+   N =  1,  n = 2000000,  r =  0,  k = 256,  Alpha =      0,  Beta =  0.125
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   46
+Chi-square statistic                  :   52.43
+p-value of test                       :    0.24
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.54
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_WeightDistrib test:
+-----------------------------------------------
+   N =  1,  n = 2000000,  r =  8,  k = 256,  Alpha =      0,  Beta =  0.125
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   46
+Chi-square statistic                  :   37.39
+p-value of test                       :    0.81
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.96
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_WeightDistrib test:
+-----------------------------------------------
+   N =  1,  n = 2000000,  r = 16,  k = 256,  Alpha =      0,  Beta =  0.125
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   46
+Chi-square statistic                  :   32.25
+p-value of test                       :    0.94
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.92
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_WeightDistrib test:
+-----------------------------------------------
+   N =  1,  n = 2000000,  r = 24,  k = 256,  Alpha =      0,  Beta =  0.125
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   46
+Chi-square statistic                  :   69.76
+p-value of test                       :    0.01
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.96
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+svaria_SumCollector test:
+-----------------------------------------------
+   N =  1,  n = 20000000,  r =  0,   g = 10
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   25
+Chi-square statistic                  :   16.13
+p-value of test                       :    0.91
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.29
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_MatrixRank test:
+-----------------------------------------------
+   N =  1,  n = 1000000,  r =  0,    s = 30,    L = 60,    k = 60
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    4
+Chi-square statistic                  :    4.40
+p-value of test                       :    0.35
+
+-----------------------------------------------
+CPU time used                    :  00:00:09.79
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_MatrixRank test:
+-----------------------------------------------
+   N =  1,  n = 1000000,  r = 20,    s = 10,    L = 60,    k = 60
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    4
+Chi-square statistic                  :    3.32
+p-value of test                       :    0.50
+
+-----------------------------------------------
+CPU time used                    :  00:00:10.87
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_MatrixRank test:
+-----------------------------------------------
+   N =  1,  n = 50000,  r =  0,    s = 30,    L = 300,    k = 300
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    3
+Chi-square statistic                  :    4.79
+p-value of test                       :    0.19
+
+-----------------------------------------------
+CPU time used                    :  00:00:16.93
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_MatrixRank test:
+-----------------------------------------------
+   N =  1,  n = 50000,  r = 20,    s = 10,    L = 300,    k = 300
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    3
+Chi-square statistic                  :    1.89
+p-value of test                       :    0.60
+
+-----------------------------------------------
+CPU time used                    :  00:00:18.92
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_MatrixRank test:
+-----------------------------------------------
+   N =  1,  n = 2000,  r =  0,    s = 30,    L = 1200,    k = 1200
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    3
+Chi-square statistic                  :    0.55
+p-value of test                       :    0.91
+
+-----------------------------------------------
+CPU time used                    :  00:00:16.81
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_MatrixRank test:
+-----------------------------------------------
+   N =  1,  n = 2000,  r = 20,    s = 10,    L = 1200,    k = 1200
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    3
+Chi-square statistic                  :    2.61
+p-value of test                       :    0.46
+
+-----------------------------------------------
+CPU time used                    :  00:00:20.71
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_Savir2 test:
+-----------------------------------------------
+   N =  1,  n = 20000000,  r =  0,    m = 1048576,    t = 30
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   17
+Chi-square statistic                  :   15.16
+p-value of test                       :    0.58
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.09
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_GCD test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r =  0,   s = 30
+
+
+-----------------------------------------------
+Number of degrees of freedom          : 2465
+Chi2 statistic for GCD values         : 2395.42
+p-value of test                       :    0.84
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:04.71
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+smarsa_GCD test:
+-----------------------------------------------
+   N =  1,  n = 40000000,  r = 10,   s = 20
+
+
+-----------------------------------------------
+Number of degrees of freedom          : 1559
+Chi2 statistic for GCD values         : 1507.42
+p-value of test                       :    0.82
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.43
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 50000000,  r =  0,   s = 30,   L0 =   90,   L1 =   90
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :   46
+ChiSquare statistic                   :   51.38
+p-value of test                       :    0.27
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :   47
+ChiSquare statistic                   :   32.26
+p-value of test                       :    0.95
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :   45
+ChiSquare statistic                   :   49.60
+p-value of test                       :    0.29
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :   36
+ChiSquare statistic                   :   29.45
+p-value of test                       :    0.77
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   23
+ChiSquare statistic                   :   23.91
+p-value of test                       :    0.41
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:11.42
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r = 20,   s = 10,   L0 =   90,   L1 =   90
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :   44
+ChiSquare statistic                   :   34.96
+p-value of test                       :    0.83
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :   45
+ChiSquare statistic                   :   37.64
+p-value of test                       :    0.77
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :   45
+ChiSquare statistic                   :   39.19
+p-value of test                       :    0.72
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :   35
+ChiSquare statistic                   :   28.50
+p-value of test                       :    0.77
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   22
+ChiSquare statistic                   :   18.20
+p-value of test                       :    0.69
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.45
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 5000000,  r =  0,   s = 30,   L0 = 1000,   L1 = 1000
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :  140
+ChiSquare statistic                   :  128.64
+p-value of test                       :    0.74
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :  141
+ChiSquare statistic                   :  137.69
+p-value of test                       :    0.56
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :  500
+ChiSquare statistic                   :  502.22
+p-value of test                       :    0.46
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :  132
+ChiSquare statistic                   :  121.64
+p-value of test                       :    0.73
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   72
+ChiSquare statistic                   :   96.78
+p-value of test                       :    0.03
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:09.70
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 1000000,  r = 20,   s = 10,   L0 = 1000,   L1 = 1000
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :  128
+ChiSquare statistic                   :  149.47
+p-value of test                       :    0.09
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :  130
+ChiSquare statistic                   :  150.38
+p-value of test                       :    0.11
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :  500
+ChiSquare statistic                   :  490.16
+p-value of test                       :    0.61
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :  122
+ChiSquare statistic                   :  117.53
+p-value of test                       :    0.60
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   66
+ChiSquare statistic                   :   65.74
+p-value of test                       :    0.49
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.07
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 500000,  r =  0,   s = 30,   L0 = 10000,   L1 = 10000
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :  366
+ChiSquare statistic                   :  399.28
+p-value of test                       :    0.11
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :  366
+ChiSquare statistic                   :  405.84
+p-value of test                       :    0.07
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          : 5000
+ChiSquare statistic                   : 5024.67
+p-value of test                       :    0.40
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :  360
+ChiSquare statistic                   :  317.68
+p-value of test                       :    0.95
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :  192
+ChiSquare statistic                   :  199.94
+p-value of test                       :    0.33
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:08.65
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 100000,  r = 20,   s = 10,   L0 = 10000,   L1 = 10000
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :  318
+ChiSquare statistic                   :  349.11
+p-value of test                       :    0.11
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :  318
+ChiSquare statistic                   :  356.56
+p-value of test                       :    0.07
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          : 5000
+ChiSquare statistic                   : 5013.74
+p-value of test                       :    0.44
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :  315
+ChiSquare statistic                   :  367.16
+p-value of test                       :    0.02
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :  169
+ChiSquare statistic                   :  185.71
+p-value of test                       :    0.18
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.76
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+scomp_LinearComp test:
+-----------------------------------------------
+   N =  1,  n = 120000,  r =  0,    s = 1
+
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   10
+Chi2 statistic for size of jumps      :    6.04
+p-value of test                       :    0.81
+
+
+-----------------------------------------------
+Normal statistic for number of jumps  :   -0.89
+p-value of test                       :    0.81
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:06.59
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+scomp_LinearComp test:
+-----------------------------------------------
+   N =  1,  n = 120000,  r = 29,    s = 1
+
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   10
+Chi2 statistic for size of jumps      :   16.07
+p-value of test                       :    0.10
+
+
+-----------------------------------------------
+Normal statistic for number of jumps  :    1.08
+p-value of test                       :    0.14
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:06.60
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+scomp_LempelZiv test:
+-----------------------------------------------
+   N = 10,  n = 33554432,  r =  0,   s =   30,   k =   25
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    :    0.19
+p-value of test                       :    0.45
+
+Kolmogorov-Smirnov- statistic = D-    :    0.22
+p-value of test                       :    0.32
+
+Anderson-Darling statistic = A2       :    0.68
+p-value of test                       :    0.57
+
+Tests on the sum of all N observations
+Standardized normal statistic         :    0.28
+p-value of test                       :    0.39
+
+Sample variance                       :    0.38
+p-value of test                       :    0.94
+
+-----------------------------------------------
+CPU time used                    :  00:00:06.14
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sspectral_Fourier3 test:
+-----------------------------------------------
+   N = 50000,  n = 16384,  r =  0,   s =   30,   k =   14
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    : 7.81e-3
+p-value of test                       :    0.60
+
+Kolmogorov-Smirnov- statistic = D-    : 8.21e-3
+p-value of test                       :    0.57
+
+Anderson-Darling statistic = A2       :    0.34
+p-value of test                       :    0.90
+
+-----------------------------------------------
+CPU time used                    :  00:00:09.70
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sspectral_Fourier3 test:
+-----------------------------------------------
+   N = 50000,  n = 16384,  r = 20,   s =   10,   k =   14
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    :   0.016
+p-value of test                       :    0.12
+
+Kolmogorov-Smirnov- statistic = D-    : 7.59e-3
+p-value of test                       :    0.62
+
+Anderson-Darling statistic = A2       :    0.95
+p-value of test                       :    0.39
+
+-----------------------------------------------
+CPU time used                    :  00:00:10.03
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_LongestHeadRun test:
+-----------------------------------------------
+   N =  1,  n = 1000,  r =  0,   s = 30,   L = 10000020
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    8
+Chi-square statistic                  :    9.28
+p-value of test                       :    0.32
+
+-----------------------------------------------
+Global longest run of 1               :   31.00
+p-value of test                       :    0.69
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:30.07
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_LongestHeadRun test:
+-----------------------------------------------
+   N =  1,  n = 300,  r = 20,   s = 10,   L = 10000020
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    7
+Chi-square statistic                  :    3.37
+p-value of test                       :    0.85
+
+-----------------------------------------------
+Global longest run of 1               :   30.00
+p-value of test                       :    0.50
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:09.42
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_PeriodsInStrings test:
+-----------------------------------------------
+   N =  1,  n = 300000000,  r =  0,   s =   30
+
+
+-----------------------------------------------
+Number of degrees of freedom          :  302
+Chi-square statistic                  :  304.16
+p-value of test                       :    0.45
+
+-----------------------------------------------
+CPU time used                    :  00:00:06.71
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_PeriodsInStrings test:
+-----------------------------------------------
+   N =  1,  n = 300000000,  r = 15,   s =   15
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   56
+Chi-square statistic                  :   57.00
+p-value of test                       :    0.44
+
+-----------------------------------------------
+CPU time used                    :  00:00:04.64
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingWeight2 test:
+-----------------------------------------------
+   N = 100,  n = 100000000,  r =  0,   s = 30,   L = 1000000
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    :   0.041
+p-value of test                       :    0.69
+
+Kolmogorov-Smirnov- statistic = D-    :   0.077
+p-value of test                       :    0.29
+
+Anderson-Darling statistic = A2       :    0.88
+p-value of test                       :    0.43
+
+Test on the sum of all N observations
+Number of degrees of freedom          : 10000
+Chi-square statistic                  :10138.93
+p-value of test                       :    0.16
+
+-----------------------------------------------
+CPU time used                    :  00:00:04.35
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingWeight2 test:
+-----------------------------------------------
+   N = 30,  n = 100000000,  r = 20,   s = 10,   L = 1000000
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    :   0.065
+p-value of test                       :    0.74
+
+Kolmogorov-Smirnov- statistic = D-    :    0.18
+p-value of test                       :    0.13
+
+Anderson-Darling statistic = A2       :    1.03
+p-value of test                       :    0.34
+
+Test on the sum of all N observations
+Number of degrees of freedom          : 3000
+Chi-square statistic                  : 3057.48
+p-value of test                       :    0.23
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.71
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingCorr test:
+-----------------------------------------------
+   N =  1,  n = 500000000,  r =  0,   s = 30,   L = 30
+
+
+
+-----------------------------------------------
+Normal statistic                      :   -0.44
+p-value of test                       :    0.67
+
+-----------------------------------------------
+CPU time used                    :  00:00:06.71
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingCorr test:
+-----------------------------------------------
+   N =  1,  n = 50000000,  r =  0,   s = 30,   L = 300
+
+
+
+-----------------------------------------------
+Normal statistic                      :   -0.40
+p-value of test                       :    0.65
+
+-----------------------------------------------
+CPU time used                    :  00:00:06.59
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingCorr test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r =  0,   s = 30,   L = 1200
+
+
+
+-----------------------------------------------
+Normal statistic                      :    0.38
+p-value of test                       :    0.35
+
+-----------------------------------------------
+CPU time used                    :  00:00:05.18
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 300000000,  r =  0,   s = 30,   L = 30,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          :  577
+Chi-square statistic                  :  517.91
+p-value of test                       :    0.96
+
+-----------------------------------------------
+CPU time used                    :  00:00:08.01
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r = 20,   s = 10,   L = 30,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          :  533
+Chi-square statistic                  :  590.63
+p-value of test                       :    0.04
+
+-----------------------------------------------
+CPU time used                    :  00:00:05.62
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 30000000,  r =  0,   s = 30,   L = 300,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          : 4117
+Chi-square statistic                  : 4180.30
+p-value of test                       :    0.24
+
+-----------------------------------------------
+CPU time used                    :  00:00:08.09
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r = 20,   s = 10,   L = 300,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          : 3585
+Chi-square statistic                  : 3517.69
+p-value of test                       :    0.79
+
+-----------------------------------------------
+CPU time used                    :  00:00:05.34
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 10000000,  r =  0,   s = 30,   L = 1200,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          : 11825
+Chi-square statistic                  :11690.95
+p-value of test                       :    0.81
+
+-----------------------------------------------
+CPU time used                    :  00:00:10.60
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 1000000,  r = 20,   s = 10,   L = 1200,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          : 7473
+Chi-square statistic                  : 7526.16
+p-value of test                       :    0.33
+
+-----------------------------------------------
+CPU time used                    :  00:00:02.10
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_Run test:
+-----------------------------------------------
+   N =  1,  n = 1000000000,  r =  0,   s =   30
+
+
+-----------------------------------------------
+Total number of 1 runs:  1000000003
+
+Number of degrees of freedom          :   52
+Chi2 statistic for number of runs     :   60.67
+p-value of test                       :    0.19
+
+
+-----------------------------------------------
+Total number of bits:  4000043580
+
+Normal statistic for number of bits   :    0.49
+p-value of test                       :    0.31
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:09.65
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_Run test:
+-----------------------------------------------
+   N =  1,  n = 1000000000,  r = 20,   s =   10
+
+
+-----------------------------------------------
+Total number of 1 runs:  1000000000
+
+Number of degrees of freedom          :   52
+Chi2 statistic for number of runs     :   64.33
+p-value of test                       :    0.12
+
+
+-----------------------------------------------
+Total number of bits:  3999942920
+
+Normal statistic for number of bits   :   -0.64
+p-value of test                       :    0.74
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:11.01
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_AutoCor test:
+-----------------------------------------------
+   N = 10,  n = 1000000021,  r =  0,   s = 30,   d = 1
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    :    0.24
+p-value of test                       :    0.26
+
+Kolmogorov-Smirnov- statistic = D-    :    0.17
+p-value of test                       :    0.50
+
+Anderson-Darling statistic = A2       :    1.13
+p-value of test                       :    0.29
+
+Tests on the sum of all N observations
+Standardized normal statistic         :   -0.89
+p-value of test                       :    0.81
+
+Sample variance                       :    0.43
+p-value of test                       :    0.92
+
+-----------------------------------------------
+CPU time used                    :  00:00:06.71
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_AutoCor test:
+-----------------------------------------------
+   N =  5,  n = 1000000001,  r = 20,   s = 10,   d = 1
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    :    0.25
+p-value of test                       :    0.45
+
+Kolmogorov-Smirnov- statistic = D-    :    0.11
+p-value of test                       :    0.82
+
+Anderson-Darling statistic = A2       :    0.37
+p-value of test                       :    0.88
+
+Tests on the sum of all N observations
+Standardized normal statistic         :   -0.45
+p-value of test                       :    0.67
+
+Sample variance                       :    1.53
+p-value of test                       :    0.19
+
+-----------------------------------------------
+CPU time used                    :  00:00:07.53
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_AutoCor test:
+-----------------------------------------------
+   N = 10,  n = 1000000020,  r =  0,   s = 30,   d = 30
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    :    0.19
+p-value of test                       :    0.42
+
+Kolmogorov-Smirnov- statistic = D-    :   0.087
+p-value of test                       :    0.81
+
+Anderson-Darling statistic = A2       :    0.46
+p-value of test                       :    0.78
+
+Tests on the sum of all N observations
+Standardized normal statistic         :   -0.41
+p-value of test                       :    0.66
+
+Sample variance                       :    1.58
+p-value of test                       :    0.11
+
+-----------------------------------------------
+CPU time used                    :  00:00:05.43
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+***********************************************************
+HOST = 
+
+ADC-Bolt
+
+
+sstring_AutoCor test:
+-----------------------------------------------
+   N =  5,  n = 1000000010,  r = 20,   s = 10,   d = 10
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    :    0.11
+p-value of test                       :    0.84
+
+Kolmogorov-Smirnov- statistic = D-    :    0.45
+p-value of test                       :    0.10
+
+Anderson-Darling statistic = A2       :    0.91
+p-value of test                       :    0.40
+
+Tests on the sum of all N observations
+Standardized normal statistic         :    0.86
+p-value of test                       :    0.19
+
+Sample variance                       :    0.43
+p-value of test                       :    0.79
+
+-----------------------------------------------
+CPU time used                    :  00:00:05.89
+
+Generator state:
+ ADC-Bolt
+
+
+
+
+
+========= Summary results of Crush =========
+
+ Version:          TestU01 1.2.3
+ Generator:        ADC-Bolt
+ Number of statistics:  144
+ Total CPU time:   00:13:12.40
+ The following tests gave p-values outside [0.001, 0.9990]:
+ (eps  means a value < 1.0e-300):
+ (eps1 means a value < 1.0e-15):
+
+       Test                          p-value
+ ----------------------------------------------
+  2  SerialOver, t = 4               9.7e-4
+ ----------------------------------------------
+ All other tests were passed
+
+
+

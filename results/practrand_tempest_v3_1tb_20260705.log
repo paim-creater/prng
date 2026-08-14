@@ -1,0 +1,59 @@
+RNG_test_cyg2 using PractRand version 0.96
+RNG = RNG_stdin64, seed = unknown
+test set = core, folding = standard (64 bit)
+
+rng=RNG_stdin64, seed=unknown
+length= 256 megabytes (2^28 bytes), time= 2.4 seconds
+  no anomalies in 199 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 512 megabytes (2^29 bytes), time= 5.7 seconds
+  no anomalies in 213 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 1 gigabyte (2^30 bytes), time= 12.6 seconds
+  no anomalies in 227 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 2 gigabytes (2^31 bytes), time= 22.6 seconds
+  no anomalies in 242 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 4 gigabytes (2^32 bytes), time= 42.2 seconds
+  no anomalies in 256 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 8 gigabytes (2^33 bytes), time= 85.2 seconds
+  no anomalies in 270 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 16 gigabytes (2^34 bytes), time= 161 seconds
+  no anomalies in 283 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 32 gigabytes (2^35 bytes), time= 310 seconds
+  no anomalies in 296 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 64 gigabytes (2^36 bytes), time= 653 seconds
+  no anomalies in 308 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 128 gigabytes (2^37 bytes), time= 1232 seconds
+  no anomalies in 320 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 256 gigabytes (2^38 bytes), time= 2362 seconds
+  no anomalies in 332 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 512 gigabytes (2^39 bytes), time= 4580 seconds
+  no anomalies in 343 test result(s)
+
+rng=RNG_stdin64, seed=unknown
+length= 1 terabyte (2^40 bytes), time= 8986 seconds
+  no anomalies in 354 test result(s)
+
+error reading from file
+DONE
+Sun Jul  5 01:54:59     2026

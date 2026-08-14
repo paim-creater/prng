@@ -1,0 +1,359 @@
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          Starting Alphabit:   nb = 100000000
+          Version: TestU01 1.2.3
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+smultin_MultinomialBitsOver test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r =  0,   s = 32,   L =    2,
+       Sparse =  FALSE
+
+       Number of bits = n = 100000000
+       Number of cells = 2^L =                  4
+       Expected number per cell =    25000000
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =  5.0000001e-09,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          :    2
+Value of the statistic                :    0.79
+p-value of test                       :    0.67
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.09
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+smultin_MultinomialBitsOver test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r =  0,   s = 32,   L =    4,
+       Sparse =  FALSE
+
+       Number of bits = n = 100000000
+       Number of cells = 2^L =                 16
+       Expected number per cell =     6250000
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =  3.5000001e-08,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          :    8
+Value of the statistic                :   11.98
+p-value of test                       :    0.15
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+smultin_MultinomialBitsOver test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r =  0,   s = 32,   L =    8,
+       Sparse =  FALSE
+
+       Number of bits = n = 100000000
+       Number of cells = 2^L =                256
+       Expected number per cell =      390625
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =  6.3500001e-07,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          :  128
+Value of the statistic                :  119.24
+p-value of test                       :    0.70
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+smultin_MultinomialBitsOver test:
+-----------------------------------------------
+   N =  1,  n = 100000000,  r =  0,   s = 32,   L =   16,
+       Sparse =  FALSE
+
+       Number of bits = n = 100000000
+       Number of cells = 2^L =              65536
+       Expected number per cell =   1525.8789
+       Hashing =  FALSE
+
+   For Delta > -1, we use the ChiSquare approximation
+   Correction factor of the ChiSquare: 
+       Delta =     1,    Mu =    0.000163835,    Sigma =          1
+
+-----------------------------------------------
+Test Results for Delta =   1.0000
+
+Number of degrees of freedom          : 32768
+Value of the statistic                :32812.04
+p-value of test                       :    0.43
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.10
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 3125000,  r =  0,   s = 32,   L = 16,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          :  205
+Chi-square statistic                  :  227.97
+p-value of test                       :    0.13
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.09
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 1562500,  r =  0,   s = 32,   L = 32,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          :  377
+Chi-square statistic                  :  407.62
+p-value of test                       :    0.13
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_HammingCorr test:
+-----------------------------------------------
+   N =  1,  n = 3125000,  r =  0,   s = 32,   L = 32
+
+
+
+-----------------------------------------------
+Normal statistic                      :    0.37
+p-value of test                       :    0.36
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.04
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 1562500,  r =  0,   s = 32,   L0 =   64,   L1 =   64
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :   34
+ChiSquare statistic                   :   32.60
+p-value of test                       :    0.54
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :   35
+ChiSquare statistic                   :   32.03
+p-value of test                       :    0.61
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :   32
+ChiSquare statistic                   :   25.18
+p-value of test                       :    0.80
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :   26
+ChiSquare statistic                   :   19.92
+p-value of test                       :    0.80
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   17
+ChiSquare statistic                   :   11.50
+p-value of test                       :    0.83
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.28
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 312500,  r =  0,   s = 32,   L0 =  320,   L1 =  320
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :   70
+ChiSquare statistic                   :   65.94
+p-value of test                       :    0.62
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :   70
+ChiSquare statistic                   :   80.55
+p-value of test                       :    0.18
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :  160
+ChiSquare statistic                   :  162.44
+p-value of test                       :    0.43
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :   63
+ChiSquare statistic                   :   71.17
+p-value of test                       :    0.22
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   35
+ChiSquare statistic                   :   37.10
+p-value of test                       :    0.37
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.23
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+
+========= Summary results of Alphabit =========
+
+ Version:          TestU01 1.2.3
+ Generator:        Dual-Tempest
+ Number of bits:   100000000
+ Number of statistics:  17
+ Total CPU time:   00:00:01.04
+
+ All tests were passed
+
+
+

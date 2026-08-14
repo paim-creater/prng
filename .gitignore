@@ -44,9 +44,8 @@ bearssl_tempest/
 gnutls_tempest/
 libtomcrypt_tempest/
 mbedtls_tempest/
-wolfssl_tempest/
 *.bin
-*.bin
+!hardware/build/tempest_v3_k2.bin
 
 # Python compiled extensions
 *.pyd

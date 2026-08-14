@@ -1,0 +1,811 @@
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          Starting Rabbit:   nb = 100000000
+          Version: TestU01 1.2.3
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+smultin_MultinomialBitsOver test:
+-----------------------------------------------
+   N = 11,  n = 9090880,  r =  0,   s = 32,   L =   38,
+       Sparse =   TRUE
+
+       Number of bits = n = 9090880
+       Number of cells = 2^L =       274877906944
+       Expected number per cell =  1 /  30236.667
+       EColl = n^2 / (2k) =  150.3287407
+       Hashing =   TRUE
+
+       Collision test
+       CollisionOver:   density = n / k =  1 /   30236.67
+       Expected number of collisions = Mu =     150.33
+
+
+-----------------------------------------------
+Results of CollisionOver test:
+
+POISSON approximation                 :
+Expected number of collisions = N*Mu  :     1653.59
+Observed number of collisions         :     1731
+p-value of test                       :    0.03
+
+-----------------------------
+Total number of cells containing j balls
+
+  j =  0                              :    3023556978435
+  j =  1                              :         99996218
+  j =  2                              :             1731
+  j =  3                              :                0
+  j =  4                              :                0
+  j =  5                              :                0
+
+-----------------------------------------------
+CPU time used                    :  00:00:15.03
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+snpair_ClosePairsBitMatch test:
+-----------------------------------------------
+   N =  1,  n = 1562500,  r =  0,  t = 2
+
+
+-----------------------------------------------
+Max of all bit distances              :   20.00
+p-value of test                       :    0.24
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.32
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+snpair_ClosePairsBitMatch test:
+-----------------------------------------------
+   N =  1,  n = 781250,  r =  0,  t = 4
+
+
+-----------------------------------------------
+Max of all bit distances              :    9.00
+p-value of test                       :    0.24
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.45
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+svaria_AppearanceSpacings test:
+-----------------------------------------------
+   N =  1,   Q = 3125000,   K = 3125000,   r = 0,   s = 30,   L = 15
+
+   Sequences of n = (K + Q)L =     93750000 bits
+   Q = 3125000 initialization blocks
+   K = 3125000 blocks for the test
+   the blocks have L = 15 bits
+
+
+
+-----------------------------------------------
+Normal statistic                      :    0.61
+p-value of test                       :    0.27
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.04
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+scomp_LinearComp test:
+-----------------------------------------------
+   N =  1,  n = 29984,  r =  0,    s = 32
+
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    8
+Chi2 statistic for size of jumps      :    7.83
+p-value of test                       :    0.45
+
+
+-----------------------------------------------
+Normal statistic for number of jumps  :   -1.56
+p-value of test                       :    0.94
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.34
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+scomp_LempelZiv test:
+-----------------------------------------------
+   N =  1,  n = 67108864,  r =  0,   s =   32,   k =   26
+
+
+-----------------------------------------------
+Normal statistic                      :    0.92
+p-value of test                       :    0.18
+
+-----------------------------------------------
+CPU time used                    :  00:00:01.82
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sspectral_Fourier1 test:
+-----------------------------------------------
+   N =  1,  n = 1048576,  r =  0,   s =   32,   k =   20
+
+
+-----------------------------------------------
+Normal statistic                      :    1.57
+p-value of test                       :    0.06
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sspectral_Fourier3 test:
+-----------------------------------------------
+   N = 24224,  n = 4096,  r =  0,   s =   32,   k =   12
+
+
+-----------------------------------------------
+
+Kolmogorov-Smirnov+ statistic = D+    :   0.023
+p-value of test                       :    0.33
+
+Kolmogorov-Smirnov- statistic = D-    :   0.023
+p-value of test                       :    0.33
+
+Anderson-Darling statistic = A2       :    0.38
+p-value of test                       :    0.87
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.56
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_LongestHeadRun test:
+-----------------------------------------------
+   N =  1,  n = 600,  r =  0,   s = 32,   L = 166656
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    8
+Chi-square statistic                  :   10.60
+p-value of test                       :    0.23
+
+-----------------------------------------------
+Global longest run of 1               :   29.00
+p-value of test                       :    0.09
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.29
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_PeriodsInStrings test:
+-----------------------------------------------
+   N =  1,  n = 3125000,  r =  0,   s =   31
+
+
+-----------------------------------------------
+Number of degrees of freedom          :  138
+Chi-square statistic                  :  128.19
+p-value of test                       :    0.71
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.09
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_HammingWeight test:
+-----------------------------------------------
+   N =  1,  n = 3125000,  r =  0,   s = 32,   L = 32
+
+
+-----------------------------------------------
+Number of degrees of freedom          :   24
+Chi-square statistic                  :   23.40
+p-value of test                       :    0.50
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_HammingCorr test:
+-----------------------------------------------
+   N =  1,  n = 3125000,  r =  0,   s = 32,   L = 32
+
+
+
+-----------------------------------------------
+Normal statistic                      :    1.16
+p-value of test                       :    0.12
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_HammingCorr test:
+-----------------------------------------------
+   N =  1,  n = 1562500,  r =  0,   s = 32,   L = 64
+
+
+
+-----------------------------------------------
+Normal statistic                      :   -0.26
+p-value of test                       :    0.60
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_HammingCorr test:
+-----------------------------------------------
+   N =  1,  n = 781250,  r =  0,   s = 32,   L = 128
+
+
+
+-----------------------------------------------
+Normal statistic                      :    0.87
+p-value of test                       :    0.19
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 3125000,  r =  0,   s = 32,   L = 16,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          :  205
+Chi-square statistic                  :  223.68
+p-value of test                       :    0.18
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.07
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 1562500,  r =  0,   s = 32,   L = 32,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          :  377
+Chi-square statistic                  :  344.45
+p-value of test                       :    0.88
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_HammingIndep test:
+-----------------------------------------------
+   N =  1,  n = 781250,  r =  0,   s = 32,   L = 64,   d = 0
+
+
+
+Counters with expected numbers >= 10
+-----------------------------------------------
+Number of degrees of freedom          :  665
+Chi-square statistic                  :  696.38
+p-value of test                       :    0.19
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.06
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_AutoCor test:
+-----------------------------------------------
+   N =  1,  n = 99999937,  r =  0,   s = 32,   d = 1
+
+
+-----------------------------------------------
+Normal statistic                      :    0.17
+p-value of test                       :    0.43
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.07
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_AutoCor test:
+-----------------------------------------------
+   N =  1,  n = 99999938,  r =  0,   s = 32,   d = 2
+
+
+-----------------------------------------------
+Normal statistic                      :    2.09
+p-value of test                       :    0.02
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.09
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+sstring_Run test:
+-----------------------------------------------
+   N =  1,  n = 20000000,  r =  0,   s =   32
+
+
+-----------------------------------------------
+Total number of 1 runs:  20000005
+
+Number of degrees of freedom          :   40
+Chi2 statistic for number of runs     :   38.99
+p-value of test                       :    0.52
+
+
+-----------------------------------------------
+Total number of bits:  79998368
+
+Normal statistic for number of bits   :   -0.13
+p-value of test                       :    0.55
+
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.23
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+smarsa_MatrixRank test:
+-----------------------------------------------
+   N =  1,  n = 97656,  r =  0,    s = 32,    L = 32,    k = 32
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    3
+Chi-square statistic                  :    2.26
+p-value of test                       :    0.52
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.28
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+smarsa_MatrixRank test:
+-----------------------------------------------
+   N =  1,  n = 976,  r =  0,    s = 32,    L = 320,    k = 320
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    2
+Chi-square statistic                  :    3.50
+p-value of test                       :    0.17
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.50
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+smarsa_MatrixRank test:
+-----------------------------------------------
+   N =  1,  n = 95,  r =  0,    s = 32,    L = 1024,    k = 1024
+
+
+-----------------------------------------------
+Number of degrees of freedom          :    2
+Chi-square statistic                  :    2.83
+p-value of test                       :    0.24
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.78
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 781250,  r =  0,   s = 32,   L0 =  128,   L1 =  128
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :   48
+ChiSquare statistic                   :   37.46
+p-value of test                       :    0.86
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :   47
+ChiSquare statistic                   :   51.53
+p-value of test                       :    0.30
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :   64
+ChiSquare statistic                   :   66.09
+p-value of test                       :    0.40
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :   40
+ChiSquare statistic                   :   39.83
+p-value of test                       :    0.48
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   24
+ChiSquare statistic                   :   21.59
+p-value of test                       :    0.60
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.25
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 97656,  r =  0,   s = 32,   L0 = 1024,   L1 = 1024
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :  112
+ChiSquare statistic                   :  113.45
+p-value of test                       :    0.44
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :  112
+ChiSquare statistic                   :  123.71
+p-value of test                       :    0.21
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :  512
+ChiSquare statistic                   :  532.04
+p-value of test                       :    0.26
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :  107
+ChiSquare statistic                   :   97.02
+p-value of test                       :    0.75
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :   58
+ChiSquare statistic                   :   53.82
+p-value of test                       :    0.63
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.21
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+***********************************************************
+HOST = LAPTOP-JUCO3OMC, CYGWIN_NT-10.0-26200
+
+Dual-Tempest
+
+
+swalk_RandomWalk1 test:
+-----------------------------------------------
+   N =  1,  n = 9984,  r =  0,   s = 32,   L0 = 10016,   L1 = 10016
+
+
+
+-----------------------------------------------
+Test on the values of the Statistic H
+
+Number of degrees of freedom          :  234
+ChiSquare statistic                   :  228.45
+p-value of test                       :    0.59
+
+
+-----------------------------------------------
+Test on the values of the Statistic M
+
+Number of degrees of freedom          :  234
+ChiSquare statistic                   :  216.22
+p-value of test                       :    0.79
+
+
+-----------------------------------------------
+Test on the values of the Statistic J
+
+Number of degrees of freedom          :  867
+ChiSquare statistic                   :  828.96
+p-value of test                       :    0.82
+
+
+-----------------------------------------------
+Test on the values of the Statistic R
+
+Number of degrees of freedom          :  233
+ChiSquare statistic                   :  208.72
+p-value of test                       :    0.87
+
+
+-----------------------------------------------
+Test on the values of the Statistic C
+
+Number of degrees of freedom          :  131
+ChiSquare statistic                   :  145.73
+p-value of test                       :    0.18
+
+
+-----------------------------------------------
+CPU time used                    :  00:00:00.18
+
+Generator state:
+ Dual-output Tempest v7\n
+
+
+
+
+========= Summary results of Rabbit =========
+
+ Version:          TestU01 1.2.3
+ Generator:        Dual-Tempest
+ Number of bits:   100000000
+ Number of statistics:  40
+ Total CPU time:   00:00:22.25
+
+ All tests were passed
+
+
+
