@@ -1,5 +1,7 @@
 # Tempest v3 — Verifiable Cryptographic Design
 
+[![Mentioned in Awesome Cryptography (Rust)](https://awesome.re/mentioned-badge-flat.svg)](https://github.com/rust-cc/awesome-cryptography-rust)
+
 Tempest v3 is an AND-RX cryptographic random number generator whose
 security statements are exact design-time computations. It accompanies
 the paper *AM-SEV: A Metric Theory of Verifiable Cryptographic Design,
@@ -15,10 +17,6 @@ why cascades are necessary, and the andmix4 cascade eliminates the
 shadow's weak differentials (2⁻³ → 2⁻¹¹ exact at W=4, below 2⁻²⁴
 sampled at W=64). The same metrics drive an AI design engine whose
 calibrated verifier stack adjudicates every candidate.
-
-Archived in the [Software Heritage universal
-archive](https://archive.softwareheritage.org/browse/origin/https://github.com/paim-creater/prng/)
-— snapshot `swh:1:snp:b8b273a6ff0b12e5f262f71d2299db26a7181353` (2026-08-11).
 
 Also listed in the [Awesome Cryptography
 (Rust)](https://github.com/rust-cc/awesome-cryptography-rust) collection,
