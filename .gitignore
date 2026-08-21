@@ -45,7 +45,9 @@ gnutls_tempest/
 libtomcrypt_tempest/
 mbedtls_tempest/
 *.bin
-!hardware/build/tempest_v3_k2.bin
+!hardware/build/
+!hardware/build/*.bin
+!hardware/build/*.bit
 
 # Python compiled extensions
 *.pyd
