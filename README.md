@@ -20,6 +20,10 @@ Archived in the [Software Heritage universal
 archive](https://archive.softwareheritage.org/browse/origin/https://github.com/paim-creater/prng/)
 — snapshot `swh:1:snp:b8b273a6ff0b12e5f262f71d2299db26a7181353` (2026-08-11).
 
+Also listed in the [Awesome Cryptography
+(Rust)](https://github.com/rust-cc/awesome-cryptography-rust) collection,
+Pseudo Random Number Generator (PRNG) section.
+
 ## Repository layout
 
 | Directory | Contents |
