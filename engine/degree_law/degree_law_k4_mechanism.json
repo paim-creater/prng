@@ -1,0 +1,18 @@
+{
+ "W": 64,
+ "claim": "no degree-64 monomial can form at level 4: zero disjoint (32,32) top pairs over all 256 output positions; max per-round degree = 63, attained on every bit of words u and v",
+ "tot_top_pairs": 1211136,
+ "tot_disjoint_pairs": 0,
+ "deg63_bits_per_word": {
+  "u": 64,
+  "v": 64,
+  "w": 0,
+  "z": 0
+ },
+ "per_bit_max_hist": {
+  "59": 64,
+  "62": 64,
+  "63": 128
+ },
+ "note": "level-3 top monomials of any two cascade source words always intersect (mean pair overlap 7.6-9.7 in probed bits); degree doubling 32->64 is structurally impossible at level 4, while overlap-1 products attain 63"
+}

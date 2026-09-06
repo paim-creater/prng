@@ -1,0 +1,38 @@
+{
+ "W": 64,
+ "note": "nlayers=0 (top-layer parity exact)",
+ "levels": {
+  "0": {
+   "max_deg": 4,
+   "hist": {
+    "4": 256
+   },
+   "bits_with_no_survivor": 0,
+   "elapsed_s": 0.0
+  },
+  "1": {
+   "max_deg": 8,
+   "hist": {
+    "8": 256
+   },
+   "bits_with_no_survivor": 0,
+   "elapsed_s": 0.0
+  },
+  "2": {
+   "max_deg": 16,
+   "hist": {
+    "16": 256
+   },
+   "bits_with_no_survivor": 0,
+   "elapsed_s": 0.1
+  },
+  "3": {
+   "max_deg": 32,
+   "hist": {
+    "32": 256
+   },
+   "bits_with_no_survivor": 0,
+   "elapsed_s": 0.5
+  }
+ }
+}
