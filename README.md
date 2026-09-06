@@ -4,10 +4,9 @@
 
 Tempest v3 is an AND-RX cryptographic random number generator whose
 security statements are exact design-time computations. It accompanies
-the paper *AM-SEV: A Metric Theory of Verifiable Cryptographic Design,
-Its AI Engine, and the Tempest Instance* (Yuèzhōu Tiān, 2026); the
-paper is not distributed here, but every quantitative claim in it is
-backed by a runnable artifact in this repository.
+a research paper describing the design and its verification; the paper
+is not distributed here, but every quantitative claim in it is backed
+by a runnable artifact in this repository.
 
 The core result is the Polar-Rank Theorem: for two-layer AND-RX round
 functions the one-round differential probability is
